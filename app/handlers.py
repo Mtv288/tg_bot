@@ -16,5 +16,8 @@ async def cmd_start(message: Message):
 async def mens(message: Message):
     if message.text == 'Мужская обувь':
         await message.answer('Выберите категорию', reply_markup=kb.mens)
-    elif message.text == 'Женская обувь':
+    if message.text == 'Женская обувь':
         await message.answer('Выберите категорию', reply_markup=kb.women)
+    if message.text == 'Назад':
+        await message.answer('Выберите категорию', reply_markup=kb.main)
+
