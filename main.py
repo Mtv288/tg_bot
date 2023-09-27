@@ -2,12 +2,7 @@ from aiogram import Bot, Dispatcher, F
 import asyncio
 from aiogram.types import Message
 from app.handlers import router
-import keyboar as kb
 
-
-@router.message(F.text == '/start')
-async def cmd_start(message: Message):
-    await message.answer('Добро пожаловать', reply_markup=kb.main)
 
 
 async def main():
@@ -16,6 +11,8 @@ async def main():
     dp.include_router(router)
     await dp.start_polling(bot)
 
+
+asyncio.run((main()))
 
 if __name__ == '__main__':
     asyncio.run(main())
