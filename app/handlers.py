@@ -19,4 +19,4 @@ async def mens(message: Message):
 
 @router.message(F.text == 'Женская обувь')
 async def mens(message: Message):
-    await message.answer('Выберите категорию', reply_markup=kb.mens)
+    await message.answer('Выберите категорию', reply_markup=kb.women)

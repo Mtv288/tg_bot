@@ -7,8 +7,8 @@ main_keyboard = [[KeyboardButton(text='Мужская обувь'), KeyboardButt
 mens_footwear = [[KeyboardButton(text='Туфли'), KeyboardButton(text='Ботинки')],
                  [KeyboardButton(text='Кроссовки'), KeyboardButton(text='Назад')]]
 
-women_shoes = [[KeyboardButton(text='Туфли'), KeyboardButton(text='Ботинки')],
-               [KeyboardButton(text='Кроссовки'), KeyboardButton(text='Назад')]]
+women_shoes = [[KeyboardButton(text='Туфли'), KeyboardButton(text='Сапоги, Ботинки')],
+               [KeyboardButton(text='Сабо'), KeyboardButton(text='Назад')]]
 
 mens = ReplyKeyboardMarkup(keyboard=mens_footwear,
                            resize_keyboard=True,
