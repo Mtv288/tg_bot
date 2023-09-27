@@ -12,11 +12,9 @@ async def cmd_start(message: Message):
     await message.answer('Если хотите ознакомится с нашим ассортиментом нажмите нужную кнопку внизу')
 
 
-@router.message(F.text == 'Мужская обувь')
+@router.message(F.text)
 async def mens(message: Message):
-    await message.answer('Выберите категорию', reply_markup=kb.mens)
-
-
-@router.message(F.text == 'Женская обувь')
-async def mens(message: Message):
-    await message.answer('Выберите категорию', reply_markup=kb.women)
+    if message.text == 'Мужская обувь':
+        await message.answer('Выберите категорию', reply_markup=kb.mens)
+    elif message.text == 'Женская обувь':
+        await message.answer('Выберите категорию', reply_markup=kb.women)
