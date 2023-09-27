@@ -2,7 +2,6 @@ from aiogram import Router, F
 from aiogram.types import Message, CallbackQuery
 import keyboar as kb
 
-
 router = Router()
 
 
@@ -14,5 +13,10 @@ async def cmd_start(message: Message):
 
 
 @router.message(F.text == 'Мужская обувь')
+async def mens(message: Message):
+    await message.answer('Выберите категорию', reply_markup=kb.mens)
+
+
+@router.message(F.text == 'Женская обувь')
 async def mens(message: Message):
     await message.answer('Выберите категорию', reply_markup=kb.mens)
