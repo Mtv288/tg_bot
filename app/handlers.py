@@ -18,6 +18,8 @@ async def mens(message: Message):
         await message.answer('Выберите категорию', reply_markup=kb.mens)
     if message.text == 'Женская обувь':
         await message.answer('Выберите категорию', reply_markup=kb.women)
+    if message.text == 'Детская обувь':
+        await message.answer('Выберите категорию', reply_markup=kb.children)
     if message.text == 'Назад':
         await message.answer('Выберите категорию', reply_markup=kb.main)
 
