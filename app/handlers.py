@@ -15,13 +15,13 @@ async def cmd_start(message: Message):
 @router.message(F.text)
 async def mens(message: Message):
     if message.text == 'Мужская обувь':
-        await message.answer('Выберите категорию', reply_markup=kb.mens)
+        await message.answer('Выберите тип обуви', reply_markup=kb.mens)
     elif message.text == 'Женская обувь':
-        await message.answer('Выберите категорию', reply_markup=kb.women)
+        await message.answer('Выберите тип обуви', reply_markup=kb.women)
     elif message.text == 'Детская обувь':
-        await message.answer('Выберите категорию', reply_markup=kb.children)
+        await message.answer('Выберите тип обуви', reply_markup=kb.children)
     elif message.text == 'Тапки':
-        await message.answer('Выберите категорию', reply_markup=kb.slippers)
+        await message.answer('Выберите тип обуви', reply_markup=kb.slippers)
     elif message.text == 'Назад':
         await message.answer('Выберите категорию', reply_markup=kb.main)
 
