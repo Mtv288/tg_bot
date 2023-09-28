@@ -21,7 +21,7 @@ async def mens(message: Message):
     elif message.text == 'Детская обувь':
         await message.answer('Выберите категорию', reply_markup=kb.children)
     elif message.text == 'Тапки':
-        await message.answer('Выберите категорию', reply_markup=kb.slipper)
+        await message.answer('Выберите категорию', reply_markup=kb.slippers)
     elif message.text == 'Назад':
         await message.answer('Выберите категорию', reply_markup=kb.main)
 
