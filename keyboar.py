@@ -1,5 +1,5 @@
-from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
-                           InlineKeyboardMarkup, InlineKeyboardButton)
+from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton)
+
 
 main_keyboard = [[KeyboardButton(text='Мужская обувь'), KeyboardButton(text='Женская обувь')],
                  [KeyboardButton(text='Детская обувь'), KeyboardButton(text='Тапки')]]
@@ -14,7 +14,7 @@ children_shoes = [[KeyboardButton(text='Туфли'), KeyboardButton(text='Са�
                   [KeyboardButton(text='Назад')]]
 
 slipper = [[KeyboardButton(text='Мужские'), KeyboardButton(text='Женские')],
-          [KeyboardButton(text='Назад')]]
+           [KeyboardButton(text='Назад')]]
 
 mens = ReplyKeyboardMarkup(keyboard=mens_footwear,
                            resize_keyboard=True,
