@@ -1,6 +1,5 @@
 from aiogram import Bot, Dispatcher, F
 import asyncio
-from aiogram.types import Message
 from app.handlers import router
 
 

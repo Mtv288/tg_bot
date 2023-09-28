@@ -13,6 +13,9 @@ women_shoes = [[KeyboardButton(text='Туфли'), KeyboardButton(text='Сапо
 children_shoes = [[KeyboardButton(text='Туфли'), KeyboardButton(text='Сапоги, Ботинки')],
                   [KeyboardButton(text='Назад')]]
 
+slipper = [[KeyboardButton(text='Мужские'), KeyboardButton(text='Женские')],
+          [KeyboardButton(text='Назад')]]
+
 mens = ReplyKeyboardMarkup(keyboard=mens_footwear,
                            resize_keyboard=True,
                            input_field_placeholder='Выберите пункт ниже')
@@ -22,6 +25,10 @@ women = ReplyKeyboardMarkup(keyboard=women_shoes,
                             input_field_placeholder='Выберите пункт ниже')
 
 children = ReplyKeyboardMarkup(keyboard=children_shoes,
+                               resize_keyboard=True,
+                               input_field_placeholder='Выберите пункт ниже')
+
+slippers = ReplyKeyboardMarkup(keyboard=slipper,
                                resize_keyboard=True,
                                input_field_placeholder='Выберите пункт ниже')
 
