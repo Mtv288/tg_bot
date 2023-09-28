@@ -1,6 +1,17 @@
-import sqlite3 as db
+import sqlite3
 
-con = db.connect('shoes.db')
+db = sqlite3.connect('shoes.db')
+curs = db.cursor()
 
+curs.execute('''CREATE TABLE IF NOT EXISTS users(
+    code TEXT,
+    name TEXT, 
+    photo TEXT, 
+    price TEXT, 
+    quantity TEXT, 
+    Размер TEXT   
+)''')
+
+db.commit()
 
 
