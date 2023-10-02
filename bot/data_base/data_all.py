@@ -1,8 +1,16 @@
 import csv
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-with open('C:/TrueShop2site/All.csv', encoding='utf-8') as df:
-    reader = csv.DictReader(df, delimiter=';')
-    for i in reader:
-        print(i['group_name'])
+DATABASE_NAME = 'database_all.sqlite'
+
+engine = create_engine(f'sqlite:///{DATABASE_NAME}')
+Session = sessionmaker(bind=engine)
+Base = declarative_base()
+
+def
+
+
 
 
