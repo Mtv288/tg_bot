@@ -17,9 +17,11 @@ data_all = db.Table('data_all', metadata,
 
 metadata.create_all(engine)
 insertion_query = data_all.insert().values([{'code': 546464, 'name': 'gfdgdfg', 'photo': 'dghdh',
-                                             'price': 5465, 'quantity': 45346767, 'size': 346546}])
+                                             'price': 5465, 'quantity': 45346767, 'size': 346546},
+                                            {'code': 4343535, 'name': 'gfgh', 'photo': 'fdgdfgd',
+                                             'price': 3654756, 'quantity': 657, 'size': 45}])
 
 conn.execute(insertion_query)
-select_all_query = db.select([data_all])
+select_all_query = db.select(data_all)
 select_all_result = conn.execute(select_all_query)
 print(select_all_result.all())
