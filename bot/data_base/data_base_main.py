@@ -1,5 +1,6 @@
 import sqlalchemy as db
 import sqlite3
+import os, sys
 
 engine = db.create_engine('sqlite:///data_all.db')
 conn = engine.connect()
@@ -16,7 +17,7 @@ data_all = db.Table('data_all', metadata,
                     )
 
 metadata.create_all(engine)
-insertion_query = data_all.insert().values([{'code': 546464, 'name': 'gfdgdfg', 'photo': 'dghdh',
+insertion_query = data_all.insert().values([{'code': 546464, 'name': 'наконец то', 'photo': 'dghdh',
                                              'price': 5465, 'quantity': 45346767, 'size': 346546},
                                             {'code': 4343535, 'name': 'gfgh', 'photo': 'fdgdfgd',
                                              'price': 3654756, 'quantity': 657, 'size': 45}])
