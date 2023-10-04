@@ -8,8 +8,8 @@ metadata = db.MetaData()
 data_all = db.Table('data_all', metadata,
                     db.Column('id', db.Integer, primary_key=True),
                     db.Column('code', db.Integer),
-                    db.Column('name', db.Text),
-                    db.Column('photo', db.Text),
+                    db.Column('name', db.String),
+                    db.Column('photo', db.String),
                     db.Column('price', db.Integer),
                     db.Column('quantity', db.Integer),
                     db.Column('size', db.Integer)
@@ -24,4 +24,5 @@ insertion_query = data_all.insert().values([{'code': 546464, 'name': 'gfdgdfg', 
 conn.execute(insertion_query)
 select_all_query = db.select(data_all)
 select_all_result = conn.execute(select_all_query)
+conn.commit()
 print(select_all_result.all())
