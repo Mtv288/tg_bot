@@ -1,6 +1,6 @@
 import sqlalchemy as db
-import sqlite3
-import os, sys
+import csv
+
 
 engine = db.create_engine('sqlite:///data_all.db')
 conn = engine.connect()
@@ -17,13 +17,16 @@ data_all = db.Table('data_all', metadata,
                     )
 
 metadata.create_all(engine)
-insertion_query = data_all.insert().values([{'code': 546464, 'name': 'наконец то', 'photo': 'dghdh',
-                                             'price': 5465, 'quantity': 45346767, 'size': 346546},
-                                            {'code': 4343535, 'name': 'gfgh', 'photo': 'fdgdfgd',
-                                             'price': 3654756, 'quantity': 657, 'size': 45}])
 
-conn.execute(insertion_query)
-select_all_query = db.select(data_all)
-select_all_result = conn.execute(select_all_query)
-conn.commit()
-print(select_all_result.all())
+with open(r'C:\TrueShop2site\All.csv') as exs:
+    reader = csv.DictReader(exs, delimiter=";")
+
+    for i in reader:
+        insertion_query = data_all.insert().values([{'code': i['code'], 'name': i['name'], 'photo': i['photo'],
+                                                    'price': i['price'], 'quantity': i['quantity'], 'size': i['Размер']}])
+
+        conn.execute(insertion_query)
+        select_all_query = db.select(data_all)
+        select_all_result = conn.execute(select_all_query)
+        conn.commit()
+
