@@ -1,7 +1,6 @@
 import sqlalchemy as db
 import csv
 
-
 engine = db.create_engine('sqlite:///data_all.db')
 conn = engine.connect()
 metadata = db.MetaData()
@@ -23,10 +22,8 @@ with open(r'C:\TrueShop2site\All.csv') as exs:
 
     for i in reader:
         insertion_query = data_all.insert().values([{'code': i['code'], 'name': i['name'], 'photo': i['photo'],
-                                                    'price': i['price'], 'quantity': i['quantity'], 'size': i['Размер']}])
+                                                     'price': i['price'], 'quantity': i['quantity'],
+                                                     'size': i['Размер']}])
 
         conn.execute(insertion_query)
-        select_all_query = db.select(data_all)
-        select_all_result = conn.execute(select_all_query)
         conn.commit()
-
