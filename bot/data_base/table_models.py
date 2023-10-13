@@ -16,3 +16,5 @@ class AllData(Base):
     quantity: Mapped[int]
     size: Mapped[int]
 
+
+
