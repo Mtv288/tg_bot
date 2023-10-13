@@ -17,5 +17,5 @@ with open(r'C:\TrueShop2site\All.csv') as exs:
                        price=i['price'], quantity=i['quantity'], size=i['Размер'])
 
         session.add(user)
-        session.commit()
+    session.commit()
     session.close()
