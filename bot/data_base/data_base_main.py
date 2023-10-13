@@ -1,29 +1,20 @@
-import sqlalchemy as db
+from sqlalchemy import create_engine, MetaData
+from sqlalchemy.orm import Session
+from table_models import AllData, Base
 import csv
 
-engine = db.create_engine('sqlite:///data_all.db')
-conn = engine.connect()
-metadata = db.MetaData()
+engine = create_engine('sqlite:///data_all.db')
+metadata = MetaData()
 
-data_all = db.Table('data_all', metadata,
-                    db.Column('id', db.Integer, primary_key=True),
-                    db.Column('code', db.Integer),
-                    db.Column('name', db.String),
-                    db.Column('photo', db.String),
-                    db.Column('price', db.Integer),
-                    db.Column('quantity', db.Integer),
-                    db.Column('size', db.Integer)
-                    )
-
-metadata.create_all(engine)
-
+Base.metadata.create_all(engine)
+session = Session(engine)
+d = []
 with open(r'C:\TrueShop2site\All.csv') as exs:
     reader = csv.DictReader(exs, delimiter=";")
 
     for i in reader:
-        insertion_query = data_all.insert().values([{'code': i['code'], 'name': i['name'], 'photo': i['photo'],
-                                                     'price': i['price'], 'quantity': i['quantity'],
-                                                     'size': i['Размер']}])
+        user = AllData(code=i['code'], name=i['name'], photo=i['photo'],
+                        price=i['price'], quantity=i['quantity'], size=i['Размер'])
 
-        conn.execute(insertion_query)
-        conn.commit()
+        session.add(user)
+    session.commit()
