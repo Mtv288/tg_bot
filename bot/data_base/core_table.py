@@ -26,6 +26,4 @@ with open(r'C:\TrueShop2site\All.csv') as exs:
                                                     'size': i['Размер']}])
 
         conn.execute(insertion_query)
-        select_all_query = db.select(data_al)
-        select_all_result = conn.execute(select_all_query)
     conn.commit()
