@@ -14,7 +14,7 @@ with open(r'C:\TrueShop2site\All.csv') as exs:
 
     for i in reader:
         user = AllData(code=i['code'], name=i['name'], photo=i['photo'],
-                        price=i['price'], quantity=i['quantity'], size=i['Размер'])
+                       price=i['price'], quantity=i['quantity'], size=i['Размер'])
 
         session.add(user)
     session.commit()
