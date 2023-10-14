@@ -49,7 +49,7 @@ with Session(engine) as session:
 with Session(engine) as session:
     for i in session.query(AllData).filter(AllData.name.like("%Тм%")).filter(AllData.quantity > 0):
         men_slippers = MenSlippers(code=i.code, group_code=i.group_code, name=i.name, photo=i.photo,
-                                       price=i.price, quantity=i.quantity, size=i.size)
+                                   price=i.price, quantity=i.quantity, size=i.size)
         session.add(men_slippers)
     session.commit()
 
