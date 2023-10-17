@@ -60,6 +60,3 @@ with Session(engine) as session:
         session.add(women_slippers)
     session.commit()
 
-with Session(engine) as d:
-    for i in d.query(AllData.name).distinct().filter(AllData.name.like("%Тж%")):
-        print(i.name)
