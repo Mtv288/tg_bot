@@ -29,3 +29,4 @@ def add_data_in_table(table_class, filter_data):
 
 
 add_data_in_table(MenShoes, "МУЖ%")
+add_data_in_table(WomenShoes, "ЖЕН%")

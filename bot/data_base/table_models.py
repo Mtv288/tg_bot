@@ -2,7 +2,6 @@ from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
 from typing import Optional
 
 
-
 class Base(DeclarativeBase):
     pass
 
@@ -18,6 +17,7 @@ class AllData(Base):
     price: Mapped[Optional[int]]
     quantity: Mapped[Optional[int]]
     size: Mapped[Optional[int]]
+
 
 class MenShoes(Base):
     __tablename__ = 'men_shoes'
@@ -82,5 +82,3 @@ class WomenSlippers(Base):
     price: Mapped[int]
     quantity: Mapped[int]
     size: Mapped[int]
-
-
