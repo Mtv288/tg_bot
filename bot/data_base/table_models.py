@@ -1,5 +1,5 @@
 from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
-from sqlalchemy import String
+from typing import Optional
 
 
 
@@ -13,12 +13,11 @@ class AllData(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     code: Mapped[int] = mapped_column(default=0)
     group_code: Mapped[int]
-    name: Mapped[str] = mapped_column(String(25), default='0')
-    photo: Mapped[str] = mapped_column(default='0')
-    price: Mapped[int] = mapped_column(default=0)
-    quantity: Mapped[int] = mapped_column(default=0)
-    size: Mapped[int] = mapped_column(default=0)
-
+    name: Mapped[Optional[str]]
+    photo: Mapped[Optional[str]]
+    price: Mapped[Optional[int]]
+    quantity: Mapped[Optional[int]]
+    size: Mapped[Optional[int]]
 
 class MenShoes(Base):
     __tablename__ = 'men_shoes'
