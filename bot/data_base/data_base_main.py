@@ -18,54 +18,14 @@ with open(r'C:\TrueShop2site\All.csv') as exs:
             session.add(user)
         session.commit()
 
-with Session(engine) as session:
-    for i in session.query(AllData).filter(AllData.name.like("МУЖ%")).filter(AllData.quantity > 0):
-        men_shoes = MenShoes(code=i.code, group_code=i.group_code, name=i.name, photo=i.photo,
-                             price=i.price, quantity=i.quantity, size=i.size)
-        session.add(men_shoes)
-    session.commit()
 
-with Session(engine) as session:
-    for i in session.query(AllData).filter(AllData.name.like("ЖЕН%")).filter(AllData.quantity > 0):
-        women_shoes = WomenShoes(code=i.code, group_code=i.group_code, name=i.name, photo=i.photo,
-                                 price=i.price, quantity=i.quantity, size=i.size)
-        session.add(women_shoes)
-    session.commit()
-
-with Session(engine) as session:
-    for i in session.query(AllData).filter(AllData.name.like("ДЕТ%")).filter(AllData.quantity > 0):
-        children_shoes = ChildrenShoes(code=i.code, group_code=i.group_code, name=i.name, photo=i.photo,
-                                       price=i.price, quantity=i.quantity, size=i.size)
-        session.add(children_shoes)
-    session.commit()
-
-with Session(engine) as session:
-    for i in session.query(AllData).filter(AllData.name.like("ДЕТ%")).filter(AllData.quantity > 0):
-        children_shoes = ChildrenShoes(code=i.code, group_code=i.group_code, name=i.name, photo=i.photo,
-                                       price=i.price, quantity=i.quantity, size=i.size)
-        session.add(children_shoes)
-    session.commit()
-
-with Session(engine) as session:
-    for i in session.query(AllData).filter(AllData.name.like("%Тм%")).filter(AllData.quantity > 0):
-        men_slippers = MenSlippers(code=i.code, group_code=i.group_code, name=i.name, photo=i.photo,
-                                   price=i.price, quantity=i.quantity, size=i.size)
-        session.add(men_slippers)
-    session.commit()
-
-with Session(engine) as session:
-    for i in session.query(AllData).filter(AllData.name.like("%Тж%")).filter(AllData.quantity > 0):
-        women_slippers = WomenSlippers(code=i.code, group_code=i.group_code, name=i.name, photo=i.photo,
-                                       price=i.price, quantity=i.quantity, size=i.size)
-        session.add(women_slippers)
-    session.commit()
+def add_data_in_table(table_class, filter_data):
+    with Session(engine) as session:
+        for i in session.query(AllData).filter(AllData.name.like(filter_data)).filter(AllData.quantity > 0):
+            men_shoes = table_class(code=i.code, group_code=i.group_code, name=i.name, photo=i.photo,
+                                    price=i.price, quantity=i.quantity, size=i.size)
+            session.add(men_shoes)
+        session.commit()
 
 
-
-
-
-
-
-
-
-
+add_data_in_table(MenShoes, "МУЖ%")
