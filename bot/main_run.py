@@ -1,17 +1,19 @@
 import asyncio
-
 from aiogram import Bot, Dispatcher
 import os
-from commands import register_user_command
+from dotenv import load_dotenv
+from handlers import replybutton
 
 
-async def main():
+load_dotenv()
+
+
+async def start():
     bot = Bot(os.getenv('TOKEN'))
     dp = Dispatcher()
-    register_user_command(dp)
-
+    dp.include_router(replybutton.router)
     await dp.start_polling(bot)
 
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    asyncio.run(start())
