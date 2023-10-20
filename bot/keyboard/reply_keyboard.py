@@ -14,6 +14,7 @@ main_kb = ReplyKeyboardMarkup(
     input_field_placeholder='Нажмите нужную кнопку'
 )
 
+
 men_kb = ReplyKeyboardMarkup(
     keyboard=[
         [
@@ -29,6 +30,7 @@ men_kb = ReplyKeyboardMarkup(
         ]
     ], resize_keyboard=True
 )
+
 
 women_kb = ReplyKeyboardMarkup(
     keyboard=[

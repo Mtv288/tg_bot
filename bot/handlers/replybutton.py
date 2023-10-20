@@ -5,6 +5,7 @@ from bot.keyboard import reply_keyboard
 
 router = Router()
 
+
 @router.message(F.text == 'Назад')
 async def back(message: Message):
     await message.answer('Главное меню', reply_markup=reply_keyboard.main_kb)
@@ -17,4 +18,4 @@ async def men(message: Message):
 
 @router.message(F.text == 'Женская обувь')
 async def women(message: Message):
-    await message.answer('Выберите нужный раздел', reply_markup=reply_keyboard.women_kb)
+    await message.answer('Выберите категорию', reply_markup=reply_keyboard.women_kb)
