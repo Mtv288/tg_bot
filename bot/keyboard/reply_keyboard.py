@@ -29,3 +29,15 @@ men_kb = ReplyKeyboardMarkup(
         ]
     ], resize_keyboard=True
 )
+
+women_kb = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text='Туфли'),
+            KeyboardButton(text='Сапоги, Ботинки')
+        ],[
+            KeyboardButton(text='Сабо'),
+            KeyboardButton(text='Назад')
+        ]
+    ], resize_keyboard=True
+)
