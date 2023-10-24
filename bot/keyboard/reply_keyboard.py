@@ -37,8 +37,31 @@ women_kb = ReplyKeyboardMarkup(
         [
             KeyboardButton(text='Туфли'),
             KeyboardButton(text='Сапоги, Ботинки')
-        ],[
+        ], [
             KeyboardButton(text='Сабо'),
+            KeyboardButton(text='Назад')
+        ]
+    ], resize_keyboard=True
+)
+
+
+child_kb = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text='Туфли'),
+            KeyboardButton(text='Ботинки')
+        ], [
+            KeyboardButton(text='Назад')
+        ]
+    ], resize_keyboard=True
+)
+
+slipper_kb = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text='Мужские'),
+            KeyboardButton(text='Женские')
+        ], [
             KeyboardButton(text='Назад')
         ]
     ], resize_keyboard=True

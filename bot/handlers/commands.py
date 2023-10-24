@@ -9,4 +9,4 @@ router = Router()
 @router.message(CommandStart())
 async def start(message: Message):
     await message.answer(f'Привет {message.from_user.first_name}')
-    await message.answer('Я ваш виртуальный помошник', reply_markup=reply_keyboard.main_kb)
+    await message.answer('Я ваш виртуальный помощник', reply_markup=reply_keyboard.main_kb)

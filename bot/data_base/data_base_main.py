@@ -8,6 +8,8 @@ metadata = MetaData()
 
 Base.metadata.create_all(engine)
 
+d = 'Y:\Обувь\Photo'
+
 
 def great_all_goods_table():
     with open(r'C:\TrueShop2site\All.csv') as exs:
@@ -24,7 +26,7 @@ def great_all_goods_table():
 def add_data_in_table(table_class, filter_data):
     with Session(engine) as session:
         for i in session.query(AllData).filter(AllData.name.like(filter_data)).filter(AllData.quantity > 0):
-            men_shoes = table_class(code=i.code, group_code=i.group_code, name=i.name, photo=i.photo,
+            men_shoes = table_class(code=i.code, group_code=i.group_code, name=i.name, photo="\\".join([d, i.photo]),
                                     price=i.price, quantity=i.quantity, size=i.size)
             session.add(men_shoes)
         session.commit()
@@ -32,12 +34,16 @@ def add_data_in_table(table_class, filter_data):
 
 great_all_goods_table()
 add_data_in_table(MenShoes, "МУЖ%")
-c = []
 
-
+b = []
 def p():
     with Session(engine) as d:
-        for i in d.query(AllData.name).distinct().filter(AllData.name.like("МУЖ%")):
-            c.append(i.name[:15])
+
+        for i in d.query(MenShoes).filter(MenShoes.quantity > 0):
+            c = (i.name[:15], i.price, i.size, i.quantity)
+            b.append(c)
+        return (b)
+
+
 
 

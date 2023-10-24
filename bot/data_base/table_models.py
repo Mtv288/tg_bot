@@ -10,7 +10,7 @@ class AllData(Base):
     __tablename__ = 'all_goods'
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    code: Mapped[int] = mapped_column(default=0)
+    code: Mapped[Optional[int]]
     group_code: Mapped[int]
     name: Mapped[Optional[str]]
     photo: Mapped[Optional[str]]
