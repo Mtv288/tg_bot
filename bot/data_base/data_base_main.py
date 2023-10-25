@@ -30,6 +30,7 @@ def add_data_in_table(table_class, filter_data):
                                     price=i.price, quantity=i.quantity, size=i.size)
             session.add(men_shoes)
         session.commit()
+        return men_shoes
 
 
 great_all_goods_table()
@@ -40,10 +41,12 @@ def p():
     with Session(engine) as d:
 
         for i in d.query(MenShoes).filter(MenShoes.quantity > 0):
-            c = (i.name[:15], i.price, i.size, i.quantity)
+            c = "  ".join([i.name[:15], str(i.price), str(i.size), str(i.quantity)])
             b.append(c)
         return (b)
 
-
+p()
+for i in b:
+    print(i)
 
 
