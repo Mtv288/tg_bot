@@ -2,7 +2,7 @@ import asyncio
 from aiogram import Bot, Dispatcher
 import os
 from dotenv import load_dotenv
-from handlers import commands, replybutton
+from handlers import commands, replybutton_hendler
 
 
 
@@ -13,7 +13,7 @@ async def start():
     bot = Bot(os.getenv('TOKEN'))
     dp = Dispatcher()
     dp.include_router(commands.router)
-    dp.include_router(replybutton.router)
+    dp.include_router(replybutton_hendler.router)
 
 
 

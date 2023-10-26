@@ -1,10 +1,10 @@
 from aiogram import F, Router
 from aiogram.types import Message
 from bot.keyboard import reply_keyboard
-from bot.keyboard import inline_keyboard
 from aiogram.types import FSInputFile
-
-
+from sqlalchemy.orm import Session
+from bot.data_base.data_base_main import MenShoes
+from bot.data_base.data_base_main import engine
 
 router = Router()
 
@@ -18,8 +18,7 @@ async def back(message: Message):
 @router.message(F.text == 'Мужская обувь')
 async def men(message: Message):
     await message.delete()
-    await message.answer_photo(FSInputFile('Y:\\Обувь\\Photo\\10309.jpg'))
-    await message.answer('Выберите категорию', reply_markup=inline_keyboard.men)
+    await message.answer('Выберите категорию', reply_markup=reply_keyboard.men_kb)
 
 
 @router.message(F.text == 'Женская обувь')
@@ -38,3 +37,14 @@ async def women(message: Message):
 async def women(message: Message):
     await message.delete()
     await message.answer('Выберите категорию', reply_markup=reply_keyboard.slipper_kb)
+
+
+@router.message(F.text == 'Туфли')
+async def men_shoes_list(message: Message):
+    await message.delete()
+    with Session(engine) as session:
+        for i in session.query(MenShoes):
+            await message.answer_photo(FSInputFile(str(i.photo)))
+
+
+

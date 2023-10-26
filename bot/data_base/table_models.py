@@ -82,3 +82,16 @@ class WomenSlippers(Base):
     price: Mapped[int]
     quantity: Mapped[int]
     size: Mapped[int]
+
+
+class Catalog(Base):
+    __tablename__ = 'catalog'
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    group_code: Mapped[int]
+    code: Mapped[int]
+    name: Mapped[str]
+    photo: Mapped[str]
+    price: Mapped[int]
+    quantity: Mapped[int]
+    size: Mapped[int]
