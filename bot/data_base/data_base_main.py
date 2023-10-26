@@ -42,3 +42,4 @@ with Session(engine) as session:
     d = session.query(MenShoes.name).distinct().all()
     for i in d:
         print(i[0])
+
