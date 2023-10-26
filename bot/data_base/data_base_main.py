@@ -28,7 +28,7 @@ def great_all_goods_table():
 def add_data_in_table(table_class, filter_data):
     with Session(engine) as session:
         for i in session.query(AllData).filter(AllData.group_code.like(filter_data)).filter(AllData.quantity > 0):
-            men_shoes = table_class(code=i.code, group_code=i.group_code, name=i.name, photo="\\".join([d, i.photo]),
+            men_shoes = table_class(code=i.code, group_code=i.group_code, name=(f'Туфли мужские {i.name}'), photo="\\".join([d, i.photo]),
                                     price=i.price, quantity=i.quantity, size=i.size)
             session.add(men_shoes)
         session.commit()
