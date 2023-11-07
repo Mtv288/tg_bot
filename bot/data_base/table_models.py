@@ -1,4 +1,4 @@
-from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
+from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped, relationship
 from typing import Optional
 
 
@@ -90,4 +90,12 @@ class Catalog(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
     price: Mapped[int]
+    photo: Mapped[Optional[str]]
 
+class Cat(Base):
+    __tablename__ = 'cat'
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+    price: Mapped[int]
+    photo: Mapped[Optional[str]]

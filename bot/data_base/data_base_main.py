@@ -37,11 +37,30 @@ def add_data_in_table(table_class, filter_data):
 
 great_all_goods_table()
 add_data_in_table(MenShoes, 12)
-
+w = dict()
 with Session(engine) as session:
-    d = session.query(MenShoes.name, MenShoes.price).distinct()
+    d = session.query(MenShoes.name, MenShoes.price, MenShoes.photo)
     for i in d:
-        catalog_men = Catalog(name=i[0], price=i[1])
-        session.add(catalog_men)
-    session.commit()
+        g = dict()
+        g[i[0]] = i[1], i[2]
+        w.update(g)
+
+
+
+
+
+with Session(engine) as ses:
+    for i in w:
+        catalog = Catalog(name=i, price=w[i][0], photo=w[i][1])
+
+        ses.add(catalog)
+    ses.commit()
+
+
+
+
+
+
+
+
 

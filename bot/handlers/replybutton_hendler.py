@@ -3,7 +3,7 @@ from aiogram.types import Message
 from bot.keyboard import reply_keyboard
 from aiogram.types import FSInputFile
 from sqlalchemy.orm import Session
-from bot.data_base.data_base_main import MenShoes
+from bot.data_base.data_base_main import Catalog
 from bot.data_base.data_base_main import engine
 
 router = Router()
@@ -42,7 +42,7 @@ async def women(message: Message):
 @router.message(F.text == 'Туфли')
 async def men_shoes_list(message: Message):
     with Session(engine) as session:
-        for i in session.query(MenShoes):
+        for i in session.query(Catalog):
             await message.answer_photo(FSInputFile(str(i.photo)))
 
 
