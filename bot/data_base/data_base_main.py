@@ -39,7 +39,9 @@ great_all_goods_table()
 add_data_in_table(MenShoes, 12)
 
 with Session(engine) as session:
-    d = session.query(MenShoes.name).distinct().all()
+    d = session.query(MenShoes.name, MenShoes.price).distinct()
     for i in d:
-        print(i[0])
+        catalog_men = Catalog(name=i[0], price=i[1])
+        session.add(catalog_men)
+    session.commit()
 

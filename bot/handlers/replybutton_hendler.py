@@ -41,10 +41,10 @@ async def women(message: Message):
 
 @router.message(F.text == 'Туфли')
 async def men_shoes_list(message: Message):
-    await message.delete()
     with Session(engine) as session:
         for i in session.query(MenShoes):
             await message.answer_photo(FSInputFile(str(i.photo)))
+
 
 
 
