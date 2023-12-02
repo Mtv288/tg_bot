@@ -44,7 +44,8 @@ async def men_shoes_list(message: Message):
     await message.answer('Назад', reply_markup=reply_keyboard.return_kb)
     with Session(engine) as session:
         for i in session.query(Catalog):
-            await message.answer_photo(FSInputFile(str(i.photo)), f'Цена: {str(i.price)} р.')
+            await message.answer_photo(FSInputFile(str(i.photo)), f'Цена: {str(i.price)} р.', reply_markup=inline_keyboard.men)
+
 
 
 
