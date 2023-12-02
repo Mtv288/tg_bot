@@ -66,3 +66,10 @@ slipper_kb = ReplyKeyboardMarkup(
         ]
     ], resize_keyboard=True
 )
+
+return_kb = ReplyKeyboardMarkup(
+    keyboard=[[
+        KeyboardButton(text='В раздел мужские'),
+        KeyboardButton(text='В главное меню')
+    ]], resize_keyboard=True
+)

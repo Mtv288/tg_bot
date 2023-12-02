@@ -5,7 +5,7 @@ from aiogram.types.callback_query import CallbackQuery
 
 men = InlineKeyboardMarkup(inline_keyboard=[
     [
-        InlineKeyboardButton(text='ролро', callback_data='rjhfhgfghf'),
-        InlineKeyboardButton(text='ghgh', callback_data='dgdfg')
+        InlineKeyboardButton(text='Цена', callback_data='gdfg'),
+        InlineKeyboardButton(text='Размеры в наличии', callback_data='ryrty')
     ]
 ])
