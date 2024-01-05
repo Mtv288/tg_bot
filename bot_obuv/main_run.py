@@ -6,18 +6,15 @@ from handlers import commands, replybutton_hendler
 
 
 
+
 load_dotenv()
+bot = Bot(os.getenv('TOKEN'))
 
 
 async def start():
-    bot = Bot(os.getenv('TOKEN'))
     dp = Dispatcher()
     dp.include_router(commands.router)
     dp.include_router(replybutton_hendler.router)
-
-
-
-
     await dp.start_polling(bot)
 
 

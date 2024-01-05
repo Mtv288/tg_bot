@@ -1,7 +1,6 @@
-from sqlalchemy import create_engine, MetaData
+from sqlalchemy import create_engine, MetaData, update, exists
 from sqlalchemy.orm import Session
-from bot.data_base.table_models import AllData, Base, MenShoes, Catalog
-
+from bot_obuv.data_base.table_models import AllData, Base, MenShoes, Catalog
 import csv
 
 
@@ -25,19 +24,21 @@ def great_all_goods_table():
             session.commit()
 
 
-def add_data_in_table(table_class, filter_data):
+def add_data_in_table(table_class, name):
     with Session(engine) as session:
-        for i in session.query(AllData).filter(AllData.group_code.like(filter_data)).filter(AllData.quantity > 0):
-            men_shoes = table_class(code=i.code, group_code=i.group_code, name=f'Туфли мужские {i.name}', photo="\\".join([d, i.photo]),
+        for i in session.query(AllData).filter(AllData.name.like(name)).filter(AllData.quantity > 0):
+            men_shoes = table_class(code=i.code, group_code=i.group_code, name=i.name, photo="\\".join([d, i.photo]),
                                     price=i.price, quantity=i.quantity, size=i.size)
             session.add(men_shoes)
         session.commit()
 
 
 
-great_all_goods_table()
-add_data_in_table(MenShoes, 12)
+
+#add_data_in_table(MenShoes, 'МУЖ П/Б%')
+
 w = dict()
+
 with Session(engine) as session:
     d = session.query(MenShoes.name, MenShoes.price, MenShoes.photo)
     for i in d:
@@ -53,10 +54,12 @@ with Session(engine) as ses:
     ses.commit()
 
 
-
-
-
-
+rt = session.query(exists().where(AllData.id.isnot(None))).scalar()
+if rt:
+    session.close()
+else:
+    great_all_goods_table()
+    session.close()
 
 
 
