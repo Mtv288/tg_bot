@@ -33,8 +33,17 @@ def add_data_in_table(table_class, name):
         session.commit()
 
 
+def check_table():
+    with Session(engine) as session:
+        rt = session.query(exists().where(AllData.id.isnot(None))).scalar()
+        if rt:
+            session.close()
+        else:
+            great_all_goods_table()
+            session.close()
 
 
+check_table()
 #add_data_in_table(MenShoes, 'МУЖ П/Б%')
 
 w = dict()
@@ -54,12 +63,7 @@ with Session(engine) as ses:
     ses.commit()
 
 
-rt = session.query(exists().where(AllData.id.isnot(None))).scalar()
-if rt:
-    session.close()
-else:
-    great_all_goods_table()
-    session.close()
+
 
 
 
