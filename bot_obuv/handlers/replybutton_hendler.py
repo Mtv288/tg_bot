@@ -40,7 +40,10 @@ async def women(message: Message):
     await message.delete()
     await message.answer('Выберите категорию', reply_markup=reply_keyboard.slipper_kb)
 
+
 r = []
+
+
 @router.message(F.text == 'Туфли')
 async def men_shoes_list(message: Message):
     await message.delete()
@@ -48,8 +51,9 @@ async def men_shoes_list(message: Message):
     photos = []
     with Session(engine) as ses:
         for i in ses.query(Catalog):
-            photos.append(types.FSInputFile(i.photo))
-    med = [types.InputMediaPhoto(media=photo) for photo in photos[:10]]
+            if i.name[:7] == 'МУЖ П/Б':
+                photos.append(types.FSInputFile(i.photo))
+    med = [types.InputMediaPhoto(media=photo, text=str(i.price)) for photo in photos[:10]]
     await bot.send_media_group(message.chat.id, media=med)
     r.append(message.chat.id)
 
@@ -73,4 +77,3 @@ async def men_menu(message: Message):
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('В главное меню', reply_markup=reply_keyboard.main_kb)
-    
