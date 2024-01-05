@@ -24,12 +24,12 @@ def great_all_goods_table():
             session.commit()
 
 
-def add_data_in_table(table_class, name):
+def add_data_in_table(table_class):
     with Session(engine) as session:
-        for i in session.query(AllData).filter(AllData.name.like(name)).filter(AllData.quantity > 0):
-            men_shoes = table_class(code=i.code, group_code=i.group_code, name=i.name, photo="\\".join([d, i.photo]),
-                                    price=i.price, quantity=i.quantity, size=i.size)
-            session.add(men_shoes)
+        for i in session.query(AllData).filter(AllData.quantity > 0):
+            catalog = table_class(name=i.name, photo="\\".join([d, i.photo]),
+                                    price=i.price)
+            session.add(catalog)
         session.commit()
 
 
@@ -43,13 +43,16 @@ def check_table():
             session.close()
 
 
+
+
+
 check_table()
-#add_data_in_table(MenShoes, 'МУЖ П/Б%')
+add_data_in_table(Catalog)
 
 w = dict()
 
 with Session(engine) as session:
-    d = session.query(MenShoes.name, MenShoes.price, MenShoes.photo)
+    d = session.query(Catalog.name, Catalog.price, Catalog.photo)
     for i in d:
         g = dict()
         g[i[0]] = i[1], i[2]
