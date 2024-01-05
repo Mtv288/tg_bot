@@ -49,11 +49,13 @@ async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Назад', reply_markup=reply_keyboard.return_kb)
     photos = []
+    price = []
     with Session(engine) as ses:
         for i in ses.query(Catalog):
             if i.name[:7] == 'МУЖ П/Б':
                 photos.append(types.FSInputFile(i.photo))
-    med = [types.InputMediaPhoto(media=photo, text=str(i.price)) for photo in photos[:10]]
+                price.append(str(i.price))
+    med = [types.InputMediaPhoto(media=photo, caption=pr) for photo, pr in zip(photos[:10], price[:10])]
     await bot.send_media_group(message.chat.id, media=med)
     r.append(message.chat.id)
 
