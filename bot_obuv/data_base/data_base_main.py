@@ -1,6 +1,6 @@
-from sqlalchemy import create_engine, MetaData, update, exists
+from sqlalchemy import create_engine, MetaData, update, exists, or_
 from sqlalchemy.orm import Session
-from bot_obuv.data_base.table_models import AllData, Base, MenShoes, Catalog
+from bot_obuv.data_base.table_models import AllData, Base, MenShoes, Catalog, CatalogAll
 import csv
 
 engine = create_engine('sqlite:///data_all.db')
@@ -25,10 +25,10 @@ def great_all_goods_table():
 
 def add_data_in_table(table_class):
     with Session(engine) as session:
-        for i in session.query(AllData).filter(AllData.quantity > 0):
-            catalog = table_class(name=i.name, photo="\\".join([d, i.photo]),
+        for i in session.query(AllData).filter(or_(AllData.name.like('МУЖ П/Б%'),AllData.name.like('ЖЕН БОТ%'))).filter(AllData.quantity > 0):
+            cat = table_class(name=i.name, photo="\\".join([d, i.photo]),
                                   price=i.price)
-            session.add(catalog)
+            session.add(cat)
         session.commit()
 
 
@@ -43,12 +43,12 @@ def check_table():
 
 
 check_table()
-add_data_in_table(Catalog)
+add_data_in_table(CatalogAll)
 
 w = dict()
 
 with Session(engine) as session:
-    d = session.query(Catalog.name, Catalog.price, Catalog.photo)
+    d = session.query(CatalogAll.name, CatalogAll.price, CatalogAll.photo)
     for i in d:
         g = dict()
         g[i[0]] = i[1], i[2]
@@ -59,3 +59,4 @@ with Session(engine) as ses:
         catalog = Catalog(name=i, price=w[i][0], photo=w[i][1])
         ses.add(catalog)
     ses.commit()
+print(w)

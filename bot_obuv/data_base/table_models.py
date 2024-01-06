@@ -34,6 +34,14 @@ class MenShoes(Base):
 
 
 
+class CatalogAll(Base):
+    __tablename__ = 'catalogall'
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+    price: Mapped[int]
+    photo: Mapped[Optional[str]]
+
 class Catalog(Base):
     __tablename__ = 'catalog'
 
@@ -41,4 +49,3 @@ class Catalog(Base):
     name: Mapped[str]
     price: Mapped[int]
     photo: Mapped[Optional[str]]
-
