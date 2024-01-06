@@ -25,7 +25,7 @@ def great_all_goods_table():
 
 def add_data_in_table(table_class):
     with Session(engine) as session:
-        for i in session.query(AllData).filter(or_(AllData.name.like('МУЖ П/Б%'),AllData.name.like('ЖЕН БОТ%'))).filter(AllData.quantity > 0):
+        for i in session.query(AllData).filter(or_(AllData.name.like('МУЖ%'),AllData.name.like('ЖЕН%'))).filter(AllData.quantity > 0):
             cat = table_class(name=i.name, photo="\\".join([d, i.photo]),
                                   price=i.price)
             session.add(cat)
