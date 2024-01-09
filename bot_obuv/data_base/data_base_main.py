@@ -9,6 +9,7 @@ session = Session()
 Base.metadata.create_all(engine)
 
 d = 'Y:\Обувь\Photo'
+g = 'Нет фото.jpg'
 
 
 def great_all_goods_table():
@@ -23,40 +24,57 @@ def great_all_goods_table():
             session.commit()
 
 
-def add_data_in_table(table_class):
+def great_catalog_all():
     with Session(engine) as session:
-        for i in session.query(AllData).filter(or_(AllData.name.like('МУЖ%'),AllData.name.like('ЖЕН%'))).filter(AllData.quantity > 0):
-            cat = table_class(name=i.name, photo="\\".join([d, i.photo]),
-                                  price=i.price)
+        for i in session.query(AllData).filter(or_(AllData.name.like('МУЖ%'),
+                                                   AllData.name.like('ЖЕН%'),
+                                                   AllData.name.like('ДЕТ%'),
+                                                   AllData.name.like('Тапки%'))).filter(AllData.quantity > 0):
+            if i.photo:
+                cat = CatalogAll(name=i.name, photo="\\".join([d, i.photo]),
+                                 price=i.price)
+            else:
+                i.photo = g
             session.add(cat)
         session.commit()
 
 
-def check_table():
+def check_table(table_name):
     with Session(engine) as session:
-        rt = session.query(exists().where(AllData.id.isnot(None))).scalar()
+        for i in table_name:
+            rt = session.query(exists().where(i.id.isnot(None))).scalar()
+
         if rt:
             session.close()
-        else:
+
+        elif i.__tablename__ == 'all_goods':
             great_all_goods_table()
-            session.close()
+
+        elif i.__tablename__ == 'catalogall':
+            great_catalog_all()
+
+        elif i.__tablename__ == 'catalog':
+            great_catalog_shoes()
+
+            session.commit()
 
 
-check_table()
-add_data_in_table(CatalogAll)
+def great_catalog_shoes():
+    w = dict()
+    with Session(engine) as session:
+        d = session.query(CatalogAll.name, CatalogAll.price, CatalogAll.photo)
+        for i in d:
+            g = dict()
+            g[i[0]] = i[1], i[2]
+            w.update(g)
 
-w = dict()
+    with Session(engine) as ses:
+        for i in w:
+            catalog = Catalog(name=i, price=w[i][0], photo=w[i][1])
+            ses.add(catalog)
+        ses.commit()
 
-with Session(engine) as session:
-    d = session.query(CatalogAll.name, CatalogAll.price, CatalogAll.photo)
-    for i in d:
-        g = dict()
-        g[i[0]] = i[1], i[2]
-        w.update(g)
 
-with Session(engine) as ses:
-    for i in w:
-        catalog = Catalog(name=i, price=w[i][0], photo=w[i][1])
-        ses.add(catalog)
-    ses.commit()
-print(w)
+table_name_list = [AllData, CatalogAll, Catalog]
+
+check_table(table_name_list)
