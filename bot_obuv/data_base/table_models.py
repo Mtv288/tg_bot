@@ -19,28 +19,14 @@ class AllData(Base):
     size: Mapped[Optional[int]]
 
 
-class MenShoes(Base):
-    __tablename__ = 'men_shoes'
-
-    id: Mapped[int] = mapped_column(primary_key=True)
-    group_code: Mapped[int]
-    code: Mapped[int]
-    name: Mapped[str]
-    photo: Mapped[str]
-    price: Mapped[int]
-    quantity: Mapped[int]
-    size: Mapped[int]
-
-
-
-
 class CatalogAll(Base):
-    __tablename__ = 'catalogall'
+    __tablename__ = 'catalog_all'
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
     price: Mapped[int]
     photo: Mapped[Optional[str]]
+
 
 class Catalog(Base):
     __tablename__ = 'catalog'
