@@ -13,6 +13,10 @@ g = 'Нет фото.jpg'
 
 
 def great_all_goods_table():
+    """
+    Собираем основную таблицу всех товаров с дублированными товарами и товарами с нулевым остатком из csv файла
+    :return: Ничего не возращает
+    """
     with open(r'C:\TrueShop2site\All.csv') as exs:
         reader = csv.DictReader(exs, delimiter=";")
         with Session(engine) as session:
@@ -25,6 +29,10 @@ def great_all_goods_table():
 
 
 def great_catalog_all():
+    """
+    Собираем таблицу CatalogAll здесь определенные виды товара и отсутствует товары с нулевым остатком
+    :return: Ничего не возвращает
+    """
     with Session(engine) as session:
         for i in session.query(AllData).filter(or_(AllData.name.like('МУЖ%'),
                                                    AllData.name.like('ЖЕН%'),
@@ -40,11 +48,16 @@ def great_catalog_all():
 
 
 def check_table(table_name):
+    """
+    Проверяем таблицы на их содержание и если таблица пустая заполняем
+    :param table_name: Список таблиц для проверки
+    :return: Ничего не возращаем
+    """
     with Session(engine) as session:
         for i in table_name:
-            rt = session.query(exists().where(i.id.isnot(None))).scalar()
+            table_instance = session.query(exists().where(i.id.isnot(None))).scalar()
 
-            if rt:
+            if table_instance:
                 session.close()
 
             elif i.__tablename__ == 'all_goods':
@@ -60,6 +73,11 @@ def check_table(table_name):
 
 
 def great_catalog_shoes():
+    """
+    Убираем дубли товаров с помощью словаря и создаем таблицу Catalog для получения полноценного каталога
+    с ценой и фото товара
+    :return: Ничего не возращаем
+    """
     values_for_the_catalog_table = dict()
     with Session(engine) as session:
         dict_values = session.query(CatalogAll.name, CatalogAll.price, CatalogAll.photo)
