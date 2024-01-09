@@ -56,6 +56,9 @@ def check_table(table_name):
         elif i.__tablename__ == 'catalog':
             great_catalog_shoes()
 
+        else:
+            pass
+
             session.commit()
 
 
