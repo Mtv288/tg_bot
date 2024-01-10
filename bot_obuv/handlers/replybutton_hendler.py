@@ -61,6 +61,7 @@ async def men_shoes_list(message: Message):
 
 @router.message(F.text == 'Кроссовки')
 async def men_shoes_list(message: Message):
+    await message.delete()
     await message.answer('Назад', reply_markup=return_kb())
     photos, price = g('МУЖ КРО')
     f = len(photos) // 10
