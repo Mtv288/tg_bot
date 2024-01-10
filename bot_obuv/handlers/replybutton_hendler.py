@@ -49,12 +49,12 @@ async def men_shoes_list(message: Message):
     photos, price = great_list_for_media_group('МУЖ П/Б')
     count_message_from_media_group = len(photos) // 10
     for _ in range(count_message_from_media_group + 1):
-        p = photos
-        pr = price
-        med = [types.InputMediaPhoto(media=p, caption=pr) for p, pr in zip(p[:10], pr[:10])]
+        photo = photos
+        prices = price
+        med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
         await bot.send_media_group(message.chat.id, media=med)
-        del p[0: 10]
-        del pr[0: 10]
+        del photo[0: 10]
+        del prices[0: 10]
 
 
 @router.message(F.text == 'Кроссовки')
@@ -64,12 +64,12 @@ async def men_shoes_list(message: Message):
     photos, price = great_list_for_media_group('МУЖ КРО')
     count_message_from_media_group = len(photos) // 10
     for _ in range(count_message_from_media_group + 1):
-        p = photos
-        pr = price
-        med = [types.InputMediaPhoto(media=p, caption=pr) for p, pr in zip(p[:10], pr[:10])]
+        photo = photos
+        prices = price
+        med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
         await bot.send_media_group(message.chat.id, media=med)
-        del p[0: 10]
-        del pr[0: 10]
+        del photo[0: 10]
+        del prices[0: 10]
 
 
 @router.message(F.text == 'В раздел мужские')
