@@ -9,7 +9,6 @@ from aiogram import types
 from bot_obuv.main_run import bot
 from bot_obuv.keyboard.reply_keyboard import main_kb, men_kb, women_kb, slipper_kb, return_kb, child_kb
 
-
 router = Router()
 
 
@@ -48,15 +47,14 @@ async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Назад', reply_markup=return_kb())
     photos, price = g('МУЖ П/Б')
-    f = len(photos) // 10
-    for _ in range(f + 1):
+    count_message_from_media_group = len(photos) // 10
+    for _ in range(count_message_from_media_group + 1):
         p = photos
         pr = price
         med = [types.InputMediaPhoto(media=p, caption=pr) for p, pr in zip(p[:10], pr[:10])]
         await bot.send_media_group(message.chat.id, media=med)
         del p[0: 10]
         del pr[0: 10]
-
 
 
 @router.message(F.text == 'Кроссовки')
@@ -95,4 +93,3 @@ def g(world):
                 photos.append(types.FSInputFile(i.photo))
                 price.append(f'Цена {str(i.price)}р.')
     return photos, price
-
