@@ -63,7 +63,11 @@ async def men_shoes_list(message: Message):
     await message.answer('Назад', reply_markup=return_kb())
     photos, price = great_list_for_media_group('МУЖ КРО')
     count_message_from_media_group = len(photos) // 10
-    for _ in range(count_message_from_media_group + 1):
+    if types(count_message_from_media_group) == int:
+        d = 0
+    else:
+        d = 1
+    for _ in range(count_message_from_media_group + d):
         photo = photos
         prices = price
         med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
