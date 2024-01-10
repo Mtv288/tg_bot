@@ -46,7 +46,7 @@ async def women(message: Message):
 async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Назад', reply_markup=return_kb())
-    photos, price = g('МУЖ П/Б')
+    photos, price = great_list_for_media_group('МУЖ П/Б')
     count_message_from_media_group = len(photos) // 10
     for _ in range(count_message_from_media_group + 1):
         p = photos
@@ -61,9 +61,9 @@ async def men_shoes_list(message: Message):
 async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Назад', reply_markup=return_kb())
-    photos, price = g('МУЖ КРО')
-    f = len(photos) // 10
-    for _ in range(f + 1):
+    photos, price = great_list_for_media_group('МУЖ КРО')
+    count_message_from_media_group = len(photos) // 10
+    for _ in range(count_message_from_media_group + 1):
         p = photos
         pr = price
         med = [types.InputMediaPhoto(media=p, caption=pr) for p, pr in zip(p[:10], pr[:10])]
@@ -84,7 +84,7 @@ async def men_menu(message: Message):
     await message.answer('В главное меню', reply_markup=main_kb())
 
 
-def g(world):
+def great_list_for_media_group(world):
     photos = []
     price = []
     with Session(engine) as ses:
