@@ -4,9 +4,6 @@ import os
 from dotenv import load_dotenv
 from handlers import commands, replybutton_hendler
 
-
-
-
 load_dotenv()
 bot = Bot(os.getenv('TOKEN'))
 

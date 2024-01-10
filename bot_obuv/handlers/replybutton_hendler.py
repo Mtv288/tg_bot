@@ -47,13 +47,13 @@ async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Назад', reply_markup=return_kb())
     photos, price = great_list_for_media_group('МУЖ П/Б')
-    count_message_from_media_group = len(photos) / 10
-    if isinstance(count_message_from_media_group, int):
+    count_message_for_media_group = len(photos) / 10
+    if isinstance(count_message_for_media_group, int):
         d = 0
     else:
-        count_message_from_media_group = int(count_message_from_media_group)
+        count_message_from_media_group = int(count_message_for_media_group)
         d = 1
-    for _ in range(count_message_from_media_group + d):
+    for _ in range(count_message_for_media_group + d):
         photo = photos
         prices = price
         med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
@@ -67,13 +67,13 @@ async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Назад', reply_markup=return_kb())
     photos, price = great_list_for_media_group('МУЖ КРО')
-    count_message_from_media_group = len(photos) / 10
-    if isinstance(count_message_from_media_group, int):
+    count_message_for_media_group = len(photos) / 10
+    if isinstance(count_message_for_media_group, int):
         d = 0
     else:
-        count_message_from_media_group = int(count_message_from_media_group)
+        count_message_for_media_group = int(count_message_for_media_group)
         d = 1
-    for _ in range(count_message_from_media_group + d):
+    for _ in range(count_message_for_media_group + d):
         photo = photos
         prices = price
         med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
