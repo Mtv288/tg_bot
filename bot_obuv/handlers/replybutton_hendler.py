@@ -62,7 +62,7 @@ async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Назад', reply_markup=return_kb())
     photos, price = great_list_for_media_group('МУЖ КРО')
-    count_message_from_media_group = len(photos) // 10
+    count_message_from_media_group = len(photos) / 10
     if isinstance(count_message_from_media_group, int):
         d = 0
     else:
