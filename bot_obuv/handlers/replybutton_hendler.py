@@ -66,6 +66,7 @@ async def men_shoes_list(message: Message):
     if isinstance(count_message_from_media_group, int):
         d = 0
     else:
+        count_message_from_media_group = int(count_message_from_media_group)
         d = 1
     for _ in range(count_message_from_media_group + d):
         photo = photos
