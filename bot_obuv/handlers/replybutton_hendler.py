@@ -40,7 +40,7 @@ async def women(message: Message):
 @router.message(F.text == 'Тапочки')
 async def women(message: Message):
     await message.delete()
-    await message.answer('Выберите категорию', reply_markup=slipper_kb)
+    await message.answer('Выберите категорию', reply_markup=slipper_kb())
 
 
 @router.message(F.text == 'Туфли')
