@@ -47,22 +47,30 @@ async def women(message: Message):
 async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Назад', reply_markup=return_kb())
-    photos, price = g(Catalog, 'МУЖ П/Б')
+    photos, price = g('МУЖ П/Б')
+    f = len(photos) // 10
+    for _ in range(f + 1):
+        p = photos
+        pr = price
+        med = [types.InputMediaPhoto(media=p, caption=pr) for p, pr in zip(p[:10], pr[:10])]
+        await bot.send_media_group(message.chat.id, media=med)
+        del p[0: 10]
+        del pr[0: 10]
 
-
-    med = [types.InputMediaPhoto(media=photo, caption=pr) for photo, pr in zip(photos[:10], price[:10])]
-    med_2 = [types.InputMediaPhoto(media=photo, caption=pr) for photo, pr in zip(photos[11:21], price[11:21])]
-    await bot.send_media_group(message.chat.id, media=med)
-    await bot.send_media_group(message.chat.id, media=med_2)
 
 
 @router.message(F.text == 'Кроссовки')
 async def men_shoes_list(message: Message):
     await message.answer('Назад', reply_markup=return_kb())
-    with Session(engine) as session:
-        for i in session.query(Catalog):
-            await message.answer_photo(FSInputFile(str(i.photo)), f'Цена: {str(i.price)} р.',
-                                       reply_markup=inline_keyboard.men)
+    photos, price = g('МУЖ КРО')
+    f = len(photos) // 10
+    for _ in range(f + 1):
+        p = photos
+        pr = price
+        med = [types.InputMediaPhoto(media=p, caption=pr) for p, pr in zip(p[:10], pr[:10])]
+        await bot.send_media_group(message.chat.id, media=med)
+        del p[0: 10]
+        del pr[0: 10]
 
 
 @router.message(F.text == 'В раздел мужские')
@@ -77,13 +85,13 @@ async def men_menu(message: Message):
     await message.answer('В главное меню', reply_markup=main_kb())
 
 
-def g(table, world):
+def g(world):
     photos = []
     price = []
     with Session(engine) as ses:
-        for i in ses.query(table):
+        for i in ses.query(Catalog):
             if i.name[:7] == world:
                 photos.append(types.FSInputFile(i.photo))
                 price.append(f'Цена {str(i.price)}р.')
     return photos, price
-print(g(Catalog, 'МУЖ П/Б'))
+
