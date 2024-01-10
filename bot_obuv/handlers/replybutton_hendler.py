@@ -1,7 +1,7 @@
 from aiogram import F, Router
 from aiogram.types import Message
-from bot_obuv.keyboard import reply_keyboard, inline_keyboard
-from aiogram.types import FSInputFile, InputFile
+from bot_obuv.keyboard import inline_keyboard
+from aiogram.types import FSInputFile
 from sqlalchemy.orm import Session
 from bot_obuv.data_base.data_base_main import Catalog
 from bot_obuv.data_base.data_base_main import engine
@@ -47,16 +47,13 @@ async def women(message: Message):
 async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Назад', reply_markup=return_kb())
-    photos = []
-    price = []
-    print(len(photos))
-    with Session(engine) as ses:
-        for i in ses.query(Catalog):
-            if i.name[:7] == 'МУЖ П/Б':
-                photos.append(types.FSInputFile(i.photo))
-                price.append(f'Цена {str(i.price)}р.')
+    photos, price = g(Catalog, 'МУЖ П/Б')
+
+
     med = [types.InputMediaPhoto(media=photo, caption=pr) for photo, pr in zip(photos[:10], price[:10])]
+    med_2 = [types.InputMediaPhoto(media=photo, caption=pr) for photo, pr in zip(photos[11:21], price[11:21])]
     await bot.send_media_group(message.chat.id, media=med)
+    await bot.send_media_group(message.chat.id, media=med_2)
 
 
 @router.message(F.text == 'Кроссовки')
@@ -78,3 +75,15 @@ async def men_menu(message: Message):
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('В главное меню', reply_markup=main_kb())
+
+
+def g(table, world):
+    photos = []
+    price = []
+    with Session(engine) as ses:
+        for i in ses.query(table):
+            if i.name[:7] == world:
+                photos.append(types.FSInputFile(i.photo))
+                price.append(f'Цена {str(i.price)}р.')
+    return photos, price
+print(g(Catalog, 'МУЖ П/Б'))
