@@ -1,7 +1,7 @@
-from aiogram import F, Router
+from aiogram import Router
 from aiogram.types import Message
 from bot_obuv.keyboard import reply_keyboard
-from aiogram.filters import Command, CommandStart
+from aiogram.filters import CommandStart
 
 router = Router()
 

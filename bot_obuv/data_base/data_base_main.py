@@ -15,7 +15,7 @@ g = 'Нет фото.jpg'
 def great_all_goods_table():
     """
     Собираем основную таблицу всех товаров с дублированными товарами и товарами с нулевым остатком из csv файла
-    :return: Ничего не возращает
+    :return: Ничего не возвращает
     """
     with open(r'C:\TrueShop2site\All.csv') as exs:
         reader = csv.DictReader(exs, delimiter=";")
@@ -51,7 +51,7 @@ def check_table(table_name):
     """
     Проверяем таблицы на их содержание и если таблица пустая заполняем
     :param table_name: Список таблиц для проверки
-    :return: Ничего не возращаем
+    :return: Ничего не возвращаем
     """
     with Session(engine) as session:
         for i in table_name:
