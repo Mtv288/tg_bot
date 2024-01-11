@@ -1,7 +1,5 @@
 from aiogram import F, Router
 from aiogram.types import Message
-from bot_obuv.keyboard import inline_keyboard
-from aiogram.types import FSInputFile
 from sqlalchemy.orm import Session
 from bot_obuv.data_base.data_base_main import Catalog
 from bot_obuv.data_base.data_base_main import engine
