@@ -103,4 +103,4 @@ def create_list_for_media_group(world):
     return photos, price
 
 
-
+rt = []
