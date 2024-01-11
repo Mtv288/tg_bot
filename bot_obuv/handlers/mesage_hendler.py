@@ -23,9 +23,9 @@ async def kid_shoes(message: Message):
 
 
 @router.message(lambda message: 'тап' in message.text.lower())
-async def kid_shoes(message: Message):
+async def slippers(message: Message):
     await message.reply('Если вы хотите посмотреть ассортимент тапочек нажмите на кнопку '
-                        '"Тапочки" внизу экрана и выберите интересующую вас категорию обуви')
+                        '"Тапочки" внизу экрана и выберите интересующую вас категорию')
 
 
 @router.message(lambda message: 'работа' in message.text.lower())
