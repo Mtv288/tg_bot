@@ -25,7 +25,7 @@ def men_kb():
                 KeyboardButton(text='Ботинки')
             ],
             [
-                KeyboardButton(text='Кроссовки'),
+                KeyboardButton(text='Кроссовки.'),
                 KeyboardButton(text='Сабо')
             ],
             [

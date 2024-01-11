@@ -43,7 +43,7 @@ async def women(message: Message):
 @router.message(F.text == 'Туфли')
 async def men_shoes_list(message: Message):
     await message.delete()
-    await message.answer('Назад', reply_markup=return_kb())
+    await message.answer('Туфли', reply_markup=return_kb())
     photos, price = create_list_for_media_group('МУЖ П/Б')
     count_message_for_media_group = len(photos) / 10
     if isinstance(count_message_for_media_group, int):
@@ -60,10 +60,10 @@ async def men_shoes_list(message: Message):
         del prices[0: 10]
 
 
-@router.message(F.text == 'Кроссовки')
+@router.message(F.text == 'Кроссовки.')
 async def men_shoes_list(message: Message):
     await message.delete()
-    await message.answer('Назад', reply_markup=return_kb())
+    await message.answer('Кроссовки мужские', reply_markup=return_kb())
     photos, price = create_list_for_media_group('МУЖ КРО')
     count_message_for_media_group = len(photos) / 10
     if isinstance(count_message_for_media_group, int):
@@ -83,13 +83,13 @@ async def men_shoes_list(message: Message):
 @router.message(F.text == 'В раздел мужские')
 async def men_menu(message: Message):
     await message.delete()
-    await message.answer('В раздел мужские', reply_markup=men_kb())
+    await message.answer('Раздел мужские', reply_markup=men_kb())
 
 
 @router.message(F.text == 'В главное меню')
 async def men_menu(message: Message):
     await message.delete()
-    await message.answer('В главное меню', reply_markup=main_kb())
+    await message.answer('Главное меню', reply_markup=main_kb())
 
 
 def create_list_for_media_group(world):
