@@ -1,11 +1,12 @@
 from aiogram import F, Router
 from aiogram.types import Message
+import re
 
 
 router = Router()
 
 
-@router.message(F.text == 'Привет')
+@router.message(lambda message: 'жен' in message.text.lower())
 async def hello(message: Message):
-    await message.answer('Пока')
+    await message.reply(f'Найдено совпадение: ура')
 
