@@ -46,12 +46,12 @@ async def women(message: Message):
 async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Назад', reply_markup=return_kb())
-    photos, price = creat_list_for_media_group('МУЖ П/Б')
+    photos, price = create_list_for_media_group('МУЖ П/Б')
     count_message_for_media_group = len(photos) / 10
     if isinstance(count_message_for_media_group, int):
         d = 0
     else:
-        count_message_from_media_group = int(count_message_for_media_group)
+        count_message_for_media_group = int(count_message_for_media_group)
         d = 1
     for _ in range(count_message_for_media_group + d):
         photo = photos
@@ -66,7 +66,7 @@ async def men_shoes_list(message: Message):
 async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Назад', reply_markup=return_kb())
-    photos, price = creat_list_for_media_group('МУЖ КРО')
+    photos, price = create_list_for_media_group('МУЖ КРО')
     count_message_for_media_group = len(photos) / 10
     if isinstance(count_message_for_media_group, int):
         d = 0
@@ -94,7 +94,7 @@ async def men_menu(message: Message):
     await message.answer('В главное меню', reply_markup=main_kb())
 
 
-def creat_list_for_media_group(world):
+def create_list_for_media_group(world):
     photos = []
     price = []
     with Session(engine) as ses:
@@ -103,3 +103,6 @@ def creat_list_for_media_group(world):
                 photos.append(types.FSInputFile(i.photo))
                 price.append(f'Цена {str(i.price)}р.')
     return photos, price
+
+
+
