@@ -96,5 +96,3 @@ def create_list_for_media_group(world):
 
     return photos, price, count_message_for_media_group
 
-
-
