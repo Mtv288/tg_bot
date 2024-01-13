@@ -6,8 +6,8 @@ router = Router()
 
 @router.message(lambda message: 'жен' in message.text.lower())
 async def woman_shoes(message: Message):
-    await message.reply('Если вы хотите посмотреть ассортимент женской обуви нажмите на кнопку '
-                        '"Женская обувь" внизу экрана и выберите интересующую вас категорию обуви')
+    await message.reply('Если вы хотите посмотреть ассортимент женской обуви напишите '
+                        '"Женская обувь" без кавычек ')
 
 
 @router.message(lambda message: 'муж' in message.text.lower())
@@ -34,3 +34,4 @@ async def job_time(message: Message):
                         '  Понедельник - Пятница с 8.00 до 17.30'
                         '  Суббота - Воскресенье с 9.00 до 16.00'
                         '  без перерывов и выходных')
+
