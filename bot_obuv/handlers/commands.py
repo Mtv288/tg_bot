@@ -1,24 +1,32 @@
-from aiogram import Router, Bot
+from aiogram import Router, types
 from aiogram.types import Message
 from bot_obuv.keyboard.reply_keyboard import main_kb
-from aiogram.filters import CommandStart, Command
-from aiogram.exceptions import TelegramBadRequest
+from aiogram.filters import CommandStart
+from sqlalchemy.orm import Session
+from bot_obuv.data_base.data_base_main import engine
+from bot_obuv.data_base.data_base_main import MessageHistory
+
 
 router = Router()
 
 
 @router.message(CommandStart())
 async def start(message: Message):
-    await message.answer(f'Привет {message.from_user.first_name}')
+    await message.answer(f'Здравствуйте {message.from_user.first_name}')
     await message.answer('Я ваш виртуальный помощник', reply_markup=main_kb())
 
-@router.message(Command('/clear'))
-async def cmd_clear(message: Message, bot: Bot):
-    try:
-        for i in range(message.message_id, 0, -1):
-            await bot.delete_message(message.from_user.id, i)
-    except TelegramBadRequest as ex:
-        if ex.message == 'Bad Request: message to delete not found':
-            print('Все сообщения удалены')
+
+@router.message()
+async def handle_message(message: types.Message):
+    with Session(engine) as session:
+        chat_message = MessageHistory(user_chat_id=message.from_user.id, user_message_id=message.message_id)
+        session.add(chat_message)
+        session.commit()
+
+
+
+
+
+
 
 

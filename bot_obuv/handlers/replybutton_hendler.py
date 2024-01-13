@@ -44,14 +44,8 @@ async def women(message: Message):
 async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Туфли', reply_markup=return_kb())
-    photos, price = create_list_for_media_group('МУЖ П/Б')
-    count_message_for_media_group = len(photos) / 10
-    if isinstance(count_message_for_media_group, int):
-        d = 0
-    else:
-        count_message_for_media_group = int(count_message_for_media_group)
-        d = 1
-    for _ in range(count_message_for_media_group + d):
+    photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ П/Б')
+    for _ in range(count_message_for_media_group):
         photo = photos
         prices = price
         med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
@@ -64,14 +58,8 @@ async def men_shoes_list(message: Message):
 async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Кроссовки мужские', reply_markup=return_kb())
-    photos, price = create_list_for_media_group('МУЖ КРО')
-    count_message_for_media_group = len(photos) / 10
-    if isinstance(count_message_for_media_group, int):
-        d = 0
-    else:
-        count_message_for_media_group = int(count_message_for_media_group)
-        d = 1
-    for _ in range(count_message_for_media_group + d):
+    photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ КРО')
+    for _ in range(count_message_for_media_group):
         photo = photos
         prices = price
         med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
@@ -100,7 +88,13 @@ def create_list_for_media_group(world):
             if i.name[:7] == world:
                 photos.append(types.FSInputFile(i.photo))
                 price.append(f'Цена {str(i.price)}р.')
-    return photos, price
+        count_message_for_media_group = len(photos) / 10
+        if not isinstance(count_message_for_media_group, int):
+            count_message_for_media_group = int(count_message_for_media_group) + 1
+        else:
+            count_message_for_media_group
+
+    return photos, price, count_message_for_media_group
 
 
 

@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, MetaData, update, exists, or_
 from sqlalchemy.orm import Session
-from bot_obuv.data_base.table_models import AllData, Base, Catalog, CatalogAll
+from bot_obuv.data_base.table_models import AllData, Base, Catalog, CatalogAll, MessageHistory
 import csv
 
 engine = create_engine('sqlite:///data_all.db')
