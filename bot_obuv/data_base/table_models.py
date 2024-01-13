@@ -35,3 +35,10 @@ class Catalog(Base):
     name: Mapped[str]
     price: Mapped[int]
     photo: Mapped[Optional[str]]
+
+class MessageHistory(Base):
+    __tablename__ = 'message_history'
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_chat_id: Mapped[int]
+    user_message_id: Mapped[int]

@@ -97,3 +97,4 @@ def great_catalog_shoes():
 table_name_list = [AllData, CatalogAll, Catalog]
 
 check_table(table_name_list)
+
