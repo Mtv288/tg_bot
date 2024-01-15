@@ -27,6 +27,7 @@ def great_all_goods_table():
 
                     session.add(user)
                 session.commit()
+
     except FileNotFoundError:
         with open(r'foto_for_mistake\All.csv') as exs:
             reader = csv.DictReader(exs, delimiter=";")
