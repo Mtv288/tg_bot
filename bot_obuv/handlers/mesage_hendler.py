@@ -3,6 +3,11 @@ from aiogram.types import Message
 
 router = Router()
 
+def answer_for_message(type_shoes):
+    answer = f'Если вы хотите посмотреть ассортимент обуви нажмите на кнопку ' \
+             f'{type_shoes} внизу экрана и выберите интересующую вас категорию обуви'
+    return answer
+
 
 @router.message(lambda message: 'жен' in message.text.lower())
 async def woman_shoes(message: Message):
@@ -12,8 +17,8 @@ async def woman_shoes(message: Message):
 
 @router.message(lambda message: 'муж' in message.text.lower())
 async def men_shoes(message: Message):
-    await message.reply('Если вы хотите посмотреть ассортимент мужской обуви нажмите на кнопку '
-                        '"Мужская обувь" внизу экрана и выберите интересующую вас категорию обуви')
+    await message.reply(answer_for_message('"Мужская обувь"'))
+
 
 
 @router.message(lambda message: 'дет' in message.text.lower())
