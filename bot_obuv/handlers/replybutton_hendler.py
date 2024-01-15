@@ -68,6 +68,20 @@ async def men_shoes_list(message: Message):
         del prices[0: 10]
 
 
+@router.message(F.text == 'Сапоги, Ботинки')
+async def men_shoes_list(message: Message):
+    await message.delete()
+    await message.answer('Сапоги, Ботинки', reply_markup=return_kb())
+    photos, price, count_message_for_media_group = create_list_for_media_group('ЖЕН БОТ')
+    for _ in range(count_message_for_media_group):
+        photo = photos
+        prices = price
+        med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:6], prices[:6])]
+        await bot.send_media_group(message.chat.id, media=med)
+        del photo[0: 6]
+        del prices[0: 6]
+
+
 @router.message(F.text == 'В раздел мужские')
 async def men_menu(message: Message):
     await message.delete()
@@ -95,4 +109,3 @@ def create_list_for_media_group(world):
             count_message_for_media_group
 
     return photos, price, count_message_for_media_group
-
