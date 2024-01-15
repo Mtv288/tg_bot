@@ -107,6 +107,5 @@ def create_list_for_media_group(world):
             count_message_for_media_group = int(count_message_for_media_group) + 1
         else:
             count_message_for_media_group = 1
-    print(len(photos))
 
     return photos, price, count_message_for_media_group
