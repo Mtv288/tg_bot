@@ -35,7 +35,7 @@ async def slippers(message: Message):
 
 @router.message(lambda message: 'работа' in message.text.lower())
 async def job_time(message: Message):
-    await message.reply('Наш режим работы:'
+    await message.reply('_____Наш режим работы:_____'
                         '  Понедельник - Пятница с 8.00 до 17.30'
                         '  Суббота - Воскресенье с 9.00 до 16.00'
                         '  без перерывов и выходных')
