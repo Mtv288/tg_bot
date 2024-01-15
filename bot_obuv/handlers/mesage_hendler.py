@@ -12,8 +12,7 @@ def answer_for_message(type_shoes):
 
 @router.message(lambda message: 'жен' in message.text.lower())
 async def woman_shoes(message: Message):
-    await message.reply('Если вы хотите посмотреть ассортимент женской обуви напишите '
-                        '"Женская обувь" без кавычек ')
+    await message.reply(answer_for_message('"Женская обувь"'))
 
 
 @router.message(lambda message: 'муж' in message.text.lower())
@@ -23,14 +22,12 @@ async def men_shoes(message: Message):
 
 @router.message(lambda message: 'дет' in message.text.lower())
 async def kid_shoes(message: Message):
-    await message.reply('Если вы хотите посмотреть ассортимент детской обуви нажмите на кнопку '
-                        '"Детская обувь" внизу экрана и выберите интересующую вас категорию обуви')
+    await message.reply(answer_for_message('"Детская обувь"'))
 
 
 @router.message(lambda message: 'тап' in message.text.lower())
 async def slippers(message: Message):
-    await message.reply('Если вы хотите посмотреть ассортимент тапочек нажмите на кнопку '
-                        '"Тапки" внизу экрана и выберите интересующую вас категорию')
+    await message.reply(answer_for_message('"Тапки"'))
 
 
 @router.message(lambda message: 'работа' in message.text.lower())
