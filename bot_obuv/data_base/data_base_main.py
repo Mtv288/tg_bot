@@ -9,7 +9,7 @@ session = Session()
 Base.metadata.create_all(engine)
 
 d = 'Y:\Обувь\Photo'
-g = 'Нет фото.jpg'
+g = 'foto_for_mistike\Нет фото.jpg'
 
 
 def great_all_goods_table():
@@ -17,15 +17,26 @@ def great_all_goods_table():
     Собираем основную таблицу всех товаров с дублированными товарами и товарами с нулевым остатком из csv файла
     :return: Ничего не возвращает
     """
-    with open(r'C:\TrueShop2site\All.csv') as exs:
-        reader = csv.DictReader(exs, delimiter=";")
-        with Session(engine) as session:
-            for i in reader:
-                user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=i['photo'],
-                               price=i['price'], quantity=i['quantity'], size=i['Размер'])
+    try:
+        with open(r'C:\TrueShop2site\All.csv') as exs:
+            reader = csv.DictReader(exs, delimiter=";")
+            with Session(engine) as session:
+                for i in reader:
+                    user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=i['photo'],
+                                   price=i['price'], quantity=i['quantity'], size=i['Размер'])
 
-                session.add(user)
-            session.commit()
+                    session.add(user)
+                session.commit()
+    except FileNotFoundError:
+        with open(r'foto_for_mistake\All.csv') as exs:
+            reader = csv.DictReader(exs, delimiter=";")
+            with Session(engine) as session:
+                for i in reader:
+                    user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=i['photo'],
+                                   price=i['price'], quantity=i['quantity'], size=i['Размер'])
+
+                    session.add(user)
+                session.commit()
 
 
 def great_catalog_all():
@@ -38,6 +49,8 @@ def great_catalog_all():
                                                    AllData.name.like('ЖЕН%'),
                                                    AllData.name.like('ДЕТ%'),
                                                    AllData.name.like('Тапки%'))).filter(AllData.quantity > 0):
+
+
             if i.photo:
                 cat = CatalogAll(name=i.name, photo="\\".join([d, i.photo]),
                                  price=i.price, size=i.size, quantity=i.quantity)
