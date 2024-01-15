@@ -21,7 +21,7 @@ def great_all_goods_table():
         reader = csv.DictReader(exs, delimiter=";")
         with Session(engine) as session:
             for i in reader:
-                user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])[:15]), photo=i['photo'],
+                user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=i['photo'],
                                price=i['price'], quantity=i['quantity'], size=i['Размер'])
 
                 session.add(user)
@@ -40,7 +40,7 @@ def great_catalog_all():
                                                    AllData.name.like('Тапки%'))).filter(AllData.quantity > 0):
             if i.photo:
                 cat = CatalogAll(name=i.name, photo="\\".join([d, i.photo]),
-                                 price=i.price)
+                                 price=i.price, size=i.size, quantity=i.quantity)
             else:
                 i.photo = g
             session.add(cat)
@@ -88,7 +88,7 @@ def great_catalog_shoes():
 
     with Session(engine) as ses:
         for i in values_for_the_catalog_table :
-            catalog = Catalog(name=i, price=values_for_the_catalog_table [i][0],
+            catalog = Catalog(name=i[:15], price=values_for_the_catalog_table [i][0],
                               photo=values_for_the_catalog_table[i][1])
             ses.add(catalog)
         ses.commit()

@@ -25,6 +25,8 @@ class CatalogAll(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
     price: Mapped[int]
+    size: Mapped[int]
+    quantity: Mapped[int]
     photo: Mapped[Optional[str]]
 
 

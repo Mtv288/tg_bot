@@ -14,8 +14,9 @@ async def start(message: Message):
 @router.message(Command("clear"))
 async def cmd_clear(message: Message, bot: Bot) -> None:
     try:
-        for i in range(message.message_id, 1, -1):
+        for i in range(message.message_id, 10, -1):
             await bot.delete_message(message.from_user.id, i)
     except TelegramBadRequest as ex:
         if ex.message == "Bad Request: message to delete not found":
             print("Все сообщения удалены")
+
