@@ -9,7 +9,7 @@ def main_kb():
                 KeyboardButton(text='Женская обувь')
             ], [
                 KeyboardButton(text='Детская обувь'),
-                KeyboardButton(text='Тапки')
+                KeyboardButton(text='Тапки.')
             ]
         ], resize_keyboard=True,
         input_field_placeholder='Нажмите нужную кнопку'
