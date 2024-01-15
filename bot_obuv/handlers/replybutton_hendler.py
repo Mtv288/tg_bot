@@ -76,10 +76,10 @@ async def men_shoes_list(message: Message):
     for _ in range(count_message_for_media_group):
         photo = photos
         prices = price
-        med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:6], prices[:6])]
+        med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:8], prices[:8])]
         await bot.send_media_group(message.chat.id, media=med)
-        del photo[0: 6]
-        del prices[0: 6]
+        del photo[0: 9]
+        del prices[0: 9]
 
 
 @router.message(F.text == 'В раздел мужские')
@@ -106,6 +106,7 @@ def create_list_for_media_group(world):
         if not isinstance(count_message_for_media_group, int):
             count_message_for_media_group = int(count_message_for_media_group) + 1
         else:
-            count_message_for_media_group
+            count_message_for_media_group = 1
+    print(len(photos))
 
     return photos, price, count_message_for_media_group
