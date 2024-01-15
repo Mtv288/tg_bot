@@ -33,7 +33,7 @@ def great_all_goods_table():
             reader = csv.DictReader(exs, delimiter=";")
             with Session(engine) as session:
                 for i in reader:
-                    user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=g,
+                    user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=i['photo'],
                                    price=i['price'], quantity=i['quantity'], size=i['Размер'])
 
                     session.add(user)

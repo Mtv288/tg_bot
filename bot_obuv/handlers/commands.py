@@ -20,4 +20,4 @@ async def cmd_clear(message: Message, bot: Bot) -> None:
             await bot.delete_message(message.from_user.id, i)
     except TelegramBadRequest as ex:
         if ex.message == "Bad Request: message to delete not found":
-            print("Все сообщения удалены")
+            await message.answer('Главное меню', reply_markup=main_kb())
