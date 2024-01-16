@@ -9,7 +9,7 @@ session = Session()
 Base.metadata.create_all(engine)
 
 d = 'Y:\Обувь\Photo'
-g = 'foto_for_mistike\Нет фото.jpg'
+g = 'Нет фото.jpg'
 
 
 def great_all_goods_table():
@@ -18,7 +18,7 @@ def great_all_goods_table():
     :return: Ничего не возвращает
     """
     try:
-        with open(r'C:\TrueShop2site\All.csv') as exs:
+        with open(r'C:\hop2site\All.csv') as exs:
             reader = csv.DictReader(exs, delimiter=";")
             with Session(engine) as session:
                 for i in reader:
@@ -29,11 +29,11 @@ def great_all_goods_table():
                 session.commit()
 
     except FileNotFoundError:
-        with open(r'foto_for_mistake\All.csv') as exs:
+        with open(r'All.csv') as exs:
             reader = csv.DictReader(exs, delimiter=";")
             with Session(engine) as session:
                 for i in reader:
-                    user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=i['photo'],
+                    user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=g,
                                    price=i['price'], quantity=i['quantity'], size=i['Размер'])
 
                     session.add(user)
@@ -52,7 +52,11 @@ def great_catalog_all():
                                                    AllData.name.like('Тапки%'))).filter(AllData.quantity > 0):
 
 
-            if i.photo:
+            if i.photo == g:
+                cat = CatalogAll(name=i.name, photo=g,
+                                 price=i.price, size=i.size, quantity=i.quantity)
+
+            elif i.photo == g:
                 cat = CatalogAll(name=i.name, photo="\\".join([d, i.photo]),
                                  price=i.price, size=i.size, quantity=i.quantity)
             else:
