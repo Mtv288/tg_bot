@@ -8,8 +8,8 @@ metadata = MetaData()
 session = Session()
 Base.metadata.create_all(engine)
 
-d = 'Y:\Обувь\Photo'
-g = 'Нет фото.jpg'
+path_to_foto = 'Y:\Обувь\Photo'
+photo_for_mistake = 'Нет фото.jpg'
 
 
 def great_all_goods_table():
@@ -34,7 +34,7 @@ def great_all_goods_table():
             reader = csv.DictReader(exs, delimiter=";")
             with Session(engine) as session:
                 for i in reader:
-                    user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=g,
+                    user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=photo_for_mistake,
                                    price=i['price'], quantity=i['quantity'], size=i['Размер'])
 
                     session.add(user)
@@ -54,15 +54,15 @@ def great_catalog_all():
 
 
 
-            if i.photo != g:
-                cat = CatalogAll(name=i.name, photo="\\".join([d, i.photo]),
+            if i.photo != photo_for_mistake :
+                cat = CatalogAll(name=i.name, photo="\\".join([path_to_foto, i.photo]),
                                  price=i.price, size=i.size, quantity=i.quantity)
 
-            elif i.photo == g:
-                cat = CatalogAll(name=i.name, photo=g,
+            elif i.photo == photo_for_mistake :
+                cat = CatalogAll(name=i.name, photo=photo_for_mistake,
                                  price=i.price, size=i.size, quantity=i.quantity)
             else:
-                i.photo = g
+                i.photo = photo_for_mistake
             session.add(cat)
         session.commit()
 
