@@ -54,16 +54,19 @@ def great_catalog_all():
                                                    AllData.name.like('Тапки%'))).filter(AllData.quantity > 0):
 
 
+            try:
+                if i.photo:
+                    cat = CatalogAll(name=i.name, photo="\\".join([path_to_foto, i.photo]),
+                                     price=i.price, size=i.size, quantity=i.quantity)
 
-            if i.photo != photo_for_mistake :
-                cat = CatalogAll(name=i.name, photo="\\".join([path_to_foto, i.photo]),
-                                 price=i.price, size=i.size, quantity=i.quantity)
+                else:
+                    i.photo == photo_for_mistake
+                    cat = CatalogAll(name=i.name, photo=photo_for_mistake,
+                                     price=i.price, size=i.size, quantity=i.quantity)
 
-            elif i.photo == photo_for_mistake :
-                cat = CatalogAll(name=i.name, photo=photo_for_mistake,
-                                 price=i.price, size=i.size, quantity=i.quantity)
-            else:
-                i.photo = photo_for_mistake
+            except FileNotFoundError:
+                    i.photo = photo_for_mistake
+
             session.add(cat)
         session.commit()
 
