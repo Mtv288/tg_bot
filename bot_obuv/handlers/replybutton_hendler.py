@@ -5,7 +5,8 @@ from bot_obuv.data_base.data_base_main import Catalog
 from bot_obuv.data_base.data_base_main import engine
 from aiogram import types
 from bot_obuv.main_run import bot
-from bot_obuv.keyboard.reply_keyboard import main_kb, men_kb, women_kb, slipper_kb, return_kb, child_kb
+from bot_obuv.keyboard.reply_keyboard import main_kb, men_kb, women_kb, \
+    slipper_kb, return_kb_men, child_kb, return_kb_women
 
 router = Router()
 
@@ -43,23 +44,29 @@ async def women(message: Message):
 @router.message(F.text == 'Туфли')
 async def men_shoes_list(message: Message):
     await message.delete()
-    await message.answer('Туфли', reply_markup=return_kb())
+    await message.answer('Туфли', reply_markup=return_kb_men())
     photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ П/Б')
-    for _ in range(count_message_for_media_group):
-        photo = photos
-        prices = price
-        med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
-        await bot.send_media_group(message.chat.id, media=med)
-        del photo[0: 10]
-        del prices[0: 10]
+
+    if count_message_for_media_group == 1:
+            creat_list_media_no_more_than_10(photos, price, count_message_for_media_group)
+            await bot.send_media_group(message.chat.id,
+                                       media=creat_list_media_no_more_than_10(photos, price, count_message_for_media_group))
+            count_message_for_media_group = 0
+    else:
+        for _ in range(count_message_for_media_group):
+            photo = photos
+            prices = price
+            med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
+            await bot.send_media_group(message.chat.id, media=med)
+            del photo[0: 10]
+            del prices[0: 10]
 
 
 @router.message(F.text == 'Кроссовки.')
 async def men_shoes_list(message: Message):
     await message.delete()
-    await message.answer('Кроссовки мужские', reply_markup=return_kb())
+    await message.answer('Кроссовки мужские', reply_markup=return_kb_men())
     photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ КРО')
-    print((count_message_for_media_group))
 
     for _ in range(count_message_for_media_group):
         photo = photos
@@ -73,18 +80,12 @@ async def men_shoes_list(message: Message):
 @router.message(F.text == 'Сапоги, Ботинки')
 async def men_shoes_list(message: Message):
     await message.delete()
-    await message.answer('Сапоги, Ботинки', reply_markup=return_kb())
-    photos, price, count_message_for_media_group = create_list_for_media_group('ЖЕН БОТ')
-    print(count_message_for_media_group)
+    await message.answer('Сапоги, Ботинки', reply_markup=return_kb_women())
+    photos, price, count_message_for_media_group = create_list_for_media_group('ЖЕН САП')
     if count_message_for_media_group == 1:
-        photo = photos
-        prices = price
-        med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:9], prices[:9])]
-        await bot.send_media_group(message.chat.id, media=med)
-        del photo[0: 10]
-        del prices[0: 10]
+        creat_list_media_no_more_than_10(photos, price, count_message_for_media_group)
+        await bot.send_media_group(message.chat.id, media=creat_list_media_no_more_than_10(photos, price, count_message_for_media_group))
         count_message_for_media_group = 0
-        print(count_message_for_media_group)
 
     else:
         for _ in range(count_message_for_media_group):
@@ -108,6 +109,12 @@ async def men_menu(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
 
 
+@router.message(F.text == 'В раздел женские')
+async def men_menu(message: Message):
+    await message.delete()
+    await message.answer('Раздел женские', reply_markup=women_kb())
+
+
 def create_list_for_media_group(world):
     photos = []
     price = []
@@ -125,3 +132,17 @@ def create_list_for_media_group(world):
             count_message_for_media_group = 1
 
     return photos, price, count_message_for_media_group
+
+
+def creat_list_media_no_more_than_10(media_file, text_in_the_file, count_message):
+    photo = media_file
+    prices = text_in_the_file
+    med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:9], prices[:9])]
+    return med
+
+
+    # med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:9], prices[:9])]
+    # await bot.send_media_group(message.chat.id, media=med)
+    # del photo[0: 10]
+    # del prices[0: 10]
+    count_message_for_media_group = 0

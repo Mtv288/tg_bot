@@ -79,10 +79,19 @@ def slipper_kb():
     return slipper
 
 
-def return_kb():
+def return_kb_men():
     return_b = ReplyKeyboardMarkup(
         keyboard=[[
             KeyboardButton(text='В раздел мужские'),
+            KeyboardButton(text='В главное меню')
+        ]], resize_keyboard=True
+    )
+    return return_b
+
+def return_kb_women():
+    return_b = ReplyKeyboardMarkup(
+        keyboard=[[
+            KeyboardButton(text='В раздел женские'),
             KeyboardButton(text='В главное меню')
         ]], resize_keyboard=True
     )
