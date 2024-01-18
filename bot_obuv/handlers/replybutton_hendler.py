@@ -59,6 +59,8 @@ async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Кроссовки мужские', reply_markup=return_kb())
     photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ КРО')
+    print((count_message_for_media_group))
+
     for _ in range(count_message_for_media_group):
         photo = photos
         prices = price
@@ -73,7 +75,7 @@ async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Сапоги, Ботинки', reply_markup=return_kb())
     photos, price, count_message_for_media_group = create_list_for_media_group('ЖЕН БОТ')
-
+    print(count_message_for_media_group)
     if count_message_for_media_group == 1:
         photo = photos
         prices = price
@@ -81,6 +83,8 @@ async def men_shoes_list(message: Message):
         await bot.send_media_group(message.chat.id, media=med)
         del photo[0: 10]
         del prices[0: 10]
+        count_message_for_media_group = 0
+        print(count_message_for_media_group)
 
     else:
         for _ in range(count_message_for_media_group):
@@ -112,10 +116,9 @@ def create_list_for_media_group(world):
             if i.name[:7] == world:
                 photos.append(types.FSInputFile(i.photo))
                 price.append(f'Цена {str(i.price)}р.')
-        count_message_for_media_group = 0
-        if count_message_for_media_group == 10:
-            count_message_for_media_group = 1
-        elif not isinstance(count_message_for_media_group, int):
+        count_message_for_media_group = len(photos) / 10
+
+        if not isinstance(count_message_for_media_group, int) and count_message_for_media_group != 1:
             count_message_for_media_group = int(count_message_for_media_group) + 1
 
         else:
