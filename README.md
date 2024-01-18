@@ -7,4 +7,4 @@
 # Используемые библиотеки:
 # Aiogram 3.1
 # Sqlalchemy 2.0
-# Sqlite
+# Sqlite 3
