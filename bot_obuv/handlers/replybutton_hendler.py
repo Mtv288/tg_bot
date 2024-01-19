@@ -85,7 +85,6 @@ async def men_shoes_list(message: Message):
     if count_message_for_media_group == 1:
         creat_list_media_no_more_than_10(photos, price)
         await bot.send_media_group(message.chat.id, media=creat_list_media_no_more_than_10(photos, price))
-        count_message_for_media_group = 0
 
     else:
         for _ in range(count_message_for_media_group):
@@ -137,7 +136,7 @@ def create_list_for_media_group(world=[]):
 def creat_list_media_no_more_than_10(media_file, text_in_the_file):
     photo = media_file
     prices = text_in_the_file
-    med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:9], prices[:9])]
+    med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
     return med
 
 
