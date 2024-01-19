@@ -50,13 +50,9 @@ async def men_shoes_list(message: Message):
         await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
 
     else:
-        for _ in range(count_message_for_media_group):
-            photo = photos
-            prices = price
-            med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
-            await bot.send_media_group(message.chat.id, media=med)
-            del photo[0: 10]
-            del prices[0: 10]
+        list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+        for i in list_media_group:
+            await bot.send_media_group(message.chat.id, media=i)
 
 
 @router.message(F.text == 'Кроссовки.')
@@ -64,14 +60,13 @@ async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Кроссовки мужские', reply_markup=return_kb_men())
     photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ КРО')
+    if count_message_for_media_group == 1:
+        await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
 
-    for _ in range(count_message_for_media_group):
-        photo = photos
-        prices = price
-        med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
-        await bot.send_media_group(message.chat.id, media=med)
-        del photo[0: 10]
-        del prices[0: 10]
+    else:
+        list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+        for i in list_media_group:
+            await bot.send_media_group(message.chat.id, media=i)
 
 
 @router.message(F.text == 'Сапоги, Ботинки')
