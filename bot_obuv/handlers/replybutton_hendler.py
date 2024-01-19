@@ -83,8 +83,7 @@ async def men_shoes_list(message: Message):
     await message.answer('Сапоги, Ботинки', reply_markup=return_kb_women())
     photos, price, count_message_for_media_group = create_list_for_media_group(['ЖЕН БОТ', 'ЖЕН САП', 'ЖЕН П/С'])
     if count_message_for_media_group == 1:
-        creat_list_media_no_more_than_10(photos, price)
-        await bot.send_media_group(message.chat.id, media=creat_list_media_no_more_than_10(photos, price))
+        await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
 
     else:
         for _ in range(count_message_for_media_group):
@@ -133,15 +132,10 @@ def create_list_for_media_group(world=[]):
     return photos, price, count_message_for_media_group
 
 
-def creat_list_media_no_more_than_10(media_file, text_in_the_file):
+def create_list_media_no_more_than_10(media_file, text_in_the_file):
     photo = media_file
     prices = text_in_the_file
     med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
     return med
 
 
-    # med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:9], prices[:9])]
-    # await bot.send_media_group(message.chat.id, media=med)
-    # del photo[0: 10]
-    # del prices[0: 10]
-    count_message_for_media_group = 0
