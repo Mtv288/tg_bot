@@ -81,10 +81,10 @@ async def men_shoes_list(message: Message):
 async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Сапоги, Ботинки', reply_markup=return_kb_women())
-    photos, price, count_message_for_media_group = create_list_for_media_group('ЖЕН САП')
+    photos, price, count_message_for_media_group = create_list_for_media_group(['ЖЕН БОТ', 'ЖЕН САП', 'ЖЕН П/С'])
     if count_message_for_media_group == 1:
-        creat_list_media_no_more_than_10(photos, price, count_message_for_media_group)
-        await bot.send_media_group(message.chat.id, media=creat_list_media_no_more_than_10(photos, price, count_message_for_media_group))
+        creat_list_media_no_more_than_10(photos, price)
+        await bot.send_media_group(message.chat.id, media=creat_list_media_no_more_than_10(photos, price))
         count_message_for_media_group = 0
 
     else:
@@ -115,12 +115,12 @@ async def men_menu(message: Message):
     await message.answer('Раздел женские', reply_markup=women_kb())
 
 
-def create_list_for_media_group(world):
+def create_list_for_media_group(world=[]):
     photos = []
     price = []
     with Session(engine) as ses:
         for i in ses.query(Catalog):
-            if i.name[:7] == world:
+            if i.name[:7] in world:
                 photos.append(types.FSInputFile(i.photo))
                 price.append(f'Цена {str(i.price)}р.')
         count_message_for_media_group = len(photos) / 10
@@ -134,7 +134,7 @@ def create_list_for_media_group(world):
     return photos, price, count_message_for_media_group
 
 
-def creat_list_media_no_more_than_10(media_file, text_in_the_file, count_message):
+def creat_list_media_no_more_than_10(media_file, text_in_the_file):
     photo = media_file
     prices = text_in_the_file
     med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:9], prices[:9])]
