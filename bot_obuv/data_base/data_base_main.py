@@ -51,7 +51,7 @@ def great_catalog_all():
         for i in session.query(AllData).filter(or_(AllData.name.like('МУЖ%'),
                                                    AllData.name.like('ЖЕН%'),
                                                    AllData.name.like('ДЕТ%'),
-                                                   AllData.name.like('Тапки%'))).filter(AllData.quantity > 0):
+                                                   AllData.name.like('Тапки%'))).filter(AllData.quantity != 0):
 
 
             try:

@@ -46,12 +46,9 @@ async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Туфли', reply_markup=return_kb_men())
     photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ П/Б')
-
     if count_message_for_media_group == 1:
-            creat_list_media_no_more_than_10(photos, price, count_message_for_media_group)
-            await bot.send_media_group(message.chat.id,
-                                       media=creat_list_media_no_more_than_10(photos, price, count_message_for_media_group))
-            count_message_for_media_group = 0
+        await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+
     else:
         for _ in range(count_message_for_media_group):
             photo = photos
@@ -86,13 +83,9 @@ async def men_shoes_list(message: Message):
         await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
 
     else:
-        for _ in range(count_message_for_media_group):
-            photo = photos
-            prices = price
-            med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
-            await bot.send_media_group(message.chat.id, media=med)
-            del photo[0: 10]
-            del prices[0: 10]
+        list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+        for i in list_media_group:
+            await bot.send_media_group(message.chat.id, media=i)
 
 
 @router.message(F.text == 'В раздел мужские')
@@ -139,3 +132,13 @@ def create_list_media_no_more_than_10(media_file, text_in_the_file):
     return med
 
 
+def create_lists_media_group(media, text, count_message):
+    lists_list_melia_group = []
+    for _ in range(count_message):
+        photo = media
+        prices = text
+        med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
+        lists_list_melia_group.append(med)
+        del photo[0: 10]
+        del prices[0: 10]
+    return lists_list_melia_group
