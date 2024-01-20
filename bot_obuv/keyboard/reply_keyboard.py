@@ -59,7 +59,6 @@ def child_kb():
                 KeyboardButton(text='Туфли Детские'),
                 KeyboardButton(text='Ботинки Детские')
             ], [
-                KeyboardButton(text='Тапки Детские'),
                 KeyboardButton(text='Назад')
             ]
         ], resize_keyboard=True
