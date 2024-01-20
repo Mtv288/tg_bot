@@ -44,6 +44,7 @@ async def women(message: Message):
 @router.message(F.text == 'Туфли')
 async def men_shoes_list(message: Message):
     await message.delete()
+
     await message.answer('Туфли', reply_markup=return_kb_men())
     photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ П/Б')
     if count_message_for_media_group == 1:
@@ -102,6 +103,15 @@ async def men_menu(message: Message):
 
 
 def create_list_for_media_group(world=[]):
+    """
+    Функция собирает два списка для фотографий и подписи под фото в данном случае это цена товара,
+    затем делит на 10 что-бы получить количество циклов для отправки сообщений в каждом сообщение
+    может быть не больше 10 файлов
+    :param world: Сюда вписываем слово или его часть по которой будет производиться выборка из таблицы catalog,
+    слов может быть несколько поэтому тут список
+    :return: получаем список с фото список с текстом под фото и количество циклов для отправки сообщений в
+    виде media_gruup
+    """
     photos = []
     price = []
     with Session(engine) as ses:
@@ -121,6 +131,12 @@ def create_list_for_media_group(world=[]):
 
 
 def create_list_media_no_more_than_10(media_file, text_in_the_file):
+    """
+    Функция собирает 2 списка с фото и текстом под фото если таких обьектов меньше или равно 10
+    :param media_file: Фото товара
+    :param text_in_the_file: Подпись под фото(в данном случае цена)
+    :return: обьект для отправки сообщения в виде media_grupp
+    """
     photo = media_file
     prices = text_in_the_file
     med = [types.InputMediaPhoto(media=photo, caption=prices) for photo, prices in zip(photo[:10], prices[:10])]
@@ -128,6 +144,13 @@ def create_list_media_no_more_than_10(media_file, text_in_the_file):
 
 
 def create_lists_media_group(media, text, count_message):
+    """
+    Функця собирает список обьектов типа media_grupp(не больше 10 в каждом списке) для отправки сообений
+    :param media: фото товара
+    :param text: подпись под фото(в данном случае цена)
+    :param count_message: количество циклов для создания media_grupp
+    :return: список готовых обьектов типа media_grupp
+    """
     lists_list_melia_group = []
     for _ in range(count_message):
         photo = media
