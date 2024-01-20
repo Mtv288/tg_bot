@@ -74,6 +74,7 @@ def slipper_kb():
                 KeyboardButton(text='Мужские тапки'),
                 KeyboardButton(text='Женские тапки')
             ], [
+                KeyboardButton(text=' Детские тапки'),
                 KeyboardButton(text='Назад')
             ]
         ], resize_keyboard=True
@@ -90,6 +91,7 @@ def return_kb_men():
     )
     return return_b
 
+
 def return_kb_women():
     return_b = ReplyKeyboardMarkup(
         keyboard=[[
@@ -99,10 +101,21 @@ def return_kb_women():
     )
     return return_b
 
+
 def return_kb_children():
     return_b = ReplyKeyboardMarkup(
         keyboard=[[
             KeyboardButton(text='В раздел детские'),
+            KeyboardButton(text='В главное меню')
+        ]], resize_keyboard=True
+    )
+    return return_b
+
+
+def return_kb_slippers():
+    return_b = ReplyKeyboardMarkup(
+        keyboard=[[
+            KeyboardButton(text='В раздел тапки'),
             KeyboardButton(text='В главное меню')
         ]], resize_keyboard=True
     )

@@ -6,7 +6,7 @@ from bot_obuv.data_base.data_base_main import engine
 from aiogram import types
 from bot_obuv.main_run import bot
 from bot_obuv.keyboard.reply_keyboard import main_kb, men_kb, women_kb, \
-    slipper_kb, return_kb_men, child_kb, return_kb_women, return_kb_children
+    slipper_kb, return_kb_men, child_kb, return_kb_women, return_kb_children, return_kb_slippers
 
 
 router = Router()
@@ -103,7 +103,7 @@ async def women(message: Message):
 
 
 
-@router.message(F.text == 'Туфли Муские')
+@router.message(F.text == 'Туфли Мужские')
 async def men_shoes_list(message: Message):
     await message.delete()
     await message.answer('Туфли', reply_markup=return_kb_men())
@@ -140,7 +140,7 @@ async def men_shoes_list(message: Message):
 @router.message(F.text == 'Мужские тапки')
 async def women(message: Message):
     await message.delete()
-    await message.answer('Выберите категорию', reply_markup=return_kb_men())
+    await message.answer('Выберите категорию', reply_markup=return_kb_slippers())
     try:
         photos, price, count_message_for_media_group = create_list_for_media_group('Тапки м')
         if count_message_for_media_group == 1:
@@ -259,7 +259,7 @@ async def women(message: Message):
 @router.message(F.text == 'Женские тапки')
 async def women(message: Message):
     await message.delete()
-    await message.answer('Выберите категорию', reply_markup=return_kb_women())
+    await message.answer('Выберите категорию', reply_markup=return_kb_slippers())
     try:
         photos, price, count_message_for_media_group = create_list_for_media_group('Тапки ж')
         if count_message_for_media_group == 1:
@@ -306,10 +306,10 @@ async def women(message: Message):
         await message.answer('Нет в наличии или неправильно указан тип обуви')
 
 
-@router.message(F.text == 'Тапки Детские')
+@router.message(F.text == 'Детские тапки')
 async def women(message: Message):
     await message.delete()
-    await message.answer('Выберите категорию', reply_markup=return_kb_children())
+    await message.answer('Выберите категорию', reply_markup=return_kb_slippers())
     try:
         photos, price, count_message_for_media_group = create_list_for_media_group('Тапки д')
         if count_message_for_media_group == 1:
@@ -343,7 +343,12 @@ async def men_menu(message: Message):
 @router.message(F.text == 'В раздел детские')
 async def men_menu(message: Message):
     await message.delete()
-    await message.answer('Раздел женские', reply_markup=child_kb())
+    await message.answer('Раздел Детские', reply_markup=child_kb())
+
+@router.message(F.text == 'В раздел тапки')
+async def men_menu(message: Message):
+    await message.delete()
+    await message.answer('Раздел Детские', reply_markup=slipper_kb())
 
 
 
