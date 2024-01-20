@@ -77,6 +77,7 @@ async def back(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
 
 
+
 @router.message(F.text == 'Мужская обувь')
 async def men(message: Message):
     await message.delete()
