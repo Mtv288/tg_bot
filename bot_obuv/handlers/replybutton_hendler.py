@@ -351,3 +351,4 @@ async def men_menu(message: Message):
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел Детские', reply_markup=slipper_kb())
+
