@@ -8,8 +8,8 @@ from bot_obuv.main_run import bot
 from bot_obuv.keyboard.reply_keyboard import main_kb, men_kb, women_kb, \
     slipper_kb, return_kb_men, child_kb, return_kb_women, return_kb_children, return_kb_slippers
 
-
 router = Router()
+
 
 def create_list_for_media_group(world=[]):
     """
@@ -71,7 +71,6 @@ def create_lists_media_group(media, text, count_message):
     return lists_list_melia_group
 
 
-
 @router.message(F.text == 'Назад')
 async def back(message: Message):
     await message.delete()
@@ -100,7 +99,6 @@ async def women(message: Message):
 async def women(message: Message):
     await message.delete()
     await message.answer('Выберите категорию', reply_markup=slipper_kb())
-
 
 
 @router.message(F.text == 'Туфли Мужские')
@@ -272,6 +270,7 @@ async def women(message: Message):
     except Exception:
         await message.answer('Нет в наличии или неправильно указан тип обуви')
 
+
 @router.message(F.text == 'Туфли Детские')
 async def women(message: Message):
     await message.delete()
@@ -340,15 +339,14 @@ async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел женские', reply_markup=women_kb())
 
+
 @router.message(F.text == 'В раздел детские')
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел Детские', reply_markup=child_kb())
 
+
 @router.message(F.text == 'В раздел тапки')
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел Детские', reply_markup=slipper_kb())
-
-
-
