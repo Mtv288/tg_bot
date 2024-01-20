@@ -6,101 +6,10 @@ from bot_obuv.data_base.data_base_main import engine
 from aiogram import types
 from bot_obuv.main_run import bot
 from bot_obuv.keyboard.reply_keyboard import main_kb, men_kb, women_kb, \
-    slipper_kb, return_kb_men, child_kb, return_kb_women
+    slipper_kb, return_kb_men, child_kb, return_kb_women, return_kb_children
+
 
 router = Router()
-
-
-@router.message(F.text == 'Назад')
-async def back(message: Message):
-    await message.delete()
-    await message.answer('Главное меню', reply_markup=main_kb())
-
-
-@router.message(F.text == 'Мужская обувь')
-async def men(message: Message):
-    await message.delete()
-    await message.answer('Выберите категорию', reply_markup=men_kb())
-
-
-@router.message(F.text == 'Женская обувь')
-async def women(message: Message):
-    await message.delete()
-    await message.answer('Выберите категорию', reply_markup=women_kb())
-
-
-@router.message(F.text == 'Детская обувь')
-async def women(message: Message):
-    await message.delete()
-    await message.answer('Выберите категорию', reply_markup=child_kb())
-
-
-@router.message(F.text == 'Тапки.')
-async def women(message: Message):
-    await message.delete()
-    await message.answer('Выберите категорию', reply_markup=slipper_kb())
-
-
-@router.message(F.text == 'Туфли')
-async def men_shoes_list(message: Message):
-    await message.delete()
-
-    await message.answer('Туфли', reply_markup=return_kb_men())
-    photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ П/Б')
-    if count_message_for_media_group == 1:
-        await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
-
-    else:
-        list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
-        for i in list_media_group:
-            await bot.send_media_group(message.chat.id, media=i)
-
-
-@router.message(F.text == 'Кроссовки.')
-async def men_shoes_list(message: Message):
-    await message.delete()
-    await message.answer('Кроссовки мужские', reply_markup=return_kb_men())
-    photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ КРО')
-    if count_message_for_media_group == 1:
-        await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
-
-    else:
-        list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
-        for i in list_media_group:
-            await bot.send_media_group(message.chat.id, media=i)
-
-
-@router.message(F.text == 'Сапоги, Ботинки')
-async def men_shoes_list(message: Message):
-    await message.delete()
-    await message.answer('Сапоги, Ботинки', reply_markup=return_kb_women())
-    photos, price, count_message_for_media_group = create_list_for_media_group(['ЖЕН БОТ', 'ЖЕН САП', 'ЖЕН П/С'])
-    if count_message_for_media_group == 1:
-        await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
-
-    else:
-        list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
-        for i in list_media_group:
-            await bot.send_media_group(message.chat.id, media=i)
-
-
-@router.message(F.text == 'В раздел мужские')
-async def men_menu(message: Message):
-    await message.delete()
-    await message.answer('Раздел мужские', reply_markup=men_kb())
-
-
-@router.message(F.text == 'В главное меню')
-async def men_menu(message: Message):
-    await message.delete()
-    await message.answer('Главное меню', reply_markup=main_kb())
-
-
-@router.message(F.text == 'В раздел женские')
-async def men_menu(message: Message):
-    await message.delete()
-    await message.answer('Раздел женские', reply_markup=women_kb())
-
 
 def create_list_for_media_group(world=[]):
     """
@@ -160,3 +69,251 @@ def create_lists_media_group(media, text, count_message):
         del photo[0: 10]
         del prices[0: 10]
     return lists_list_melia_group
+
+
+
+@router.message(F.text == 'Назад')
+async def back(message: Message):
+    await message.delete()
+    await message.answer('Главное меню', reply_markup=main_kb())
+
+
+@router.message(F.text == 'Мужская обувь')
+async def men(message: Message):
+    await message.delete()
+    await message.answer('Выберите категорию', reply_markup=men_kb())
+
+
+@router.message(F.text == 'Женская обувь')
+async def women(message: Message):
+    await message.delete()
+    await message.answer('Выберите категорию', reply_markup=women_kb())
+
+
+@router.message(F.text == 'Детская обувь')
+async def women(message: Message):
+    await message.delete()
+    await message.answer('Выберите категорию', reply_markup=child_kb())
+
+
+@router.message(F.text == 'Тапки')
+async def women(message: Message):
+    await message.delete()
+    await message.answer('Выберите категорию', reply_markup=slipper_kb())
+
+
+
+@router.message(F.text == 'Туфли Муские')
+async def men_shoes_list(message: Message):
+    await message.delete()
+
+    await message.answer('Туфли', reply_markup=return_kb_men())
+    photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ П/Б')
+    if count_message_for_media_group == 1:
+        await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+
+    else:
+        list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+        for i in list_media_group:
+            await bot.send_media_group(message.chat.id, media=i)
+
+
+@router.message(F.text == 'Кроссовки Мужские')
+async def men_shoes_list(message: Message):
+    await message.delete()
+    await message.answer('Кроссовки мужские', reply_markup=return_kb_men())
+    photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ КРО')
+    if count_message_for_media_group == 1:
+        await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+
+    else:
+        list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+        for i in list_media_group:
+            await bot.send_media_group(message.chat.id, media=i)
+
+
+@router.message(F.text == 'Мужские тапки')
+async def women(message: Message):
+    await message.delete()
+    await message.answer('Выберите категорию', reply_markup=return_kb_men())
+    photos, price, count_message_for_media_group = create_list_for_media_group('Тапки м')
+    if count_message_for_media_group == 1:
+        await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+
+    else:
+        list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+        for i in list_media_group:
+            await bot.send_media_group(message.chat.id, media=i)
+
+
+@router.message(F.text == 'Сабо Мужское')
+async def women(message: Message):
+    await message.delete()
+    await message.answer('Выберите категорию', reply_markup=return_kb_men())
+    try:
+        photos, price, count_message_for_media_group = create_list_for_media_group(['МУЖ САБ', 'МУЖ САН'])
+        if count_message_for_media_group == 1:
+            await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+
+        else:
+            list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+            for i in list_media_group:
+                await bot.send_media_group(message.chat.id, media=i)
+    except Exception:
+        await message.answer('Нет в наличии или неправильно указан тип обуви')
+
+
+@router.message(F.text == 'Ботинки Мужские')
+async def women(message: Message):
+    await message.delete()
+    await message.answer('Выберите категорию', reply_markup=return_kb_men())
+    try:
+        photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ БОТ')
+        if count_message_for_media_group == 1:
+            await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+
+        else:
+            list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+            for i in list_media_group:
+                await bot.send_media_group(message.chat.id, media=i)
+    except Exception:
+        await message.answer('Нет в наличии или неправильно указан тип обуви')
+
+
+@router.message(F.text == 'Сапоги Мужские')
+async def women(message: Message):
+    await message.delete()
+    await message.answer('Выберите категорию', reply_markup=return_kb_men())
+    try:
+        photos, price, count_message_for_media_group = create_list_for_media_group('МУЖ САП')
+        if count_message_for_media_group == 1:
+            await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+
+        else:
+            list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+            for i in list_media_group:
+                await bot.send_media_group(message.chat.id, media=i)
+    except Exception:
+        await message.answer('Нет в наличии или неправильно указан тип обуви')
+
+
+@router.message(F.text == 'Сапоги, Ботинки')
+async def men_shoes_list(message: Message):
+    await message.delete()
+    await message.answer('Сапоги, Ботинки', reply_markup=return_kb_women())
+    photos, price, count_message_for_media_group = create_list_for_media_group(['ЖЕН БОТ', 'ЖЕН САП', 'ЖЕН П/С'])
+    if count_message_for_media_group == 1:
+        await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+
+    else:
+        list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+        for i in list_media_group:
+            await bot.send_media_group(message.chat.id, media=i)
+
+
+@router.message(F.text == 'Туфли Женские')
+async def women(message: Message):
+    await message.delete()
+    await message.answer('Выберите категорию', reply_markup=return_kb_women())
+    try:
+        photos, price, count_message_for_media_group = create_list_for_media_group('ЖЕН ТУФ')
+        if count_message_for_media_group == 1:
+            await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+
+        else:
+            list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+            for i in list_media_group:
+                await bot.send_media_group(message.chat.id, media=i)
+    except Exception:
+        await message.answer('Нет в наличии или неправильно указан тип обуви')
+
+
+@router.message(F.text == 'Сабо Женское')
+async def women(message: Message):
+    await message.delete()
+    await message.answer('Выберите категорию', reply_markup=return_kb_women())
+    try:
+        photos, price, count_message_for_media_group = create_list_for_media_group('ЖЕН САБ')
+        if count_message_for_media_group == 1:
+            await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+
+        else:
+            list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+            for i in list_media_group:
+                await bot.send_media_group(message.chat.id, media=i)
+    except Exception:
+        await message.answer('Нет в наличии или неправильно указан тип обуви')
+
+
+@router.message(F.text == 'Женские тапки')
+async def women(message: Message):
+    await message.delete()
+    await message.answer('Выберите категорию', reply_markup=return_kb_women())
+    photos, price, count_message_for_media_group = create_list_for_media_group('Тапки ж')
+    if count_message_for_media_group == 1:
+        await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+
+    else:
+        list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+        for i in list_media_group:
+            await bot.send_media_group(message.chat.id, media=i)
+
+
+@router.message(F.text == 'Туфли Детские')
+async def women(message: Message):
+    await message.delete()
+    await message.answer('Выберите категорию', reply_markup=return_kb_children())
+    try:
+        photos, price, count_message_for_media_group = create_list_for_media_group('ДЕТ П/Б')
+        if count_message_for_media_group == 1:
+            await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+
+        else:
+            list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+            for i in list_media_group:
+                await bot.send_media_group(message.chat.id, media=i)
+    except Exception:
+        await message.answer('Нет в наличии или неправильно указан тип обуви')
+
+
+@router.message(F.text == 'Ботинки Детские')
+async def women(message: Message):
+    await message.delete()
+    await message.answer('Выберите категорию', reply_markup=return_kb_children())
+    try:
+        photos, price, count_message_for_media_group = create_list_for_media_group(['ДЕТ БОТ', 'ДЕТ САП'])
+        if count_message_for_media_group == 1:
+            await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+
+        else:
+            list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
+            for i in list_media_group:
+                await bot.send_media_group(message.chat.id, media=i)
+    except Exception:
+        await message.answer('Нет в наличии или неправильно указан тип обуви')
+
+
+@router.message(F.text == 'В раздел мужские')
+async def men_menu(message: Message):
+    await message.delete()
+    await message.answer('Раздел мужские', reply_markup=men_kb())
+
+
+@router.message(F.text == 'В главное меню')
+async def men_menu(message: Message):
+    await message.delete()
+    await message.answer('Главное меню', reply_markup=main_kb())
+
+
+@router.message(F.text == 'В раздел женские')
+async def men_menu(message: Message):
+    await message.delete()
+    await message.answer('Раздел женские', reply_markup=women_kb())
+
+@router.message(F.text == 'В раздел детские')
+async def men_menu(message: Message):
+    await message.delete()
+    await message.answer('Раздел женские', reply_markup=child_kb())
+
+
+
