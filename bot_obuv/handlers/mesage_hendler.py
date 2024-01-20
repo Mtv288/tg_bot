@@ -1,7 +1,6 @@
 from aiogram import Router, F
 from aiogram.types import Message
 
-
 router = Router()
 
 
@@ -38,9 +37,9 @@ async def job_time(message: Message):
                         '  Суббота - Воскресенье с 9.00 до 16.00'
                         '  без перерывов и выходных')
 
+
 @router.message(F.text == 'Помощь')
 async def slippers(message: Message):
-
     await message.reply('Это небольшая инструкция как пользоваться помощником в чате')
     await message.reply('Внизу вы видите кнопки с разделами, нажимая на них вы переходите в соответсвующие разделы '
                         'позволяющие выбрать интересующий вас тип обуви и посмотреть фото и цены,'
@@ -49,4 +48,3 @@ async def slippers(message: Message):
                         'код модели, например "99-555", код модели находится на фото и выглядит как "ЧЧ-ЧЧЧ"')
     await message.reply('Или можно просто набрать сообщение допустим "мужские летние"')
     await message.delete()
-
