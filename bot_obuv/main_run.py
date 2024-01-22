@@ -3,9 +3,10 @@ from aiogram import Bot, Dispatcher, types
 import os
 from dotenv import load_dotenv
 from handlers import commands, replybutton_hendler, mesage_hendler
-from bot_env import bot
 
 
+load_dotenv()
+bot = Bot(os.getenv('TOKEN'))
 
 
 

@@ -1,8 +1,6 @@
 from aiogram import F, Router
 from aiogram.types import Message
-from aiogram import types
-from bot_obuv.main_run import bot
-from bot_obuv.data_base.data_base_main import list_name_goods, get_price_and_size_good_and_photo
+
 
 router = Router()
 
@@ -58,20 +56,4 @@ async def none_text(message: Message):
     await message.reply('Я вас не понял повторите вопрос более корректно')
 
 
-@router.message()
-async def check_for_rt(message: Message):
-    rt = list_name_goods()
-    count = 0
-    for word in rt:
-        if word in message.text.lower():
-            count += 1
-            break
-    if count > 0:
-        list_size_str, phot, price = get_price_and_size_good_and_photo(word)
-        r = types.FSInputFile(phot)
-        await bot.send_photo(chat_id=message.from_user.id,
-                             photo=r)
-        await message.reply(f'Цена: {price}р. {list_size_str}')
 
-    else:
-        await message.reply('Нет в наличии')
