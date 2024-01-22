@@ -25,7 +25,6 @@ def great_all_goods_table():
                     user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=i['photo'],
                                    price=i['price'], quantity=i['quantity'], size=i['Размер'])
 
-
                     session.add(user)
                 session.commit()
 
@@ -34,7 +33,8 @@ def great_all_goods_table():
             reader = csv.DictReader(exs, delimiter=";")
             with Session(engine) as session:
                 for i in reader:
-                    user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=photo_for_mistake,
+                    user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])),
+                                   photo=photo_for_mistake,
                                    price=i['price'], quantity=i['quantity'], size=i['Размер'])
 
                     session.add(user)
@@ -53,7 +53,6 @@ def great_catalog_all():
                                                    AllData.name.like('ДЕТ%'),
                                                    AllData.name.like('Тапки%'))).filter(AllData.quantity != 0):
 
-
             try:
                 if i.photo:
                     cat = CatalogAll(name=i.name, photo="\\".join([path_to_foto, i.photo]),
@@ -65,11 +64,10 @@ def great_catalog_all():
                                      price=i.price, size=i.size, quantity=i.quantity)
 
             except FileNotFoundError:
-                    i.photo = photo_for_mistake
+                i.photo = photo_for_mistake
 
             session.add(cat)
         session.commit()
-
 
 
 def check_table(table_name):
@@ -109,11 +107,11 @@ def great_catalog_shoes():
         for i in dict_values:
             new_values_in_dict = dict()
             new_values_in_dict[i[0]] = i[1], i[2]
-            values_for_the_catalog_table .update(new_values_in_dict)
+            values_for_the_catalog_table.update(new_values_in_dict)
 
     with Session(engine) as ses:
-        for i in values_for_the_catalog_table :
-            catalog = Catalog(name=i[:15], price=values_for_the_catalog_table [i][0],
+        for i in values_for_the_catalog_table:
+            catalog = Catalog(name=i[:15], price=values_for_the_catalog_table[i][0],
                               photo=values_for_the_catalog_table[i][1])
             ses.add(catalog)
         ses.commit()
@@ -126,6 +124,7 @@ def list_name_goods():
         for i in goods:
             list_goods.append(i[0][8:14])
     return list_goods
+
 
 def get_price_and_size_good_and_photo(good_name):
     size_list = []
@@ -141,28 +140,6 @@ def get_price_and_size_good_and_photo(good_name):
     return list_size_str, photo, price
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 table_name_list = [AllData, CatalogAll, Catalog]
 
 check_table(table_name_list)
-
