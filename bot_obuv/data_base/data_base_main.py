@@ -119,6 +119,32 @@ def great_catalog_shoes():
         ses.commit()
 
 
+def list_name_goods():
+    list_goods = []
+    with Session(engine) as ses:
+        goods = ses.query(Catalog.name)
+        for i in goods:
+            list_goods.append(i[0][8:14])
+    return list_goods
+
+def get_price_and_size_good_and_photo(good_name):
+    size_list = []
+    with Session(engine) as ses:
+        for i in ses.query(CatalogAll):
+            if good_name in i.name:
+                size_list.append(f'{str(i.size)},')
+        r = f'В наличии есть размеры: {" ".join(size_list)}'
+        return r
+
+    print(size_list)
+
+
+
+
+
+
+
+
 table_name_list = [AllData, CatalogAll, Catalog]
 
 check_table(table_name_list)
