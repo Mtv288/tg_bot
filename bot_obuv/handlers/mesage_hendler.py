@@ -2,8 +2,6 @@ from aiogram import Router, F
 from aiogram.types import Message
 from bot_obuv.data_base.data_base_main import list_name_goods, get_price_and_size_good_and_photo
 
-
-
 router = Router()
 
 
@@ -52,9 +50,7 @@ async def slippers(message: Message):
     await message.reply('Или можно просто набрать сообщение допустим "мужские летние"')
     await message.delete()
 
+
 @router.message()
 async def none_text(message: Message):
     await message.reply('Я вас не понял повторите вопрос более корректно')
-
-
-
