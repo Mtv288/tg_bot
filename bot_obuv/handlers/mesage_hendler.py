@@ -10,10 +10,16 @@ router = Router()
 @router.message()
 async def check_for_rt(message: Message):
     rt = list_name_goods()
+    count = 0
     for word in rt:
         if word in message.text.lower():
-            await message.reply(get_price_and_size_good_and_photo(word))
+            count += 1
             break
+    if count > 0:
+        await message.reply(get_price_and_size_good_and_photo(word))
+    else:
+        await message.reply('Нет в наличии')
+
 
 
 def answer_for_message(type_shoes):
