@@ -52,5 +52,9 @@ async def slippers(message: Message):
     await message.reply('Или можно просто набрать сообщение допустим "мужские летние"')
     await message.delete()
 
+@router.message()
+async def none_text(message: Message):
+    await message.reply('Я вас не понял повторите вопрос более корректно')
+
 
 
