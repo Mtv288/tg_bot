@@ -55,7 +55,7 @@ async def slippers(message: Message):
 
 @router.message(F.text.len() != 6)
 async def none_text(message: Message):
-        await message.reply('Я вас не понял повторите вопрос более корректно')
+    await message.reply('Я вас не понял повторите вопрос более корректно')
 
 
 @router.message()
@@ -75,8 +75,3 @@ async def check_for_rt(message: Message):
 
     else:
         await message.reply('Нет в наличии')
-
-
-
-
-
