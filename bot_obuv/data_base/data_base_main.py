@@ -129,12 +129,16 @@ def list_name_goods():
 
 def get_price_and_size_good_and_photo(good_name):
     size_list = []
+    photo = ''
+    price = ''
     with Session(engine) as ses:
         for i in ses.query(CatalogAll):
             if good_name in i.name:
+                photo = i.photo
+                price = i.price
                 size_list.append(f'{str(i.size)} - {str(i.quantity)}пар., ')
         list_size_str = f'В наличии есть размеры: {" ".join(size_list)}'
-    return list_size_str
+    return list_size_str, photo, price
 
 
 
