@@ -352,11 +352,9 @@ async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел Детские', reply_markup=slipper_kb())
 
-@router.message(F.text.len() != 6)
-async def none_text(message: Message):
-    await message.reply('Я вас не понял повторите вопрос более корректно')
 
-@router.message()
+
+@router.message(F.text.len() == 6)
 async def check_for_rt(message: Message):
     rt = list_name_goods()
     count = 0
@@ -373,3 +371,8 @@ async def check_for_rt(message: Message):
 
     else:
         await message.reply('Нет в наличии')
+
+
+@router.message(F.text.len() != 6 and F.text != 'Помощь.')
+async def none_text(message: Message):
+    await message.reply('Я вас не понял повторите вопрос более корректно')
