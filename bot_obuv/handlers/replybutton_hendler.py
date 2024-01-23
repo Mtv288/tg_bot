@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from bot_obuv.data_base.data_base_main import Catalog
 from bot_obuv.data_base.data_base_main import engine
 from aiogram import types
-from bot_obuv.bot_env import bot
+from bot_obuv.main_run import bot
 from bot_obuv.keyboard.reply_keyboard import main_kb, men_kb, women_kb, \
     slipper_kb, return_kb_men, child_kb, return_kb_women, return_kb_children, return_kb_slippers
 from bot_obuv.data_base.data_base_main import list_name_goods, get_price_and_size_good_and_photo
@@ -351,3 +351,23 @@ async def men_menu(message: Message):
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел Детские', reply_markup=slipper_kb())
+
+
+
+@router.message()
+async def check_for_rt(message: Message):
+    rt = list_name_goods()
+    count = 0
+    for word in rt:
+        if word in message.text.lower():
+            count += 1
+            break
+    if count > 0:
+        list_size_str, phot, price = get_price_and_size_good_and_photo(word)
+        r = types.FSInputFile(phot)
+        await bot.send_photo(chat_id=message.from_user.id,
+                             photo=r)
+        await message.reply(f'Цена: {price}р. {list_size_str}')
+
+    else:
+        await message.reply('Нет в наличии')

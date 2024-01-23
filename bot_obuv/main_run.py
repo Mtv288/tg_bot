@@ -1,7 +1,13 @@
 import asyncio
-from aiogram import Dispatcher
+from aiogram import Bot, Dispatcher, types
+import os
+from dotenv import load_dotenv
 from handlers import commands, replybutton_hendler, mesage_hendler
-from bot_env import bot
+
+
+load_dotenv()
+bot = Bot(os.getenv('TOKEN'))
+
 
 
 async def start():
@@ -12,5 +18,8 @@ async def start():
     await dp.start_polling(bot)
 
 
+
+
 if __name__ == '__main__':
     asyncio.run(start())
+
