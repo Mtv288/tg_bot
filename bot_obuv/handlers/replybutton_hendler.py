@@ -373,6 +373,4 @@ async def check_for_rt(message: Message):
         await message.reply('Нет в наличии')
 
 
-@router.message(F.text.len() != 6 and F.text != 'Помощь.')
-async def none_text(message: Message):
-    await message.reply('Я вас не понял повторите вопрос более корректно')
+

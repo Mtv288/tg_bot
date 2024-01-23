@@ -51,7 +51,9 @@ async def slippers(message: Message):
     await message.delete()
 
 
-
+@router.message(F.text.len() != 6 and F.text != 'Помощь.')
+async def none_text(message: Message):
+    await message.reply('Я вас не понял повторите вопрос более корректно')
 
 
 
