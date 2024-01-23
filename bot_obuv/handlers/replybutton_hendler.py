@@ -1,4 +1,4 @@
-from aiogram import F, Router
+from aiogram import F, Router, Bot
 from aiogram.types import Message, InputFile, input_media
 from sqlalchemy.orm import Session
 from bot_obuv.data_base.data_base_main import Catalog
@@ -8,7 +8,8 @@ from bot_obuv.main_run import bot
 from bot_obuv.keyboard.reply_keyboard import main_kb, men_kb, women_kb, \
     slipper_kb, return_kb_men, child_kb, return_kb_women, return_kb_children, return_kb_slippers
 from bot_obuv.data_base.data_base_main import list_name_goods, get_price_and_size_good_and_photo
-
+from bot_obuv.main_run import bot
+import traceback
 router = Router()
 
 
@@ -116,7 +117,7 @@ async def men_shoes_list(message: Message):
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
-        await message.answer('Нет в наличии или неправильно указан тип обуви')
+        pass
 
 
 @router.message(F.text == 'Кроссовки Мужские')
@@ -133,7 +134,7 @@ async def men_shoes_list(message: Message):
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
-        await message.answer('Нет в наличии или неправильно указан тип обуви')
+        pass
 
 
 @router.message(F.text == 'Мужские тапки')
@@ -150,7 +151,7 @@ async def women(message: Message):
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
-        await message.answer('Нет в наличии или неправильно указан тип обуви')
+        pass
 
 
 @router.message(F.text == 'Сабо Мужское')
@@ -167,7 +168,7 @@ async def women(message: Message):
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
-        await message.answer('Нет в наличии или неправильно указан тип обуви')
+        pass
 
 
 @router.message(F.text == 'Ботинки Мужские')
@@ -184,7 +185,7 @@ async def women(message: Message):
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
-        await message.answer('Нет в наличии или неправильно указан тип обуви')
+        pass
 
 
 @router.message(F.text == 'Сапоги Мужские')
@@ -201,7 +202,7 @@ async def women(message: Message):
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
-        await message.answer('Нет в наличии или неправильно указан тип обуви')
+        pass
 
 
 @router.message(F.text == 'Сапоги, Ботинки')
@@ -218,7 +219,7 @@ async def men_shoes_list(message: Message):
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
-        await message.answer('Нет в наличии или неправильно указан тип обуви')
+        pass
 
 
 @router.message(F.text == 'Туфли Женские')
@@ -235,7 +236,7 @@ async def women(message: Message):
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
-        await message.answer('Нет в наличии или неправильно указан тип обуви')
+        pass
 
 
 @router.message(F.text == 'Сабо Женское')
@@ -252,7 +253,7 @@ async def women(message: Message):
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
-        await message.answer('Нет в наличии или неправильно указан тип обуви')
+        pass
 
 
 @router.message(F.text == 'Женские тапки')
@@ -269,7 +270,7 @@ async def women(message: Message):
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
-        await message.answer('Нет в наличии или неправильно указан тип обуви')
+        pass
 
 
 @router.message(F.text == 'Туфли Детские')
@@ -286,7 +287,7 @@ async def women(message: Message):
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
-        await message.answer('Нет в наличии или неправильно указан тип обуви')
+        pass
 
 
 @router.message(F.text == 'Ботинки Детские')
@@ -302,8 +303,8 @@ async def women(message: Message):
             list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
-    except Exception:
-        await message.answer('Нет в наличии или неправильно указан тип обуви')
+    except Exception as e:
+       pass
 
 
 @router.message(F.text == 'Детские тапки')
@@ -320,7 +321,7 @@ async def women(message: Message):
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
-        await message.answer('Нет в наличии или неправильно указан тип обуви')
+        pass
 
 
 @router.message(F.text == 'В раздел мужские')
@@ -351,7 +352,6 @@ async def men_menu(message: Message):
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел Детские', reply_markup=slipper_kb())
-
 
 
 @router.message(F.text.len() == 6)
