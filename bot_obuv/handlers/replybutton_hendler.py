@@ -352,7 +352,9 @@ async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел Детские', reply_markup=slipper_kb())
 
-
+@router.message(F.text.len() != 6)
+async def none_text(message: Message):
+    await message.reply('Я вас не понял повторите вопрос более корректно')
 
 @router.message()
 async def check_for_rt(message: Message):

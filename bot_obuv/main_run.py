@@ -4,10 +4,8 @@ import os
 from dotenv import load_dotenv
 from handlers import commands, replybutton_hendler, mesage_hendler
 
-
 load_dotenv()
 bot = Bot(os.getenv('TOKEN'))
-
 
 
 async def start():
@@ -18,8 +16,5 @@ async def start():
     await dp.start_polling(bot)
 
 
-
-
 if __name__ == '__main__':
     asyncio.run(start())
-

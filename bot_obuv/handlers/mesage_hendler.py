@@ -39,7 +39,7 @@ async def job_time(message: Message):
                         '  без перерывов и выходных')
 
 
-@router.message(F.text == 'Помощь')
+@router.message(F.text == 'Помощь.')
 async def slippers(message: Message):
     await message.reply('Это небольшая инструкция как пользоваться помощником в чате')
     await message.reply('Внизу вы видите кнопки с разделами, нажимая на них вы переходите в соответсвующие разделы '
