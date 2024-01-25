@@ -58,8 +58,11 @@ async def slippers(message: Message):
 
 @router.message()
 async def price(message: Message):
-    if message.text in ['цена', 'стоит', 'почем']:
-        await message.reply('Чтобы узнать цену и наличие размеров, '
+    mes = ''.join(message.text.lower())
+    print(mes)
+    for i in ['цен', 'стоит', 'почем']:
+        if i in mes:
+            await message.reply('Чтобы узнать цену и наличие размеров, '
                             'введите артикул модели который находится на фото и '
                             'выглядит в таком формате "99-999".(Вместо девяток подставьте нужные цифры) ')
 
