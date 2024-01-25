@@ -59,7 +59,6 @@ async def slippers(message: Message):
 @router.message()
 async def price(message: Message):
     mes = ''.join(message.text.lower())
-    print(mes)
     for i in ['цен', 'стоит', 'почем']:
         if i in mes:
             await message.reply('Чтобы узнать цену и наличие размеров, '
