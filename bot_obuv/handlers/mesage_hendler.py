@@ -63,18 +63,14 @@ async def price(message: Message):
     for i in ['цен', 'стоит', 'почем']:
         if i in mes:
             await message.reply('Чтобы узнать цену и наличие размеров, '
-                            'введите артикул модели который находится на фото и '
-                            'выглядит в таком формате "99-999".(Вместо девяток подставьте нужные цифры) ')
+                                'введите артикул модели который находится на фото и '
+                                'выглядит в таком формате "99-999".(Вместо девяток подставьте нужные цифры) ')
+
 
 @router.message()
 async def select_inl(message: Message):
-
     if message.text == 'Тип':
         await message.reply('Выберите мужские или женские', reply_markup=select_type_shoes_kb)
     else:
         if len(message.text) != 6 and message.text != 'Помощь.':
             await message.reply('Я вас не понял повторите вопрос более корректно')
-
-
-
-
