@@ -16,6 +16,15 @@ def search_in_word(message_in_chat, word_1, word_2):
         return word_1, word_2
 
 
+@router.message()
+async def search_type_shoes(message: Message):
+    list_word_type = ['жен', 'муж', 'дет']
+    list_word_season = ['лет', 'зим', 'осен', 'вес']
+    for i, x in zip(list_word_type, list_word_season):
+        if i and x in message.text.lower():
+            await message.reply('Выберите мужские, женские, или детские', reply_markup=select_type_shoes_kb)
+
+
 @router.message(lambda message: 'жен' in message.text.lower())
 async def woman_shoes(message: Message):
     await message.reply(answer_for_message('"Женская обувь"'))
@@ -58,9 +67,8 @@ async def slippers(message: Message):
 
 @router.message()
 async def price(message: Message):
-    mes = ''.join(message.text.lower())
     for i in ['цен', 'стоит', 'почем']:
-        if i in mes:
+        if i in message.text.lower():
             await message.reply('Чтобы узнать цену и наличие размеров, '
                                 'введите артикул модели который находится на фото и '
                                 'выглядит в таком формате "99-999".(Вместо девяток подставьте нужные цифры) ')
