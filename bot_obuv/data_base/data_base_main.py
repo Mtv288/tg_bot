@@ -111,7 +111,7 @@ def great_catalog_shoes():
 
     with Session(engine) as ses:
         for i in values_for_the_catalog_table:
-            catalog = Catalog(name=i[:15], price=values_for_the_catalog_table[i][0],
+            catalog = Catalog(name=i, price=values_for_the_catalog_table[i][0],
                               photo=values_for_the_catalog_table[i][1])
             ses.add(catalog)
         ses.commit()

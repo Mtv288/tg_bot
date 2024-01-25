@@ -1,6 +1,6 @@
 from aiogram import F, Router
 from aiogram.types import Message
-
+from bot_obuv.keyboard.inline_keyboard import select_type_shoes_kb
 
 router = Router()
 
@@ -9,6 +9,11 @@ def answer_for_message(type_shoes):
     answer = f'Если вы хотите посмотреть ассортимент обуви нажмите на кнопку ' \
              f'{type_shoes} внизу экрана и выберите интересующую вас категорию обуви'
     return answer
+
+
+def search_in_word(message_in_chat, word_1, word_2):
+    if word_1 and word_2 in message_in_chat:
+        return word_1, word_2
 
 
 @router.message(lambda message: 'жен' in message.text.lower())
@@ -51,9 +56,22 @@ async def slippers(message: Message):
     await message.delete()
 
 
-@router.message(F.text.len() != 6 and F.text != 'Помощь.')
-async def none_text(message: Message):
-    await message.reply('Я вас не понял повторите вопрос более корректно')
+@router.message()
+async def price(message: Message):
+    if message.text in ['цена', 'стоит', 'почем']:
+        await message.reply('Чтобы узнать цену и наличие размеров, '
+                            'введите артикул модели который находится на фото и '
+                            'выглядит в таком формате "99-999".(Вместо девяток подставьте нужные цифры) ')
+
+@router.message()
+async def select_inl(message: Message):
+
+    if message.text == 'Тип':
+        await message.reply('Выберите мужские или женские', reply_markup=select_type_shoes_kb)
+    else:
+        if len(message.text) != 6 and message.text != 'Помощь.':
+            await message.reply('Я вас не понял повторите вопрос более корректно')
+
 
 
 
