@@ -367,6 +367,7 @@ async def check_for_rt(message: Message):
         await bot.send_photo(chat_id=message.from_user.id,
                              photo=photo_goods)
         await message.reply(f'Цена: {price}р. {list_size_str}')
+        await message.delete()
 
     else:
         await message.reply('Нет в наличии')
