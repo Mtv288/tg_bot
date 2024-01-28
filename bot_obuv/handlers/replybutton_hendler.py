@@ -10,6 +10,7 @@ from bot_obuv.keyboard.reply_keyboard import main_kb, men_kb, women_kb, \
 from bot_obuv.data_base.data_base_main import list_name_goods, get_price_and_size_good_and_photo
 from bot_obuv.main_run import bot
 import traceback
+
 router = Router()
 
 
@@ -118,6 +119,7 @@ async def men_shoes_list(message: Message):
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
         pass
+    await message.answer('Это весь ассортимент в данной категории')
 
 
 @router.message(F.text == 'Кроссовки Мужские')
@@ -135,6 +137,7 @@ async def men_shoes_list(message: Message):
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
         pass
+    await message.answer('Это весь ассортимент в данной категории')
 
 
 @router.message(F.text == 'Мужские тапки')
@@ -152,6 +155,7 @@ async def women(message: Message):
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
         pass
+    await message.answer('Это весь ассортимент в данной категории')
 
 
 @router.message(F.text == 'Сабо Мужское')
@@ -169,6 +173,7 @@ async def women(message: Message):
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
         pass
+    await message.answer('Это весь ассортимент в данной категории')
 
 
 @router.message(F.text == 'Ботинки Мужские')
@@ -186,6 +191,7 @@ async def women(message: Message):
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
         pass
+    await message.answer('Это весь ассортимент в данной категории')
 
 
 @router.message(F.text == 'Сапоги Мужские')
@@ -203,6 +209,7 @@ async def women(message: Message):
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
         pass
+    await message.answer('Это весь ассортимент в данной категории')
 
 
 @router.message(F.text == 'Сапоги, Ботинки')
@@ -220,6 +227,7 @@ async def men_shoes_list(message: Message):
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
         pass
+    await message.answer('Это весь ассортимент в данной категории')
 
 
 @router.message(F.text == 'Туфли Женские')
@@ -237,6 +245,7 @@ async def women(message: Message):
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
         pass
+    await message.answer('Это весь ассортимент в данной категории')
 
 
 @router.message(F.text == 'Сабо Женское')
@@ -254,6 +263,7 @@ async def women(message: Message):
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
         pass
+    await message.answer('Это весь ассортимент в данной категории')
 
 
 @router.message(F.text == 'Женские тапки')
@@ -271,6 +281,7 @@ async def women(message: Message):
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
         pass
+    await message.answer('Это весь ассортимент в данной категории')
 
 
 @router.message(F.text == 'Туфли Детские')
@@ -288,6 +299,7 @@ async def women(message: Message):
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
         pass
+    await message.answer('Это весь ассортимент в данной категории')
 
 
 @router.message(F.text == 'Ботинки Детские')
@@ -303,8 +315,10 @@ async def women(message: Message):
             list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
             for i in list_media_group:
                 await bot.send_media_group(message.chat.id, media=i)
+
     except Exception as e:
-       pass
+        pass
+    await message.answer('Это весь ассортимент в данной категории')
 
 
 @router.message(F.text == 'Детские тапки')
@@ -322,6 +336,7 @@ async def women(message: Message):
                 await bot.send_media_group(message.chat.id, media=i)
     except Exception:
         pass
+    await message.answer('Это весь ассортимент в данной категории')
 
 
 @router.message(F.text == 'В раздел мужские')
@@ -372,6 +387,3 @@ async def check_for_rt(message: Message):
     else:
         await message.reply('Нет в наличии')
         await message.delete()
-
-
-

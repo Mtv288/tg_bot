@@ -13,6 +13,8 @@ def answer_for_message(type_shoes):
     return answer
 
 
+
+
 @router.message(lambda message: 'жен' in message.text.lower())
 async def woman_shoes(message: Message):
     reply = await message.reply(answer_for_message('"Женская обувь"'))
@@ -59,17 +61,19 @@ async def job_time(message: Message):
                         '  Понедельник - Пятница с 8.00 до 17.30'
                         '  Суббота - Воскресенье с 9.00 до 16.00'
                         '  без перерывов и выходных')
+    await message.delete()
 
 
 @router.message(F.text == 'Помощь.')
 async def slippers(message: Message):
     await message.reply('Это небольшая инструкция как пользоваться помощником в чате')
-    await message.reply('Внизу вы видите кнопки с разделами, нажимая на них вы переходите в соответсвующие разделы '
+    await message.reply('Внизу вы видите кнопки с разделами, нажимая на них вы переходите в соответствующие разделы '
                         'позволяющие выбрать интересующий вас тип обуви и посмотреть фото и цены,'
                         'все фото и цены актуальны показано то что есть в наличии на момент когда вы смотрите')
     await message.reply('Если вас интересует определенная модель обуви, то в поле сообщение наберите '
                         'код модели, например "99-555", код модели находится на фото и выглядит как "ЧЧ-ЧЧЧ"')
-    await message.reply('Или можно просто набрать сообщение допустим "мужские летние"')
+    await message.reply('Или можно просто набрать сообщение допустим "мужские туфли"')
+    await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
 
 
@@ -80,5 +84,9 @@ async def price(message: Message):
             await message.reply('Чтобы узнать цену и наличие размеров, '
                                 'введите артикул модели который находится на фото и '
                                 'выглядит в таком формате "99-999".(Вместо девяток подставьте нужные цифры) ')
+
+
+
+
 
 

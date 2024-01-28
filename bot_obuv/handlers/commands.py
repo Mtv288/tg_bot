@@ -9,8 +9,9 @@ router = Router()
 
 @router.message(CommandStart())
 async def start(message: Message):
-    await message.answer(f'Здравствуйте {message.from_user.first_name}')
+    await message.answer(f'Здравствуйте {message.from_user.full_name}')
     await message.answer('Я ваш виртуальный помощник', reply_markup=main_kb())
+
 
 
 @router.message(Command("clear"))
