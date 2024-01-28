@@ -356,21 +356,21 @@ async def men_menu(message: Message):
 
 @router.message(F.text.len() == 6)
 async def check_for_rt(message: Message):
-    rt = list_name_goods()
     count = 0
-    for word in rt:
+    for word in list_name_goods():
         if word in message.text.lower():
             count += 1
             break
     if count > 0:
         list_size_str, phot, price = get_price_and_size_good_and_photo(word)
-        r = types.FSInputFile(phot)
+        photo_goods = types.FSInputFile(phot)
         await bot.send_photo(chat_id=message.from_user.id,
-                             photo=r)
+                             photo=photo_goods)
         await message.reply(f'Цена: {price}р. {list_size_str}')
 
     else:
         await message.reply('Нет в наличии')
+        await message.delete()
 
 
 
