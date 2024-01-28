@@ -2,6 +2,7 @@ from aiogram import F, Router
 from aiogram.types import Message
 from bot_obuv.keyboard.inline_keyboard import select_type_shoes_kb
 from aiogram.fsm.context import FSMContext
+from bot_obuv.keyboard.reply_keyboard import main_kb
 
 router = Router()
 
@@ -12,35 +13,32 @@ def answer_for_message(type_shoes):
     return answer
 
 
-
-d = ['лет', 'осен', 'бот', 'туф']
-
-
-@router.message()
-async def search_type_shoes(message: Message, state: FSMContext):
-    shoes_list = d
-    await state.update_data(shoes_list=shoes_list)
-    await message.reply('Выберите мужские, женские, или детские', reply_markup=select_type_shoes_kb)
-
-
 @router.message(lambda message: 'жен' in message.text.lower())
 async def woman_shoes(message: Message):
     await message.reply(answer_for_message('"Женская обувь"'))
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
 
 
 @router.message(lambda message: 'муж' in message.text.lower())
 async def men_shoes(message: Message):
     await message.reply(answer_for_message('"Мужская обувь"'))
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
 
 
 @router.message(lambda message: 'дет' in message.text.lower())
 async def kid_shoes(message: Message):
     await message.reply(answer_for_message('"Детская обувь"'))
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
 
 
 @router.message(lambda message: 'тап' in message.text.lower())
 async def slippers(message: Message):
     await message.reply(answer_for_message('"Тапки"'))
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
 
 
 @router.message(lambda message: 'работа' in message.text.lower())
@@ -70,6 +68,3 @@ async def price(message: Message):
             await message.reply('Чтобы узнать цену и наличие размеров, '
                                 'введите артикул модели который находится на фото и '
                                 'выглядит в таком формате "99-999".(Вместо девяток подставьте нужные цифры) ')
-
-
-
