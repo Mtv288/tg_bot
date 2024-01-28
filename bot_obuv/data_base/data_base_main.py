@@ -1,7 +1,8 @@
-from sqlalchemy import create_engine, MetaData, update, exists, or_
+from sqlalchemy import create_engine, MetaData, update, exists, or_, and_
 from sqlalchemy.orm import Session
 from bot_obuv.data_base.table_models import AllData, Base, Catalog, CatalogAll
 import csv
+
 
 engine = create_engine('sqlite:///data_all.db')
 metadata = MetaData()
@@ -140,6 +141,24 @@ def get_price_and_size_good_and_photo(good_name):
     return list_size_str, photo, price
 
 
+def select_shoes_type(name_table, type_word):
+    list_type_shoes = ['лет', 'осен', 'зим', 'вес']
+    if type_word in list_type_shoes:
+        t = type_word
+        if type_word == 'лет':
+            ty = ['%96-%', '%94-%']
+        elif type_word == 'осен':
+            ty = ['%99-%', '%БАЙ%']
+            with Session(engine) as ses:
+                rt = []
+                for i in ses.query(name_table).filter(or_(name_table.name.like(ty[0]),
+                                                          and_(name_table.name.like(ty[1]),
+                                                               name_table.name.like('%МУЖ%')))):
+                    rt.append(i.name)
+        return rt, 'Запарил'
+
+
+select_shoes_type(Catalog, 'осен')
 table_name_list = [AllData, CatalogAll, Catalog]
 
 check_table(table_name_list)

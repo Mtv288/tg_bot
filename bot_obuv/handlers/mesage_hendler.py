@@ -1,6 +1,7 @@
 from aiogram import F, Router
 from aiogram.types import Message
 from bot_obuv.keyboard.inline_keyboard import select_type_shoes_kb
+from aiogram.fsm.context import FSMContext
 
 router = Router()
 
@@ -11,18 +12,15 @@ def answer_for_message(type_shoes):
     return answer
 
 
-def search_in_word(message_in_chat, word_1, word_2):
-    if word_1 and word_2 in message_in_chat:
-        return word_1, word_2
+
+d = ['лет', 'осен', 'бот', 'туф']
 
 
 @router.message()
-async def search_type_shoes(message: Message):
-    list_word_type = ['жен', 'муж', 'дет']
-    list_word_season = ['лет', 'зим', 'осен', 'вес']
-    for i, x in zip(list_word_type, list_word_season):
-        if i and x in message.text.lower():
-            await message.reply('Выберите мужские, женские, или детские', reply_markup=select_type_shoes_kb)
+async def search_type_shoes(message: Message, state: FSMContext):
+    shoes_list = d
+    await state.update_data(shoes_list=shoes_list)
+    await message.reply('Выберите мужские, женские, или детские', reply_markup=select_type_shoes_kb)
 
 
 @router.message(lambda message: 'жен' in message.text.lower())
@@ -74,10 +72,4 @@ async def price(message: Message):
                                 'выглядит в таком формате "99-999".(Вместо девяток подставьте нужные цифры) ')
 
 
-@router.message()
-async def select_inl(message: Message):
-    if message.text == 'Тип':
-        await message.reply('Выберите мужские или женские', reply_markup=select_type_shoes_kb)
-    else:
-        if len(message.text) != 6 and message.text != 'Помощь.':
-            await message.reply('Я вас не понял повторите вопрос более корректно')
+
