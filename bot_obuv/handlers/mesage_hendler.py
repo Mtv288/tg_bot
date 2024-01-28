@@ -3,7 +3,7 @@ from aiogram.types import Message
 from bot_obuv.keyboard.inline_keyboard import select_type_shoes_kb
 from aiogram.fsm.context import FSMContext
 from bot_obuv.keyboard.reply_keyboard import main_kb
-
+import asyncio
 router = Router()
 
 
@@ -15,30 +15,42 @@ def answer_for_message(type_shoes):
 
 @router.message(lambda message: 'жен' in message.text.lower())
 async def woman_shoes(message: Message):
-    await message.reply(answer_for_message('"Женская обувь"'))
+    reply = await message.reply(answer_for_message('"Женская обувь"'))
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
+    await asyncio.sleep(10)
+    if reply:
+        await reply.delete()
 
 
 @router.message(lambda message: 'муж' in message.text.lower())
 async def men_shoes(message: Message):
-    await message.reply(answer_for_message('"Мужская обувь"'))
+    reply = await message.reply(answer_for_message('"Мужская обувь"'))
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
+    await asyncio.sleep(10)
+    if reply:
+        await reply.delete()
 
 
 @router.message(lambda message: 'дет' in message.text.lower())
 async def kid_shoes(message: Message):
-    await message.reply(answer_for_message('"Детская обувь"'))
+    reply = await message.reply(answer_for_message('"Детская обувь"'))
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
+    await asyncio.sleep(10)
+    if reply:
+        await reply.delete()
 
 
 @router.message(lambda message: 'тап' in message.text.lower())
 async def slippers(message: Message):
-    await message.reply(answer_for_message('"Тапки"'))
+    reply = await message.reply(answer_for_message('"Тапки"'))
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
+    await asyncio.sleep(10)
+    if reply:
+        await reply.delete()
 
 
 @router.message(lambda message: 'работа' in message.text.lower())
