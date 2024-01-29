@@ -387,3 +387,4 @@ async def check_for_rt(message: Message):
     else:
         await message.reply('Нет в наличии')
         await message.delete()
+    await message.answer('Главное меню', reply_markup=main_kb())

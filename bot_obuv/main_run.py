@@ -3,8 +3,6 @@ from aiogram import Bot, Dispatcher
 import os
 from dotenv import load_dotenv
 from handlers import commands, replybutton_hendler, mesage_hendler
-from bot_obuv.keyboard.reply_keyboard import main_kb
-
 
 load_dotenv()
 bot = Bot(os.getenv('TOKEN'))

@@ -4,6 +4,7 @@ from bot_obuv.keyboard.inline_keyboard import select_type_shoes_kb
 from aiogram.fsm.context import FSMContext
 from bot_obuv.keyboard.reply_keyboard import main_kb, women_kb, men_kb, child_kb, slipper_kb
 import asyncio
+
 router = Router()
 
 
@@ -11,8 +12,6 @@ def answer_for_message(type_shoes):
     answer = f'Если вы хотите посмотреть ассортимент обуви нажмите на кнопку ' \
              f'{type_shoes} внизу экрана и выберите интересующую вас категорию обуви'
     return answer
-
-
 
 
 @router.message(lambda message: 'жен' in message.text.lower())
@@ -77,6 +76,12 @@ async def slippers(message: Message):
     await message.delete()
 
 
+@router.message(F.text == 'Спасибо'.lower())
+async def reply_to_thank_you(message: Message):
+    await message.delete()
+    await message.answer('Пожалуйста, рад что смог помочь')
+
+
 @router.message()
 async def price(message: Message):
     for i in ['цен', 'стоит', 'почем']:
@@ -84,9 +89,4 @@ async def price(message: Message):
             await message.reply('Чтобы узнать цену и наличие размеров, '
                                 'введите артикул модели который находится на фото и '
                                 'выглядит в таком формате "99-999".(Вместо девяток подставьте нужные цифры) ')
-
-
-
-
-
-
+            await message.answer('Главное меню', reply_markup=men_kb())

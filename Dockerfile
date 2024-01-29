@@ -1,12 +1,17 @@
-FROM python:3.11
+FROM python:3.9
 
-WORKDIR . .
-
-COPY requirements.txt .
-
-RUN pip install --no-cache-dir -r requirements.txt
+RUN mkdir /bot && apt-get update
 
 
-COPY . .
+WORKDIR /bot
 
-CMD ["python", "bot_obuv/main_run.py"]
+
+COPY requirements.txt requirements.txt
+
+
+RUN python -m pip install -r requirements.txt
+
+
+COPY ./ /bot
+
+CMD ["python", ".bot_obuv/main_run.py"]
