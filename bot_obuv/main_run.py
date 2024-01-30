@@ -1,4 +1,5 @@
 import asyncio
+import logging
 from aiogram import Bot, Dispatcher
 import os
 from dotenv import load_dotenv
@@ -9,6 +10,7 @@ bot = Bot(os.getenv('TOKEN'))
 
 
 async def start():
+    logging.basicConfig(filename='logs.log', level=logging.DEBUG)
     dp = Dispatcher()
     dp.include_router(commands.router)
     dp.include_router(replybutton_hendler.router)
