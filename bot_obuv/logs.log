@@ -1,0 +1,15 @@
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @obuvmasterbot id=6247171392 - 'ObuvBot'
+INFO:aiogram.event:Update id=159429845 is handled. Duration 702 ms by bot id=6247171392
+INFO:aiogram.event:Update id=159429846 is handled. Duration 2406 ms by bot id=6247171392
+INFO:aiogram.event:Update id=159429847 is handled. Duration 4671 ms by bot id=6247171392
+INFO:aiogram.event:Update id=159429848 is handled. Duration 2203 ms by bot id=6247171392
+INFO:aiogram.dispatcher:Polling stopped
+INFO:aiogram.dispatcher:Polling stopped for bot @obuvmasterbot id=6247171392 - 'ObuvBot'
+ERROR:asyncio:Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x000001E32771CDD0>
+ERROR:asyncio:Unclosed connector
+connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x000001E327763700>, 33409.343)]']
+connector: <aiohttp.connector.TCPConnector object at 0x000001E3277CF7D0>
+INFO:aiogram.dispatcher:Start polling
+INFO:aiogram.dispatcher:Run polling for bot @obuvmasterbot id=6247171392 - 'ObuvBot'
