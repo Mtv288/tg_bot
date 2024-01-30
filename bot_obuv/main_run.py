@@ -10,7 +10,7 @@ bot = Bot(os.getenv('TOKEN'))
 
 
 async def start():
-    logging.basicConfig(filename='logs.log', level=logging.DEBUG)
+    logging.basicConfig(filename='logs.log', level=logging.ERROR)
     dp = Dispatcher()
     dp.include_router(commands.router)
     dp.include_router(replybutton_hendler.router)

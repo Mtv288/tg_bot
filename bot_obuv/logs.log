@@ -13,3 +13,11 @@ connections: ['[(<aiohttp.client_proto.ResponseHandler object at 0x000001E327763
 connector: <aiohttp.connector.TCPConnector object at 0x000001E3277CF7D0>
 INFO:aiogram.dispatcher:Start polling
 INFO:aiogram.dispatcher:Run polling for bot @obuvmasterbot id=6247171392 - 'ObuvBot'
+INFO:aiogram.event:Update id=159429850 is handled. Duration 405 ms by bot id=6247171392
+INFO:aiogram.event:Update id=159429849 is handled. Duration 11108 ms by bot id=6247171392
+INFO:aiogram.event:Update id=159429851 is handled. Duration 0 ms by bot id=6247171392
+INFO:aiogram.event:Update id=159429852 is handled. Duration 11234 ms by bot id=6247171392
+ERROR:aiogram.dispatcher:Failed to fetch updates - TelegramNetworkError: HTTP Client says - ServerDisconnectedError: Server disconnected
+WARNING:aiogram.dispatcher:Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 6247171392)
+INFO:aiogram.event:Update id=159429853 is handled. Duration 610 ms by bot id=6247171392
+INFO:aiogram.dispatcher:Connection established (tryings = 1, bot id = 6247171392)
