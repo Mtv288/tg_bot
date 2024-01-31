@@ -156,6 +156,9 @@ async def women(message: Message):
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.delete()
+    await asyncio.sleep(10)
+
 
 
 @router.message(F.text == 'Сабо Мужское')
@@ -386,5 +389,10 @@ async def check_for_rt(message: Message):
 
     else:
         await message.reply('Нет в наличии')
-        await message.delete()
     await message.answer('Главное меню', reply_markup=main_kb())
+
+
+
+
+
+

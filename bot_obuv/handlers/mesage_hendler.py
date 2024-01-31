@@ -89,11 +89,24 @@ async def reply_to_thank_you(message: Message):
 async def price(message: Message):
     for i in ['цен', 'стоит', 'почем']:
         if i in message.text.lower():
-            rep =await message.reply('Чтобы узнать цену и наличие размеров, '
-                                'введите артикул модели который находится на фото и '
-                                'выглядит в таком формате "99-999".(Вместо девяток подставьте нужные цифры) ')
+            rep = await message.reply('Чтобы узнать цену и наличие размеров, '
+                                      'введите артикул модели который находится на фото и '
+                                      'выглядит в таком формате "99-999".(Вместо девяток подставьте нужные цифры) ')
             await message.answer('Главное меню', reply_markup=men_kb())
             await message.delete()
             await asyncio.sleep(10)
             if rep:
                 await rep.delete()
+        elif len(message.text) != 6:
+            rep = await message.reply('Извините я не понял вопрос')
+            await asyncio.sleep(8)
+            await message.delete()
+            if rep:
+                await rep.delete()
+
+
+
+
+
+
+
