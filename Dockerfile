@@ -3,7 +3,7 @@ FROM python:3.9
 RUN mkdir /bot && apt-get update
 
 
-WORKDIR /bot
+WORKDIR . .
 
 
 COPY requirements.txt requirements.txt
@@ -12,6 +12,6 @@ COPY requirements.txt requirements.txt
 RUN python -m pip install -r requirements.txt
 
 
-COPY ./ /bot
+COPY . .
 
-CMD ["python", ".bot_obuv/main_run.py"]
+CMD ["python", "bot_obuv/main_run.py"]

@@ -340,6 +340,7 @@ async def women(message: Message):
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.answer('Главное меню', reply_markup=main_kb())
 
 
 @router.message(F.text == 'В раздел мужские')
@@ -382,7 +383,7 @@ async def check_for_rt(message: Message):
     if count > 0:
         list_size_str, phot, price = get_price_and_size_good_and_photo(word)
         photo_goods = types.FSInputFile(phot)
-        await bot.send_photo(chat_id=message.from_user.id,
+        await bot.send_photo(chat_id=message.chat.id,
                              photo=photo_goods)
         await message.reply(f'Цена: {price}р. {list_size_str}')
         await message.delete()
