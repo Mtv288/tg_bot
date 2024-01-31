@@ -79,10 +79,10 @@ async def slippers(message: Message):
 @router.message(F.text == 'Спасибо')
 async def reply_to_thank_you(message: Message):
     rep = await message.reply('Пожалуйста, рад что смог помочь')
-    await message.delete()
     await asyncio.sleep(10)
     if rep:
         await rep.delete()
+    await message.delete()
 
 
 @router.message()
