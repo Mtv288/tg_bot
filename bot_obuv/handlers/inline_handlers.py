@@ -4,10 +4,11 @@ from aiogram.types import Message, InputFile, InputMediaPhoto, FSInputFile
 from bot_obuv.keyboard.inline_keyboard import select_type_shoes_kb
 from bot_obuv.keyboard.reply_keyboard import main_kb
 
-
 router = Router()
 
 photo_for = 'photo_phasad.jpg'
+
+
 @router.message()
 async def search_type_shoes(message: Message):
     list_word_address = ['как', 'ехать', 'где', 'найти']
@@ -19,12 +20,12 @@ async def search_type_shoes(message: Message):
             break
 
 
-
 @router.callback_query()
 async def g(callback: CallbackQuery):
     if callback.data == 'адрес':
-        await callback.message.reply_photo(photo=FSInputFile('photo_phasad.jpg'), caption='Наш адрес ул.Привокзальная 17б')
+        await callback.message.reply_photo(photo=FSInputFile('photo_phasad.jpg'),
+                                           caption='Наш адрес ул.Привокзальная 17б')
     elif callback.data == 'телефон':
         await callback.message.reply('Наши телефоны:  сот.: +7 928-394-27-63 '
-                                     'город.: (8878) 2  21-09-44'    
-                                     '          WhatsApp: +7 928-394-27-63' )
+                                     'город.: (8878) 2  21-09-44'
+                                     '          WhatsApp: +7 928-394-27-63')
