@@ -120,6 +120,9 @@ async def men_shoes_list(message: Message):
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
+    await asyncio.sleep(10)
 
 
 @router.message(F.text == 'Кроссовки Мужские')
@@ -138,6 +141,9 @@ async def men_shoes_list(message: Message):
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
+    await asyncio.sleep(10)
 
 
 @router.message(F.text == 'Мужские тапки')
@@ -156,6 +162,7 @@ async def women(message: Message):
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
 
@@ -177,6 +184,9 @@ async def women(message: Message):
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
+    await asyncio.sleep(10)
 
 
 @router.message(F.text == 'Ботинки Мужские')
@@ -195,6 +205,9 @@ async def women(message: Message):
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
+    await asyncio.sleep(10)
 
 
 @router.message(F.text == 'Сапоги Мужские')
@@ -213,6 +226,9 @@ async def women(message: Message):
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
+    await asyncio.sleep(10)
 
 
 @router.message(F.text == 'Сапоги, Ботинки')
@@ -231,6 +247,9 @@ async def men_shoes_list(message: Message):
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
+    await asyncio.sleep(10)
 
 
 @router.message(F.text == 'Туфли Женские')
@@ -249,6 +268,9 @@ async def women(message: Message):
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
+    await asyncio.sleep(10)
 
 
 @router.message(F.text == 'Сабо Женское')
@@ -267,6 +289,9 @@ async def women(message: Message):
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
+    await asyncio.sleep(10)
 
 
 @router.message(F.text == 'Женские тапки')
@@ -285,6 +310,9 @@ async def women(message: Message):
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
+    await asyncio.sleep(10)
 
 
 @router.message(F.text == 'Туфли Детские')
@@ -303,6 +331,9 @@ async def women(message: Message):
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
+    await asyncio.sleep(10)
 
 
 @router.message(F.text == 'Ботинки Детские')
@@ -322,6 +353,9 @@ async def women(message: Message):
     except Exception as e:
         pass
     await message.answer('Это весь ассортимент в данной категории')
+    await message.answer('Главное меню', reply_markup=main_kb())
+    await message.delete()
+    await asyncio.sleep(10)
 
 
 @router.message(F.text == 'Детские тапки')
@@ -331,16 +365,17 @@ async def women(message: Message):
     try:
         photos, price, count_message_for_media_group = create_list_for_media_group('Тапки д')
         if count_message_for_media_group == 1:
-            await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
+            await bot.send_media_group(message.from_user.id, media=create_list_media_no_more_than_10(photos, price))
 
         else:
             list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
             for i in list_media_group:
-                await bot.send_media_group(message.chat.id, media=i)
+                await bot.send_media_group(message.from_user.id, media=i)
     except Exception:
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+
 
 
 @router.message(F.text == 'В раздел мужские')
@@ -391,6 +426,7 @@ async def check_for_rt(message: Message):
     else:
         await message.reply('Нет в наличии')
     await message.answer('Главное меню', reply_markup=main_kb())
+
 
 
 

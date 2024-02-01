@@ -1,7 +1,5 @@
 from aiogram import F, Router
 from aiogram.types import Message
-from bot_obuv.keyboard.inline_keyboard import select_type_shoes_kb
-from aiogram.fsm.context import FSMContext
 from bot_obuv.keyboard.reply_keyboard import main_kb, women_kb, men_kb, child_kb, slipper_kb
 import asyncio
 
@@ -83,6 +81,7 @@ async def reply_to_thank_you(message: Message):
     if rep:
         await rep.delete()
     await message.delete()
+
 
 
 @router.message()

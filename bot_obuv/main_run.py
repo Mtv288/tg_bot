@@ -3,7 +3,7 @@ import logging
 from aiogram import Bot, Dispatcher
 import os
 from dotenv import load_dotenv
-from handlers import commands, replybutton_hendler, mesage_hendler
+from handlers import commands, replybutton_hendler, mesage_hendler, inline_handlers
 
 load_dotenv()
 bot = Bot(os.getenv('TOKEN'))
@@ -14,6 +14,7 @@ async def start():
     dp = Dispatcher()
     dp.include_router(commands.router)
     dp.include_router(replybutton_hendler.router)
+    dp.include_router(inline_handlers.router)
     dp.include_router(mesage_hendler.router)
     await dp.start_polling(bot)
 
