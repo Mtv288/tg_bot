@@ -13,7 +13,7 @@ async def search_type_shoes(message: Message):
     for i in list_word_address:
         if i in message.text.lower():
             await message.reply('Если вы хотите узнать наш адрес и контакты '
-                                'нажмите кнопку под сообщением', reply_markup=select_type_shoes_kb)
+                                'нажмите нужную кнопку под сообщением', reply_markup=select_type_shoes_kb)
             await message.answer('Главое меню', reply_markup=main_kb())
             break
 
