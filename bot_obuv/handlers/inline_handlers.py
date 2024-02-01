@@ -1,12 +1,10 @@
-from aiogram import F, Router
+from aiogram import Router
 from aiogram.types.callback_query import CallbackQuery
-from aiogram.types import Message, InputFile, InputMediaPhoto, FSInputFile
+from aiogram.types import Message, FSInputFile
 from bot_obuv.keyboard.inline_keyboard import select_type_shoes_kb
 from bot_obuv.keyboard.reply_keyboard import main_kb
 
 router = Router()
-
-
 
 
 @router.message()
