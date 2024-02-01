@@ -7,15 +7,7 @@ from bot_obuv.keyboard.reply_keyboard import main_kb
 router = Router()
 
 
-@router.message()
-async def search_type_shoes(message: Message):
-    list_word_address = ['как', 'ехать', 'где', 'найти']
-    for i in list_word_address:
-        if i in message.text.lower():
-            await message.reply('Если вы хотите узнать наш адрес и контакты '
-                                'нажмите нужную кнопку под сообщением', reply_markup=select_type_shoes_kb)
-            await message.answer('Главое меню', reply_markup=main_kb())
-            break
+
 
 
 @router.callback_query()

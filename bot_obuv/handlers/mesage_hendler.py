@@ -2,6 +2,7 @@ from aiogram import F, Router
 from aiogram.types import Message
 from bot_obuv.keyboard.reply_keyboard import main_kb, women_kb, men_kb, child_kb, slipper_kb
 import asyncio
+from bot_obuv.keyboard.inline_keyboard import select_type_shoes_kb
 
 router = Router()
 
@@ -83,6 +84,16 @@ async def reply_to_thank_you(message: Message):
     await message.delete()
 
 
+@router.message()
+async def search_type_shoes(message: Message):
+    list_word_address = ['как', 'ехать', 'где', 'найти']
+    for i in list_word_address:
+        if i in message.text.lower():
+            await message.reply('Если вы хотите узнать наш адрес и контакты '
+                                'нажмите нужную кнопку под сообщением', reply_markup=select_type_shoes_kb)
+            await message.answer('Главое меню', reply_markup=main_kb())
+            break
+
 
 @router.message()
 async def price(message: Message):
@@ -102,10 +113,3 @@ async def price(message: Message):
             await message.delete()
             if rep:
                 await rep.delete()
-
-
-
-
-
-
-
