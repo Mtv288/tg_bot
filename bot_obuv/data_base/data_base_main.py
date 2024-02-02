@@ -9,7 +9,7 @@ metadata = MetaData()
 session = Session()
 Base.metadata.create_all(engine)
 
-path_to_foto = 'H:\Photo'
+path_to_foto = 'C:\Обувь\Обувь\Photo'
 photo_for_mistake = 'Нет фото.jpg'
 
 

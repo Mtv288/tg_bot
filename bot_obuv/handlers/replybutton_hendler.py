@@ -365,7 +365,7 @@ async def women(message: Message):
     try:
         photos, price, count_message_for_media_group = create_list_for_media_group('Тапки д')
         if count_message_for_media_group == 1:
-            await bot.send_media_group(message.from_user.id, media=create_list_media_no_more_than_10(photos, price))
+            await bot.send_media_group(message.chat.id, media=create_list_media_no_more_than_10(photos, price))
 
         else:
             list_media_group = create_lists_media_group(photos, price, count_message_for_media_group)
