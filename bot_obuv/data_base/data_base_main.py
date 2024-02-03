@@ -153,7 +153,7 @@ def update_all_goods_table():
     :return: Ничего не возвращает
     """
     try:
-        with open(path_to_csv) as exs:
+        with open(r'C:\TrueShop2site\All.csv') as exs:
             reader = csv.DictReader(exs, delimiter=";")
             with Session(engine) as session:
                 for i in reader:
