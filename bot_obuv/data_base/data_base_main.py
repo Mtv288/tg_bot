@@ -4,12 +4,13 @@ from bot_obuv.data_base.table_models import AllData, Base, Catalog, CatalogAll
 import csv
 
 
+
 engine = create_engine('sqlite:///data_all.db')
 metadata = MetaData()
 session = Session()
 Base.metadata.create_all(engine)
 
-path_to_foto = 'C:\Обувь\Обувь\Photo'
+path_to_foto = 'H:\Photo'
 photo_for_mistake = 'Нет фото.jpg'
 
 
@@ -25,7 +26,6 @@ def great_all_goods_table():
                 for i in reader:
                     user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=i['photo'],
                                    price=i['price'], quantity=i['quantity'], size=i['Размер'])
-
                     session.add(user)
                 session.commit()
 
@@ -147,24 +147,28 @@ def get_price_and_size_good_and_photo(good_name):
     return list_size_str, photo, price
 
 
-def select_shoes_type(name_table, type_word):
-    list_type_shoes = ['лет', 'осен', 'зим', 'вес']
-    if type_word in list_type_shoes:
-        t = type_word
-        if type_word == 'лет':
-            ty = ['%96-%', '%94-%']
-        elif type_word == 'осен':
-            ty = ['%99-%', '%БАЙ%']
-            with Session(engine) as ses:
-                rt = []
-                for i in ses.query(name_table).filter(or_(name_table.name.like(ty[0]),
-                                                          and_(name_table.name.like(ty[1]),
-                                                               name_table.name.like('%МУЖ%')))):
-                    rt.append(i.name)
-        return rt, 'Запарил'
+def update_all_goods_table():
+    """
+    Собираем основную таблицу всех товаров с дублированными товарами и товарами с нулевым остатком из csv файла
+    :return: Ничего не возвращает
+    """
+    try:
+        with open(path_to_csv) as exs:
+            reader = csv.DictReader(exs, delimiter=";")
+            with Session(engine) as session:
+                for i in reader:
+                    user = AllData(code=i['code'], group_code=i['group_code'], name=str(i['name']), photo=i['photo'],
+                                   price=i['price'], quantity=i['quantity'], size=i['Размер'])
+                    session.add(user)
+                session.commit()
+    except FileNotFoundError:
+        pass
 
 
-select_shoes_type(Catalog, 'осен')
+def update_all_tables():
+    update_all_goods_table()
+    great_catalog_all()
+    great_catalog_shoes()
+
 table_name_list = [AllData, CatalogAll, Catalog]
-
 check_table(table_name_list)

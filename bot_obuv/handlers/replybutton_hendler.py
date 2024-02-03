@@ -10,6 +10,7 @@ from bot_obuv.keyboard.reply_keyboard import main_kb, men_kb, women_kb, \
 from bot_obuv.data_base.data_base_main import list_name_goods, get_price_and_size_good_and_photo
 from bot_obuv.main_run import bot
 import traceback
+from aiogram.filters import Command
 
 router = Router()
 
@@ -150,6 +151,7 @@ async def men_shoes_list(message: Message):
 async def women(message: Message):
     await message.delete()
     await message.answer('Выберите категорию', reply_markup=return_kb_slippers())
+    count = 0
     try:
         photos, price, count_message_for_media_group = create_list_for_media_group('Тапки м')
         if count_message_for_media_group == 1:
@@ -165,7 +167,6 @@ async def women(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
-
 
 
 @router.message(F.text == 'Сабо Мужское')
@@ -377,7 +378,6 @@ async def women(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
 
 
-
 @router.message(F.text == 'В раздел мужские')
 async def men_menu(message: Message):
     await message.delete()
@@ -426,10 +426,5 @@ async def check_for_rt(message: Message):
     else:
         await message.reply('Нет в наличии')
     await message.answer('Главное меню', reply_markup=main_kb())
-
-
-
-
-
-
+    await message.delete()
 

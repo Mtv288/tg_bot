@@ -13,7 +13,6 @@ async def start(message: Message):
     await message.answer('Я ваш виртуальный помощник', reply_markup=main_kb())
 
 
-
 @router.message(Command("clear"))
 async def cmd_clear(message: Message, bot: Bot) -> None:
     try:

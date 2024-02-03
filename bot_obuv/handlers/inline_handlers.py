@@ -10,7 +10,7 @@ router = Router()
 async def g(callback: CallbackQuery):
     if callback.data == 'адрес':
         rep = await callback.message.reply_photo(photo=FSInputFile('facade.jpg'),
-                                                 caption='Наш адрес ул.Привокзальная 17.Бб, Если хотите найти нас на карте нажмите '
+                                                 caption='Наш адрес ул.Привокзальная 17.Б, Если хотите найти нас на карте нажмите '
                                                          'на эту ссылку: '
                                                          ' https://yandex.ru/maps/1104/cherkessk'
                                                          '/house/privokzalnaya_ulitsa_17b/YEsYdgFmQUwFQFpufX5yeX5hYA==/?ll=42.066'
