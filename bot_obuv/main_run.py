@@ -13,6 +13,7 @@ bot = Bot(os.getenv('TOKEN'))
 
 
 async def start():
+
     logging.basicConfig(filename='logs.log', level=logging.ERROR)
     dp = Dispatcher()
     dp.include_router(commands.router)
@@ -20,12 +21,12 @@ async def start():
     dp.include_router(inline_handlers.router)
     dp.include_router(mesage_hendler.router)
     await dp.start_polling(bot)
-
-
-if __name__ == '__main__':
-    asyncio.run(start())
     schedule.every().hour.do(update_all_tables())
 
     while True:
         schedule.run_pending()
         time.sleep(1)
+
+
+if __name__ == '__main__':
+    asyncio.run(start())
