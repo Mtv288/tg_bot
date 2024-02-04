@@ -119,8 +119,8 @@ async def price(message: Message):
 async def no_answer(message: Message):
     if len(message.text) != 6:
         rep = await message.reply('Извините я не понял вопрос')
-        await message.delete()
         await message.answer('Главное меню', reply_markup=main_kb())
         if rep:
             await asyncio.sleep(10)
             await rep.delete()
+            await message.delete()
