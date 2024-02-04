@@ -112,12 +112,13 @@ def great_catalog_shoes():
             values_for_the_catalog_table.update(new_values_in_dict)
 
     with Session(engine) as ses:
-        session.query(CatalogAll).delete()
-        for i in values_for_the_catalog_table:
-            catalog = Catalog(name=i, price=values_for_the_catalog_table[i][0],
-                              photo=values_for_the_catalog_table[i][1])
-            ses.add(catalog)
-        ses.commit()
+        if session.query(exists().where(i.id.isnot(None))).scalar():
+            session.query(CatalogAll).delete()
+            for i in values_for_the_catalog_table:
+                catalog = Catalog(name=i, price=values_for_the_catalog_table[i][0],
+                                  photo=values_for_the_catalog_table[i][1])
+                ses.add(catalog)
+            ses.commit()
 
 
 def list_name_goods():
@@ -149,10 +150,9 @@ def get_price_and_size_good_and_photo(good_name):
     return list_size_str, photo, price
 
 
-
 def update_all_tables():
-    update_all_goods_table()
-    update_catalog_all()
+    great_all_goods_table()
+    great_catalog_all()
     great_catalog_shoes()
 
 

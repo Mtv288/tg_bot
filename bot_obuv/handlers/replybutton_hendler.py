@@ -11,6 +11,7 @@ from bot_obuv.data_base.data_base_main import list_name_goods, get_price_and_siz
 from bot_obuv.main_run import bot
 import traceback
 from aiogram.filters import Command
+import asyncio
 
 router = Router()
 
@@ -425,6 +426,8 @@ async def check_for_rt(message: Message):
 
     else:
         await message.reply('Нет в наличии')
+        await asyncio.sleep(10)
+        await message.delete()
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
 
