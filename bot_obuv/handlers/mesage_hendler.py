@@ -122,5 +122,5 @@ async def no_answer(message: Message):
         await message.delete()
         await message.answer('Главное меню', reply_markup=main_kb())
         if rep:
-            await asyncio.sleep(8)
+            await asyncio.sleep(10)
             await rep.delete()

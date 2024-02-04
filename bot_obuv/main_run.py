@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from handlers import commands, replybutton_hendler, mesage_hendler, inline_handlers
 from bot_obuv.data_base.data_base_main import update_all_tables
 import schedule
-import time
+
 
 load_dotenv()
 bot = Bot(os.getenv('TOKEN'))

@@ -1,8 +1,8 @@
 from aiogram import Router, Bot
 from aiogram.types import Message
-from bot_obuv.keyboard.reply_keyboard import main_kb
 from aiogram.filters import CommandStart, Command
 from aiogram.exceptions import TelegramBadRequest
+from bot_obuv.keyboard.reply_keyboard import main_kb
 
 router = Router()
 
