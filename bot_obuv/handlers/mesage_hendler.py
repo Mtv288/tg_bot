@@ -5,7 +5,7 @@ import asyncio
 from bot_obuv.keyboard.inline_keyboard import contact_and_address_kb
 
 list_price_text = ['цен', 'стоит', 'почем', 'размер']
-list_word_address = ['ехать', 'находит', 'найти', 'адрес']
+list_word_address = ['ехать', 'находит', 'найти', 'адрес', 'телеф', 'связ', 'звон']
 
 router = Router()
 

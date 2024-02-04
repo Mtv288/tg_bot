@@ -3,8 +3,6 @@ from sqlalchemy.orm import Session
 from bot_obuv.data_base.table_models import AllData, Base, Catalog, CatalogAll
 import csv
 
-
-
 engine = create_engine('sqlite:///data_all.db')
 metadata = MetaData()
 session = Session()
@@ -23,6 +21,7 @@ def great_all_goods_table():
         with open(r'C:\TrueShop2site\All.csv') as exs:
             reader = csv.DictReader(exs, delimiter=";")
             with Session(engine) as session:
+                session.query(AllData).delete()
                 for i in reader:
                     user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=i['photo'],
                                    price=i['price'], quantity=i['quantity'], size=i['Размер'])
@@ -31,6 +30,7 @@ def great_all_goods_table():
 
     except FileNotFoundError:
         with open(r'All.csv') as exs:
+            session.query(AllData).delete()
             reader = csv.DictReader(exs, delimiter=";")
             with Session(engine) as session:
                 for i in reader:
@@ -49,6 +49,7 @@ def great_catalog_all():
     :return: Ничего не возвращает
     """
     with Session(engine) as session:
+        session.query(CatalogAll).delete()
         for i in session.query(AllData).filter(or_(AllData.name.like('МУЖ%'),
                                                    AllData.name.like('ЖЕН%'),
                                                    AllData.name.like('ДЕТ%'),
@@ -111,6 +112,7 @@ def great_catalog_shoes():
             values_for_the_catalog_table.update(new_values_in_dict)
 
     with Session(engine) as ses:
+        session.query(CatalogAll).delete()
         for i in values_for_the_catalog_table:
             catalog = Catalog(name=i, price=values_for_the_catalog_table[i][0],
                               photo=values_for_the_catalog_table[i][1])
@@ -147,28 +149,12 @@ def get_price_and_size_good_and_photo(good_name):
     return list_size_str, photo, price
 
 
-def update_all_goods_table():
-    """
-    Собираем основную таблицу всех товаров с дублированными товарами и товарами с нулевым остатком из csv файла
-    :return: Ничего не возвращает
-    """
-    try:
-        with open(r'C:\TrueShop2site\All.csv') as exs:
-            reader = csv.DictReader(exs, delimiter=";")
-            with Session(engine) as session:
-                for i in reader:
-                    user = AllData(code=i['code'], group_code=i['group_code'], name=str(i['name']), photo=i['photo'],
-                                   price=i['price'], quantity=i['quantity'], size=i['Размер'])
-                    session.add(user)
-                session.commit()
-    except FileNotFoundError:
-        pass
-
 
 def update_all_tables():
     update_all_goods_table()
-    great_catalog_all()
+    update_catalog_all()
     great_catalog_shoes()
+
 
 table_name_list = [AllData, CatalogAll, Catalog]
 check_table(table_name_list)
