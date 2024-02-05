@@ -21,7 +21,6 @@ def great_all_goods_table():
         with open(r'C:\TrueShop2site\All.csv') as exs:
             reader = csv.DictReader(exs, delimiter=";")
             with Session(engine) as session:
-                session.query(AllData).delete()
                 for i in reader:
                     user = AllData(code=i['code'], group_code=i['group_code'], name=(str(i['name'])), photo=i['photo'],
                                    price=i['price'], quantity=i['quantity'], size=i['Размер'])
@@ -30,7 +29,6 @@ def great_all_goods_table():
 
     except FileNotFoundError:
         with open(r'All.csv') as exs:
-            session.query(AllData).delete()
             reader = csv.DictReader(exs, delimiter=";")
             with Session(engine) as session:
                 for i in reader:
@@ -49,7 +47,6 @@ def great_catalog_all():
     :return: Ничего не возвращает
     """
     with Session(engine) as session:
-        session.query(CatalogAll).delete()
         for i in session.query(AllData).filter(or_(AllData.name.like('МУЖ%'),
                                                    AllData.name.like('ЖЕН%'),
                                                    AllData.name.like('ДЕТ%'),
@@ -112,8 +109,7 @@ def great_catalog_shoes():
             values_for_the_catalog_table.update(new_values_in_dict)
 
     with Session(engine) as ses:
-        if session.query(exists().where(i.id.isnot(None))).scalar():
-            session.query(CatalogAll).delete()
+        if session.query(exists().where(CatalogAll.id.isnot(None))).scalar():
             for i in values_for_the_catalog_table:
                 catalog = Catalog(name=i, price=values_for_the_catalog_table[i][0],
                                   photo=values_for_the_catalog_table[i][1])

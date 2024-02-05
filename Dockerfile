@@ -1,17 +1,17 @@
 FROM python:3.11.1
 
-RUN mkdir /bot && apt-get update
+
+RUN mkdir /bot
 
 
-WORKDIR . .
+COPY . /bot
 
-COPY main_run.py /bot_obuv/main_run.py
+WORKDIR . /bot
+
+COPY . /bot_obuv
+COPY bot_obuv/ /All.csv
 COPY requirements.txt requirements.txt
 
-
 RUN python -m pip install -r requirements.txt
-
-
-COPY . .
 
 CMD ["python", "bot_obuv/main_run.py"]
