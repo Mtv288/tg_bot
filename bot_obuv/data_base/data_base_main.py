@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, MetaData, update, exists, or_, and_
 from sqlalchemy.orm import Session
-from bot_obuv.data_base.table_models import AllData, Base, Catalog, CatalogAll
+from bot_obuv.data_base.table_models import AllData, Base, Catalog, CatalogAll, Users
 import csv
 
 engine = create_engine('sqlite:///data_all.db')
@@ -151,6 +151,18 @@ def get_price_and_size_good_and_photo(good_name):
                 size_list.append(f'{str(i.size)} - {str(i.quantity)}пар., ')
         list_size_str = f'В наличии есть размеры: {" ".join(size_list)}'
     return list_size_str, photo, price
+
+
+def update_user_visits(user_nickname):
+    with Session(engine) as ses:
+        user = ses.query(Users).filter_by(user_name=user_nickname).first()
+        if user is None:
+            user = Users(user_name=user_nickname, number_of_visits=1)
+        else:
+            user.number_of_visits += 1
+
+        ses.add(user)
+        ses.commit()
 
 
 def update_all_tables():

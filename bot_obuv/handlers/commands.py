@@ -3,6 +3,7 @@ from aiogram.types import Message
 from aiogram.filters import CommandStart, Command
 from aiogram.exceptions import TelegramBadRequest
 from bot_obuv.keyboard.reply_keyboard import main_kb
+from bot_obuv.data_base.data_base_main import update_user_visits
 
 router = Router()
 
@@ -11,6 +12,8 @@ router = Router()
 async def start(message: Message):
     await message.answer(f'Здравствуйте {message.from_user.full_name}')
     await message.answer('Я ваш виртуальный помощник', reply_markup=main_kb())
+    await update_user_visits(message.from_user.full_name)
+
 
 
 @router.message(Command("clear"))

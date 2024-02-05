@@ -37,3 +37,12 @@ class Catalog(Base):
     name: Mapped[str]
     price: Mapped[int]
     photo: Mapped[Optional[str]]
+
+
+class Users(Base):
+    __tablename__ = 'quantity_user'
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_name: Mapped[str]
+    number_of_visits: Mapped[int]
+
