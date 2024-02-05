@@ -115,6 +115,13 @@ def great_catalog_shoes():
                                   photo=values_for_the_catalog_table[i][1])
                 ses.add(catalog)
             ses.commit()
+        else:
+            for i in values_for_the_catalog_table:
+                catalog = Catalog(name=i, price=values_for_the_catalog_table[i][0],
+                                  photo=values_for_the_catalog_table[i][1])
+                ses.add(catalog)
+            ses.commit()
+
 
 
 def list_name_goods():
