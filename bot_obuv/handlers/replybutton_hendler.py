@@ -80,30 +80,35 @@ def create_lists_media_group(media, text, count_message):
 async def back(message: Message):
     await message.delete()
     await message.answer('Главное меню', reply_markup=main_kb())
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Мужская обувь')
 async def men(message: Message):
     await message.delete()
     await message.answer('Выберите категорию', reply_markup=men_kb())
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Женская обувь')
 async def women(message: Message):
     await message.delete()
     await message.answer('Выберите категорию', reply_markup=women_kb())
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Детская обувь')
 async def women(message: Message):
     await message.delete()
     await message.answer('Выберите категорию', reply_markup=child_kb())
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Тапки')
 async def women(message: Message):
     await message.delete()
     await message.answer('Выберите категорию', reply_markup=slipper_kb())
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Туфли Мужские')
@@ -125,6 +130,7 @@ async def men_shoes_list(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Кроссовки Мужские')
@@ -146,6 +152,7 @@ async def men_shoes_list(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Мужские тапки')
@@ -168,6 +175,7 @@ async def women(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Сабо Мужское')
@@ -189,6 +197,7 @@ async def women(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Ботинки Мужские')
@@ -210,6 +219,7 @@ async def women(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Сапоги Мужские')
@@ -231,6 +241,7 @@ async def women(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Сапоги, Ботинки')
@@ -252,6 +263,7 @@ async def men_shoes_list(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Туфли Женские')
@@ -273,6 +285,7 @@ async def women(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Сабо Женское')
@@ -294,6 +307,7 @@ async def women(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Женские тапки')
@@ -315,6 +329,7 @@ async def women(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Туфли Детские')
@@ -336,6 +351,7 @@ async def women(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Ботинки Детские')
@@ -358,6 +374,7 @@ async def women(message: Message):
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
     await asyncio.sleep(10)
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Детские тапки')
@@ -377,36 +394,43 @@ async def women(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'В раздел мужские')
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел мужские', reply_markup=men_kb())
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'В главное меню')
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Главное меню', reply_markup=main_kb())
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'В раздел женские')
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел женские', reply_markup=women_kb())
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'В раздел детские')
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел Детские', reply_markup=child_kb())
+    await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'В раздел тапки')
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел Детские', reply_markup=slipper_kb())
+    await update_user_visits(message.from_user.full_name)
+
 
 
 @router.message(F.text.len() == 6)
@@ -430,4 +454,5 @@ async def check_for_rt(message: Message):
             await message.delete()
     await message.answer('Главное меню', reply_markup=main_kb())
     await message.delete()
+    await update_user_visits(message.from_user.full_name)
 

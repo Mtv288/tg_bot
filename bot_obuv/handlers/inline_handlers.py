@@ -26,3 +26,4 @@ async def g(callback: CallbackQuery):
         await asyncio.sleep(25)
         if rep:
             await rep.delete()
+    await update_user_visits(message.from_user.full_name)

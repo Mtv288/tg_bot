@@ -15,7 +15,6 @@ async def start(message: Message):
     await update_user_visits(message.from_user.full_name)
 
 
-
 @router.message(Command("clear"))
 async def cmd_clear(message: Message, bot: Bot) -> None:
     try:
