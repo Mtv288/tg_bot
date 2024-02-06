@@ -12,6 +12,7 @@ from bot_obuv.main_run import bot
 import traceback
 from aiogram.filters import Command
 import asyncio
+from bot_obuv.data_base.data_base_main import update_user_visits
 
 router = Router()
 
@@ -80,6 +81,7 @@ def create_lists_media_group(media, text, count_message):
 async def back(message: Message):
     await message.delete()
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
 
 
 
@@ -87,6 +89,7 @@ async def back(message: Message):
 async def men(message: Message):
     await message.delete()
     await message.answer('Выберите категорию', reply_markup=men_kb())
+    await  update_user_visits(message.from_user.full_name)
 
 
 
@@ -94,6 +97,7 @@ async def men(message: Message):
 async def women(message: Message):
     await message.delete()
     await message.answer('Выберите категорию', reply_markup=women_kb())
+    await  update_user_visits(message.from_user.full_name)
 
 
 
@@ -101,6 +105,7 @@ async def women(message: Message):
 async def women(message: Message):
     await message.delete()
     await message.answer('Выберите категорию', reply_markup=child_kb())
+    await  update_user_visits(message.from_user.full_name)
 
 
 
@@ -108,6 +113,7 @@ async def women(message: Message):
 async def women(message: Message):
     await message.delete()
     await message.answer('Выберите категорию', reply_markup=slipper_kb())
+    await  update_user_visits(message.from_user.full_name)
 
 
 
@@ -128,6 +134,7 @@ async def men_shoes_list(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await update_user_visits(message.from_user.full_name)
     await message.delete()
     await asyncio.sleep(10)
 
@@ -150,6 +157,7 @@ async def men_shoes_list(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
     await message.delete()
     await asyncio.sleep(10)
 
@@ -173,6 +181,7 @@ async def women(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
     await message.delete()
     await asyncio.sleep(10)
 
@@ -195,6 +204,7 @@ async def women(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
     await message.delete()
     await asyncio.sleep(10)
 
@@ -217,6 +227,7 @@ async def women(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
     await message.delete()
     await asyncio.sleep(10)
 
@@ -239,6 +250,7 @@ async def women(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
     await message.delete()
     await asyncio.sleep(10)
 
@@ -261,6 +273,7 @@ async def men_shoes_list(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
     await message.delete()
     await asyncio.sleep(10)
 
@@ -283,6 +296,7 @@ async def women(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
     await message.delete()
     await asyncio.sleep(10)
 
@@ -305,6 +319,7 @@ async def women(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
     await message.delete()
     await asyncio.sleep(10)
 
@@ -327,6 +342,7 @@ async def women(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
     await message.delete()
     await asyncio.sleep(10)
 
@@ -349,6 +365,7 @@ async def women(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
     await message.delete()
     await asyncio.sleep(10)
 
@@ -372,6 +389,7 @@ async def women(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
     await message.delete()
     await asyncio.sleep(10)
 
@@ -394,6 +412,7 @@ async def women(message: Message):
         pass
     await message.answer('Это весь ассортимент в данной категории')
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
 
 
 
@@ -401,6 +420,7 @@ async def women(message: Message):
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел мужские', reply_markup=men_kb())
+    await  update_user_visits(message.from_user.full_name)
 
 
 
@@ -408,6 +428,7 @@ async def men_menu(message: Message):
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
 
 
 
@@ -415,6 +436,7 @@ async def men_menu(message: Message):
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел женские', reply_markup=women_kb())
+    await  update_user_visits(message.from_user.full_name)
 
 
 
@@ -422,6 +444,7 @@ async def men_menu(message: Message):
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел Детские', reply_markup=child_kb())
+    await  update_user_visits(message.from_user.full_name)
 
 
 
@@ -429,6 +452,7 @@ async def men_menu(message: Message):
 async def men_menu(message: Message):
     await message.delete()
     await message.answer('Раздел Детские', reply_markup=slipper_kb())
+    await  update_user_visits(message.from_user.full_name)
 
 
 
@@ -446,6 +470,7 @@ async def check_for_rt(message: Message):
         await bot.send_photo(chat_id=message.chat.id,
                              photo=photo_goods)
         await message.reply(f'Цена: {price}р. {list_size_str}')
+        await  update_user_visits(message.from_user.full_name)
 
 
     else:
@@ -455,6 +480,7 @@ async def check_for_rt(message: Message):
             await message.delete()
 
     await message.answer('Главное меню', reply_markup=main_kb())
+    await  update_user_visits(message.from_user.full_name)
     await message.delete()
 
 
