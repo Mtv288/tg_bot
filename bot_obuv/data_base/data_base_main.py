@@ -165,10 +165,12 @@ def update_user_visits(user_nickname):
         ses.commit()
 
 
-def update_all_tables():
-    great_all_goods_table()
-    great_catalog_all()
-    great_catalog_shoes()
+def update_all_tables(list_table):
+   with Session(engine) as ses:
+       for i in list_table:
+           ses.query(i).delete()
+       ses.commit()
+       check_table(list_table)
 
 
 table_name_list = [AllData, CatalogAll, Catalog]

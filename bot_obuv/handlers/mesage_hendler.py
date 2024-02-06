@@ -23,7 +23,7 @@ async def woman_shoes(message: Message):
     await message.delete()
     if reply:
         await reply.delete()
-    await update_user_visits(message.from_user.full_name)
+        await update_user_visits(message.from_user.full_name)
 
 
 @router.message(lambda message: 'муж' in message.text.lower())
@@ -34,7 +34,7 @@ async def men_shoes(message: Message):
     await message.delete()
     if reply:
         await reply.delete()
-    await update_user_visits(message.from_user.full_name)
+        await update_user_visits(message.from_user.full_name)
 
 
 @router.message(lambda message: 'дет' in message.text.lower())
@@ -45,7 +45,7 @@ async def kid_shoes(message: Message):
     await message.delete()
     if reply:
         await reply.delete()
-    await update_user_visits(message.from_user.full_name)
+        await update_user_visits(message.from_user.full_name)
 
 
 @router.message(lambda message: 'тап' in message.text.lower())
@@ -56,7 +56,7 @@ async def slippers(message: Message):
     await message.delete()
     if reply:
         await reply.delete()
-    await update_user_visits(message.from_user.full_name)
+        await update_user_visits(message.from_user.full_name)
 
 
 @router.message(lambda message: 'работа' in message.text.lower())
@@ -69,7 +69,7 @@ async def job_time(message: Message):
         await asyncio.sleep(15)
         await message.delete()
         await rep.delete()
-    await update_user_visits(message.from_user.full_name)
+        await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Помощь.')
@@ -88,7 +88,7 @@ async def slippers(message: Message):
         await asyncio.sleep(45)
         await rep.delete()
         await message.delete()
-    await update_user_visits(message.from_user.full_name)
+        await update_user_visits(message.from_user.full_name)
 
 
 @router.message(F.text == 'Спасибо')
@@ -98,7 +98,7 @@ async def reply_to_thank_you(message: Message):
         await asyncio.sleep(10)
         await rep.delete()
         await message.delete()
-    await update_user_visits(message.from_user.full_name)
+        await update_user_visits(message.from_user.full_name)
 
 
 @router.message(lambda message: any(word in message.text.lower() for word in list_word_address))
@@ -110,7 +110,7 @@ async def search_type_shoes(message: Message):
     await message.delete()
     if rep:
         await rep.delete()
-    await update_user_visits(message.from_user.full_name)
+        await update_user_visits(message.from_user.full_name)
 
 
 @router.message(lambda message: any(word in message.text.lower() for word in list_price_text))
@@ -123,7 +123,7 @@ async def price(message: Message):
     await message.delete()
     if rep:
         await rep.delete()
-    await update_user_visits(message.from_user.full_name)
+        await update_user_visits(message.from_user.full_name)
 
 
 @router.message()
@@ -135,4 +135,4 @@ async def no_answer(message: Message):
             await asyncio.sleep(10)
             await rep.delete()
             await message.delete()
-    await update_user_visits(message.from_user.full_name)
+            await update_user_visits(message.from_user.full_name)

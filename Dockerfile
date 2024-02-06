@@ -6,11 +6,11 @@ RUN mkdir /bot
 
 COPY . /bot
 
-WORKDIR . /bot
+WORKDIR /bot
 
 
 COPY requirements.txt .
 
 RUN python -m pip install -r requirements.txt
 
-CMD ["python", "main_run.py"]
+CMD ["python", "bot_obuv/main_run.py"]
