@@ -123,3 +123,4 @@ def return_kb_slippers():
         ]], resize_keyboard=True
     )
     return return_b
+
