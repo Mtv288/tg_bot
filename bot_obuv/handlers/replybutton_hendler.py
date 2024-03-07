@@ -591,6 +591,17 @@ async def slippers(message: Message):
         await message.delete()
         await update_user_visits(message.from_user.full_name, message.from_user.id)
 
+@router.message(F.text == 'График работы')
+async def job_time(message: Message):
+    rep = await message.reply('_____Наш режим работы:_____'
+                              '  Понедельник - Пятница с 8.00 до 17.30'
+                              '  Суббота - Воскресенье с 9.00 до 16.00'
+                              '  без перерывов и выходных')
+    if rep:
+        await asyncio.sleep(15)
+        await message.delete()
+        await rep.delete()
+        await update_user_visits(message.from_user.full_name, message.from_user.id)
 
 @router.message()
 async def no_answer(message: Message):
@@ -628,4 +639,13 @@ async def no_answer(message: Message):
         await message.delete()
         if rep:
             await rep.delete()
+            await update_user_visits(message.from_user.full_name, message.from_user.id)
+    else:
+        len(message.text) >= 9 and len(message.text) != 6 and message != 'График работы'
+        rep = await message.reply('Извините я не понял вопрос')
+        await message.answer('Главное меню', reply_markup=main_kb())
+        if rep:
+            await asyncio.sleep(10)
+            await rep.delete()
+            await message.delete()
             await update_user_visits(message.from_user.full_name, message.from_user.id)

@@ -4,7 +4,7 @@ import logging
 from aiogram import Bot, Dispatcher
 import os
 from dotenv import load_dotenv
-from handlers import commands, replybutton_hendler, mesage_hendler, inline_handlers
+from handlers import commands, replybutton_hendler, inline_handlers
 from data_base.data_base_main import update_all_tables
 import schedule
 from data_base.data_base_main import table_name_list
@@ -21,7 +21,6 @@ async def start():
     dp.include_router(commands.router)
     dp.include_router(replybutton_hendler.router)
     dp.include_router(inline_handlers.router)
-    dp.include_router(mesage_hendler.router)
     await dp.start_polling(bot)
 
 

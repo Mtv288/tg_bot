@@ -11,7 +11,8 @@ def main_kb():
                 KeyboardButton(text='Детская обувь'),
                 KeyboardButton(text='Тапки')
             ], [
-                KeyboardButton(text='Помощь.')
+                KeyboardButton(text='Помощь.'),
+                KeyboardButton(text='График работы')
             ]
         ], resize_keyboard=True,
         input_field_placeholder='Нажмите нужную кнопку'
