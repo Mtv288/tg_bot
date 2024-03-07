@@ -45,4 +45,11 @@ class Users(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     user_name: Mapped[str]
     number_of_visits: Mapped[int]
+    message_id: Mapped[int]
+
+
+
+
+
+
 

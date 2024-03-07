@@ -4,10 +4,10 @@ import logging
 from aiogram import Bot, Dispatcher
 import os
 from dotenv import load_dotenv
-from bot_obuv.handlers import commands, replybutton_hendler, mesage_hendler, inline_handlers
-from bot_obuv.data_base.data_base_main import update_all_tables
+from handlers import commands, replybutton_hendler, mesage_hendler, inline_handlers
+from data_base.data_base_main import update_all_tables
 import schedule
-from bot_obuv.data_base.data_base_main import table_name_list
+from data_base.data_base_main import table_name_list
 
 
 load_dotenv()
