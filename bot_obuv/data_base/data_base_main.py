@@ -32,7 +32,7 @@ def great_all_goods_table():
                 session.commit()
 
     except FileNotFoundError:
-        with open(r'All.csv') as exs:
+        with open(r'All.csv', encoding='cp1251') as exs:
             reader = csv.DictReader(exs, delimiter=";")
             with Session(engine) as session:
                 for i in reader:

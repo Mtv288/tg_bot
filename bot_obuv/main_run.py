@@ -9,13 +9,11 @@ from data_base.data_base_main import update_all_tables
 import schedule
 from data_base.data_base_main import table_name_list
 
-
 load_dotenv()
 bot = Bot(os.getenv('TOKEN'))
 
 
 async def start():
-
     logging.basicConfig(filename='logs.log', level=logging.ERROR)
     dp = Dispatcher()
     dp.include_router(commands.router)
@@ -36,5 +34,3 @@ async def run_schedule():
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
     loop.run_until_complete(asyncio.gather(run_schedule(), start()))
-
-
