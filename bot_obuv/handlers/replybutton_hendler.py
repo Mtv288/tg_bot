@@ -591,6 +591,7 @@ async def slippers(message: Message):
         await message.delete()
         await update_user_visits(message.from_user.full_name, message.from_user.id)
 
+
 @router.message(F.text == 'График работы')
 async def job_time(message: Message):
     rep = await message.reply('_____Наш режим работы:_____'
@@ -602,6 +603,7 @@ async def job_time(message: Message):
         await message.delete()
         await rep.delete()
         await update_user_visits(message.from_user.full_name, message.from_user.id)
+
 
 @router.message()
 async def no_answer(message: Message):
@@ -631,7 +633,7 @@ async def no_answer(message: Message):
                     await rep.delete()
                     await update_user_visits(message.from_user.full_name, message.from_user.id)
 
-    elif any(word in message.text.lower() for word in list_word_address ):
+    elif any(word in message.text.lower() for word in list_word_address):
         rep = await message.reply('Если вы хотите узнать наш адрес и контакты '
                                   'нажмите нужную кнопку под сообщением', reply_markup=contact_and_address_kb)
         await message.answer('Главное меню', reply_markup=main_kb())
